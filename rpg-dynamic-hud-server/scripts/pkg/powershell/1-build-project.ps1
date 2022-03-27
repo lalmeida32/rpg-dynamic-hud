@@ -11,6 +11,9 @@ if (Test-Path -Path $projectBuildOutDirName) {
   Remove-Item $projectBuildOutDirName -Recurse
 }
 yarn run build
+if ($LASTEXITCODE -ne 0) {
+  Write-Error 'build command failed.'
+}
 if (-not (Test-Path -Path $projectBuildOutDirName)) {
-  Write-Error 'build project command failed.'
+  Write-Error 'project build out dir not found.'
 }

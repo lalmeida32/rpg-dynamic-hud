@@ -17,6 +17,10 @@ def run() -> None:
   lib.runAuto('2-create-pkg-build-folder', PROJECT_ROOT_PATH, constants.PKG_BUILD_OUT_DIR_NAME)
   lib.runAuto('3-copying-dist-to-pkg-build', PROJECT_ROOT_PATH, PROJECT_BUILD_OUT_DIR_NAME, constants.PKG_BUILD_OUT_DIR_NAME)
   lib.runAuto('4-copying-sample-to-pkg-build', PROJECT_ROOT_PATH, constants.PKG_ROOT_PATH, constants.PKG_BUILD_OUT_DIR_NAME)
-  lib.runPython('5-generate-package-json', PROJECT_ROOT_PATH, constants.PKG_BUILD_OUT_DIR_NAME, COLOR_ERROR, COLOR_RESET)
+  lib.runPython('5-generate-package-json', PROJECT_ROOT_PATH, PROJECT_BUILD_OUT_DIR_NAME, constants.PKG_BUILD_OUT_DIR_NAME, COLOR_ERROR, COLOR_RESET)
+  lib.runAuto('6-install-dependencies-pkg-build', PROJECT_ROOT_PATH, constants.PKG_BUILD_OUT_DIR_NAME)
+  lib.runAuto('7-run-pkg', PROJECT_ROOT_PATH, constants.PKG_BUILD_OUT_DIR_NAME)
+  lib.runAuto('8-remove-unecessary-files', PROJECT_ROOT_PATH, constants.PKG_BUILD_OUT_DIR_NAME)
+
 
   input(COLOR_SUCCESS + '\nPkg script finished successfully! Press enter to continue...' + COLOR_RESET)

@@ -3,9 +3,10 @@ import pathlib
 import json
 
 PROJECT_ROOT_PATH = sys.argv[1]
-PKG_BUILD_OUT_DIR_NAME = sys.argv[2]
-COLOR_ERROR = sys.argv[3]
-COLOR_RESET = sys.argv[4]
+PROJECT_BUILD_OUT_DIR_NAME = sys.argv[2]
+PKG_BUILD_OUT_DIR_NAME = sys.argv[3]
+COLOR_ERROR = sys.argv[4]
+COLOR_RESET = sys.argv[5]
 PROJECT_NAME = 'rpg-dynamic-hud-server'
 
 def errprint(msg: str) -> None:
@@ -39,17 +40,18 @@ for key in useless_fields:
 
 # Adding useful fields
 
-package_json_data['bin'] = 'dist/index.js'
+package_json_data['bin'] = f'{PROJECT_BUILD_OUT_DIR_NAME}/index.js'
 
 package_json_data['scripts'] = {
-  'pack': 'pkg .'
+  'pkgbuild': 'pkg .'
 }
 
 package_json_data['pkg'] = {
   'targets': [
     'node16-win-x64',
     'node16-linux-x64'
-  ]
+  ],
+  'outputPath': str(pathlib.Path(PROJECT_ROOT_PATH).joinpath(PKG_BUILD_OUT_DIR_NAME))
 }
 
 # Finally writing back in build dir
