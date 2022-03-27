@@ -11,7 +11,7 @@
     "tsconfig.json": true,
     "nodemon.json": true,
     ".gitignore": true,
-    "yarn.lock": false,
+    "yarn.lock": true,
     "node_modules/": true,
     "dist/": true
   }

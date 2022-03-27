@@ -16,8 +16,10 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan('tiny'));
 
-app.get('/', (req, res) => res.send('Express + TypeScript Server'));
-
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+app.get('/', (req, res) => {
+  res.send('Express + TypeScript Server');
 });
+
+app.listen(port, () =>
+  console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
+);

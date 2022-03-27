@@ -1,23 +1,12 @@
 {
   "name": "rpg-dynamic-hud-server",
   "version": "0.1.0",
-<<<<<<< HEAD
   "license": "ISC",
   "scripts": {
     "build": "tsc",
     "start": "node dist",
     "dev": "nodemon src/index.ts"
   },
-=======
-  "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
->>>>>>> 0210668 (server:refactor importing old project template)
   "dependencies": {
     "debug": "^4.3.4",
     "dotenv": "^16.0.0",
