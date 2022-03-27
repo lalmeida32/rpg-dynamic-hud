@@ -2,12 +2,12 @@ import sys
 import pathlib
 import json
 
-PROJECT_ROOT_PATH = sys.argv[1]
-PROJECT_BUILD_OUT_DIR_NAME = sys.argv[2]
-PKG_BUILD_OUT_DIR_NAME = sys.argv[3]
-COLOR_ERROR = sys.argv[4]
-COLOR_RESET = sys.argv[5]
-PROJECT_NAME = 'rpg-dynamic-hud-server'
+PROJECT_NAME = sys.argv[1]
+PROJECT_ROOT_PATH = sys.argv[2]
+PROJECT_BUILD_OUT_DIR_NAME = sys.argv[3]
+PKG_BUILD_OUT_DIR_NAME = sys.argv[4]
+COLOR_ERROR = sys.argv[5]
+COLOR_RESET = sys.argv[6]
 
 def errprint(msg: str) -> None:
   print(COLOR_ERROR + 'error: ' + msg + COLOR_RESET, file=sys.stderr)

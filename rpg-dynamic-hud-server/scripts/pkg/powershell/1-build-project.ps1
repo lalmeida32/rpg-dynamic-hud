@@ -1,9 +1,9 @@
 $ErrorActionPreference = "Stop"
 Set-PSDebug -Trace 0
 
-$projectRootPath = $args[0]
-$projectBuildOutDirName = $args[1]
-$projectName = 'rpg-dynamic-hud-server'
+$projectName = $args[0]
+$projectRootPath = $args[1]
+$projectBuildOutDirName = $args[2]
 
 cd $projectRootPath
 cd $projectName

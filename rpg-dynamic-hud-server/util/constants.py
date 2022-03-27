@@ -6,6 +6,7 @@ PROJECT_ROOT_PATH = None
 
 # Config
 SHELL_TYPE = None
+PROJECT_NAME = None
 PROJECT_BUILD_OUT_DIR_NAME = 'dist'
 
 # Really constant
@@ -20,6 +21,7 @@ def setupConstants(root_path : Path) -> None:
   global PROJECT_ROOT_PATH
   global SHELL_TYPE
   global PROJECT_BUILD_OUT_DIR_NAME
+  global PROJECT_NAME
 
   PROJECT_ROOT_PATH = root_path
 
@@ -44,6 +46,12 @@ def setupConstants(root_path : Path) -> None:
     exit()
 
   SHELL_TYPE = config.SHELL_TYPE
+
+  if not hasattr(config, 'PROJECT_NAME'):
+    print('Your config.py file must have a PROJECT_NAME variable defined.')
+    exit()
+
+  PROJECT_NAME = str(config.PROJECT_NAME)
 
   if hasattr(config, 'PROJECT_BUILD_OUT_DIR_NAME'):
     PROJECT_BUILD_OUT_DIR_NAME = config.PROJECT_BUILD_OUT_DIR_NAME
