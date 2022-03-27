@@ -1,0 +1,18 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.exclude": {
+    ".editorconfig": true,
+    ".eslintignore": true,
+    ".eslintrc.json": true,
+    ".prettierignore": true,
+    ".prettierrc": true,
+    "tsconfig.json": true,
+    "nodemon.json": true,
+    ".gitignore": true,
+    "yarn.lock": false,
+    "node_modules/": true,
+    "dist/": true
+  }
+}

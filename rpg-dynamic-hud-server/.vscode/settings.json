@@ -1,0 +1,9 @@
+{
+  "editor.tabSize": 2,
+  "files.exclude": {
+    "**/__pycache__/": true,
+    "pkg-build": false,
+    "rpg-dynamic-hud-server": true,
+    ".editorconfig": true
+  }
+}
