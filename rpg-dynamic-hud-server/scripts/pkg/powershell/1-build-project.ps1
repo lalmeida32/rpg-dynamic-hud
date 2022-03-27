@@ -6,7 +6,7 @@ $projectBuildOutDirName = $args[1]
 $projectName = 'rpg-dynamic-hud-server'
 
 cd $projectRootPath
-cd ".\$($projectName)\"
+cd $projectName
 if (Test-Path -Path $projectBuildOutDirName) {
   Remove-Item $projectBuildOutDirName -Recurse
 }
