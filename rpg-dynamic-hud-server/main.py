@@ -1,5 +1,5 @@
 import pathlib
-from src import constants
+from util import constants
 
 root_path = pathlib.Path(__file__).parent.resolve()
 
@@ -11,7 +11,7 @@ constants.setupConstants(root_path)
 
 # ----------------------------------
 
-from src.lib import clearTerminal
+from util.libs import clearTerminal
 
 import scripts.pkg
 

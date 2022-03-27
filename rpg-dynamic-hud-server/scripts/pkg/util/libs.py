@@ -1,6 +1,6 @@
 import os
-from src.constants import COLOR_RESET, COLOR_PARTIAL, SHELL_TYPE
-from scripts.pkg.src import constants
+from util.constants import COLOR_RESET, COLOR_PARTIAL, SHELL_TYPE
+from scripts.pkg.util import constants
 
 def createRunner(ext: str, folder_name: str, command: str):
   def runner(filename: str, *args: str):
