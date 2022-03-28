@@ -1,4 +1,4 @@
-import { IEnvironmentSettings } from './interface';
+import { IEnvironmentSettings } from './interfaces';
 
 export const envSettings: IEnvironmentSettings = {
   env: process.env.NODE_ENV || 'development',
