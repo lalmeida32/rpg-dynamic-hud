@@ -8,5 +8,6 @@ interface IEnvironmentSettingsDatabase {
 export interface IEnvironmentSettings {
   readonly env: string;
   readonly port: string;
+  readonly readline: string;
   readonly database: IEnvironmentSettingsDatabase;
 }
