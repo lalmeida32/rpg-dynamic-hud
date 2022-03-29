@@ -1,12 +1,12 @@
 interface IEnvironmentSettingsDatabase {
-  host: string;
-  port: string;
-  username: string;
-  password: string;
+  readonly host: string;
+  readonly port: string;
+  readonly username: string;
+  readonly password: string;
 }
 
 export interface IEnvironmentSettings {
-  env: string;
-  port: string;
-  database: IEnvironmentSettingsDatabase;
+  readonly env: string;
+  readonly port: string;
+  readonly database: IEnvironmentSettingsDatabase;
 }
