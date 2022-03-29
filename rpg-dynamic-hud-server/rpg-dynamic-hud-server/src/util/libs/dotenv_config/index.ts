@@ -1,7 +1,7 @@
 import path from 'path';
 import dotenv from 'dotenv';
 
-const { error } = dotenv.config({
+dotenv.config({
   path: path.resolve(process.cwd(), '.env'),
 });
 

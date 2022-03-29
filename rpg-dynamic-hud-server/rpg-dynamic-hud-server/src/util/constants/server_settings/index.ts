@@ -1,6 +1,6 @@
-import { IEnvironmentSettings } from './interfaces';
+import { IServerSettings } from './interfaces';
 
-export const envSettings: IEnvironmentSettings = {
+export const serverSettings: IServerSettings = {
   env: process.env.NODE_ENV || 'development',
   port: process.env.PORT || '3000',
   readline: process.env.READLINE || 'false',

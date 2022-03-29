@@ -1,13 +1,13 @@
-interface IEnvironmentSettingsDatabase {
+interface IServerSettingsDatabase {
   readonly host: string;
   readonly port: string;
   readonly username: string;
   readonly password: string;
 }
 
-export interface IEnvironmentSettings {
+export interface IServerSettings {
   readonly env: string;
   readonly port: string;
   readonly readline: string;
-  readonly database: IEnvironmentSettingsDatabase;
+  readonly database: IServerSettingsDatabase;
 }
