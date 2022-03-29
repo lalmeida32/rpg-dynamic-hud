@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import 'util/libs/dotenv_config';
 
 import express from 'express';
 import helmet from 'helmet';

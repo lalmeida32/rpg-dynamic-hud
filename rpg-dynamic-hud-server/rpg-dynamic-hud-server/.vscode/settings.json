@@ -9,6 +9,7 @@
     ".prettierignore": true,
     ".prettierrc": true,
     "tsconfig.json": true,
+    "webpack.config.js": true,
     "nodemon.json": true,
     ".gitignore": true,
     "yarn.lock": true,
