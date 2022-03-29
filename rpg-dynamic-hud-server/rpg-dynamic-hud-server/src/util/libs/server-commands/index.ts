@@ -1,2 +1,1 @@
-export * from './declaration/TCommandCallback';
-export * from './implementation/registerCommand';
+export * from './command-manager';

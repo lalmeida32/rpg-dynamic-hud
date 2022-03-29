@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import debug from 'debug';
 
-import { envSettings } from './util/constants/environment-settings';
+import { envSettings } from 'util/constants/environment-settings';
 
 debug('app:setup')(`Starting ${envSettings.env} environment debug`);
 
@@ -14,7 +14,7 @@ const port = +envSettings.port;
 
 app.use(express.json());
 app.use(helmet());
-app.use(morgan('tiny'));
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   res.send('Express + TypeScript Server');
