@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import debug from 'debug';
 
-import { envSettings } from 'util/constants/environment-settings';
+import { envSettings } from 'util/constants/environment_settings';
 
 debug('app:setup')(`Starting ${envSettings.env} environment debug`);
 

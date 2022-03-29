@@ -1,4 +1,4 @@
-import { TCommandCallback } from '../command-callback';
+import { TCommandCallback } from '../command_callback';
 import { ICommandManager } from './ICommandManager';
 import readline from 'readline';
 

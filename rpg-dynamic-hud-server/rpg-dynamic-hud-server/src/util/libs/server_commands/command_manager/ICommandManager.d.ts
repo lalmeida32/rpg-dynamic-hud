@@ -1,4 +1,4 @@
-import { TCommandCallback } from '../command-callback';
+import { TCommandCallback } from '../command_callback';
 
 export interface ICommandManager {
   subscribe: (command: string, callback: TCommandCallback) => void;
