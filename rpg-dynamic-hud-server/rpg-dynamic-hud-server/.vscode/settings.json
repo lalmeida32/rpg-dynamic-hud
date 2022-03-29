@@ -8,11 +8,11 @@
     ".eslintrc.json": true,
     ".prettierignore": true,
     ".prettierrc": true,
-    "tsconfig.json": false,
+    "tsconfig.json": true,
     "nodemon.json": true,
     ".gitignore": true,
     "yarn.lock": true,
     "node_modules/": true,
-    "dist/": false
+    "dist/": true
   }
 }

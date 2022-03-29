@@ -45,6 +45,12 @@ def setupConstants(root_path : Path) -> None:
     print(f'It was detected that you are using Windows. Please use cmd or powershell.')
     exit()
 
+  posix_with_not_bash = config.SHELL_TYPE != 'bash' and os.name == 'posix'
+
+  if posix_with_not_bash:
+    print(f'It was detected that you are using POSIX (probably MacOS or linux). Please use bash shell.')
+    exit()
+
   SHELL_TYPE = config.SHELL_TYPE
 
   if not hasattr(config, 'PROJECT_NAME'):
