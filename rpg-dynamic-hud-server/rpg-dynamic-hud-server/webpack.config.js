@@ -1,3 +1,5 @@
+const webpackNodeExternals = require('webpack-node-externals');
+
 const path = require('path');
 
 const distPath = path.resolve(__dirname, 'dist');
@@ -24,4 +26,6 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
   target: 'node',
+  externalsPresets: { node: true },
+  externals: [webpackNodeExternals()],
 };
