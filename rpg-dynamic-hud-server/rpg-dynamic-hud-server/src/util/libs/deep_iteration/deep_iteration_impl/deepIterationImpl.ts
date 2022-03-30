@@ -6,11 +6,11 @@ export const deepIterationImpl: TDeepIterationImpl = (
   keyStack
 ) => {
   for (const key in obj) {
+    keyStack.push(key);
     const element = obj[key];
-    if (typeof element === typeof obj) {
-      keyStack.push(key);
+    if (typeof element === typeof obj)
       deepIterationImpl(element as typeof obj, callback, keyStack);
-      keyStack.pop();
-    } else callback(element, [...keyStack]);
+    else callback(element, [...keyStack]);
+    keyStack.pop();
   }
 };
