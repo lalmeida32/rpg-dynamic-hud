@@ -1,12 +1,12 @@
 export interface IServerSettings {
-  readonly port: number;
-  readonly commands: boolean;
-  readonly dotenv: 'none' | 'cwd' | 'bin';
+  port: number;
+  commands: boolean;
+  dotenv: 'none' | 'cwd' | 'bin';
   // node
-  readonly node_env: 'development' | 'staging' | 'production';
+  node_env: 'development' | 'staging' | 'production';
   // database
-  readonly database_host: string;
-  readonly database_port: number;
-  readonly database_username: string;
-  readonly database_password: string;
+  database_host: string;
+  database_port: number;
+  database_username: string;
+  database_password: string;
 }

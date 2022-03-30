@@ -1,6 +1,6 @@
 import { IServerSettings } from './IServerSettings';
 
-export const defaultServerSettings: IServerSettings = {
+export const defaultServerSettings: Readonly<IServerSettings> = {
   port: 3000,
   commands: false,
   dotenv: 'cwd',
