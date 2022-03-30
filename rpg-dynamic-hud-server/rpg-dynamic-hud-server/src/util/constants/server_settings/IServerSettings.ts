@@ -2,6 +2,7 @@ export interface IServerSettings {
   port: number;
   commands: boolean;
   dotenv: 'none' | 'cwd' | 'bin';
+  debug: string;
   // node
   node_env: 'development' | 'staging' | 'production';
   // database

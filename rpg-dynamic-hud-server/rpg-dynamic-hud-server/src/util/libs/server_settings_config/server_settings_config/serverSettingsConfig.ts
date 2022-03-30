@@ -1,43 +1,51 @@
-import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
 import dotenv from 'dotenv';
 
-import {
-  defaultServerSettings,
-  IServerSettings,
-} from 'util/constants/server_settings';
-import { deepIteration } from 'util/libs/deep_iteration';
+import { defaultServerSettings } from 'util/constants/server_settings';
 
-import { ISettingModel } from '../setting_model';
+import { TServerSettingsModel } from '../server_settings_model';
+import { ISolvedArgs, argsSolver } from 'util/libs/args_solver';
+import path from 'path';
+import { settingsValidation } from '../settings_validation';
 
-/* Load setting models  */
-const settingModels: ISettingModel[] = [];
+const serverSettingsModel: TServerSettingsModel = {};
+for (const key in defaultServerSettings)
+  serverSettingsModel[key as keyof TServerSettingsModel] = undefined;
 
-deepIteration(defaultServerSettings, (element, keyStack) => {
-  settingModels.push({
-    keys: [...keyStack],
-  });
-});
+/* Load launch options */
 
-/* Load argv */
-
-const argv = yargs(hideBin(process.argv)).parseSync();
-for (const setting of settingModels) {
-  const settingKeyStr = setting.keys.join('-');
-
-  if (!(settingKeyStr in argv)) continue;
-  setting.value = argv[settingKeyStr];
-}
+const launchOptions: ISolvedArgs = argsSolver(process.argv.splice(2));
+for (const key in launchOptions.optional)
+  if (key in serverSettingsModel)
+    serverSettingsModel[key as keyof TServerSettingsModel] =
+      launchOptions.optional[key];
+  else throw Error(`${key} launch option is not valid.`);
 
 /* Run dotenv */
+if (serverSettingsModel.dotenv === undefined)
+  serverSettingsModel.dotenv = defaultServerSettings.dotenv;
 
-if (settingModels) dotenv.config();
+if (serverSettingsModel.dotenv === 'cwd') dotenv.config();
+else if (serverSettingsModel.dotenv === 'bin')
+  dotenv.config({ path: path.resolve(process.argv0, '..', '.env') });
+else if (serverSettingsModel.dotenv !== 'none')
+  throw Error(`${serverSettingsModel.dotenv} is not a valid value for dotenv.`);
 
-/* Load environment variables */
+/* Load environment variables or default */
+for (const key in serverSettingsModel) {
+  if (serverSettingsModel[key as keyof TServerSettingsModel] === undefined) {
+    serverSettingsModel[key as keyof TServerSettingsModel] =
+      process.env[key.toUpperCase()] ||
+      String(defaultServerSettings[key as keyof TServerSettingsModel]);
+  }
+}
 
-/* Load default  */
+/* Save back to environment variables to be consistent */
+for (const key in serverSettingsModel) {
+  process.env[key.toUpperCase()] =
+    serverSettingsModel[key as keyof TServerSettingsModel];
+}
 
-/*  */
-export const serverSettings: IServerSettings = { ...defaultServerSettings };
+/* Validation and exporting */
+const serverSettings = settingsValidation(serverSettingsModel);
 
-console.log(settingModels);
+export { serverSettings };

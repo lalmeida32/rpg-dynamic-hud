@@ -12,15 +12,13 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "helmet": "^5.0.2",
-    "morgan": "^1.10.0",
-    "yargs": "^17.4.0"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.7",
     "@types/express": "^4.17.13",
     "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.23",
-    "@types/yargs": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "eslint": "^8.11.0",
