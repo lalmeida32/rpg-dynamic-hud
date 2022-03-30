@@ -6,7 +6,7 @@ const commandsHash: Record<string, TCommandCallback> = {};
 let stdio: readline.Interface | null = null;
 const isRunning = () => stdio !== null;
 
-export const serverCommands: IServerCommands = {
+export const serverCommands: Readonly<IServerCommands> = {
   subscribe: (command, callback) => {
     commandsHash[command] = callback;
   },

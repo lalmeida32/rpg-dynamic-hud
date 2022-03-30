@@ -19,7 +19,7 @@ const solveArg = (arg: string, solvedArgs: ISolvedArgs) => {
 };
 
 export const argsSolver: TArgsSolver = args => {
-  const solvedArgs: ISolvedArgs = {
+  const solvedArgs: Readonly<ISolvedArgs> = {
     optional: {},
     positional: [],
   };
