@@ -1,18 +1,12 @@
-interface IServerSettingsNode {
-  readonly env: 'development' | 'staging' | 'production';
-}
-
-interface IServerSettingsDatabase {
-  readonly host: string;
-  readonly port: number;
-  readonly username: string;
-  readonly password: string;
-}
-
 export interface IServerSettings {
-  [index: string]: unknown;
   readonly port: number;
   readonly commands: boolean;
-  readonly node: IServerSettingsNode;
-  readonly database: IServerSettingsDatabase;
+  readonly dotenv: 'none' | 'cwd' | 'bin';
+  // node
+  readonly node_env: 'development' | 'staging' | 'production';
+  // database
+  readonly database_host: string;
+  readonly database_port: number;
+  readonly database_username: string;
+  readonly database_password: string;
 }

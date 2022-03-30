@@ -1,5 +1,6 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+import dotenv from 'dotenv';
 
 import {
   defaultServerSettings,
@@ -27,6 +28,10 @@ for (const setting of settingModels) {
   if (!(settingKeyStr in argv)) continue;
   setting.value = argv[settingKeyStr];
 }
+
+/* Run dotenv */
+
+if (settingModels) dotenv.config();
 
 /* Load environment variables */
 
