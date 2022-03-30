@@ -1,1 +1,1 @@
-export * from './command_manager';
+export * from './server_commands';

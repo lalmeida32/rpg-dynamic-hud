@@ -1,6 +1,6 @@
 import { TCommandCallback } from '../command_callback';
 
-export interface ICommandManager {
+export interface IServerCommands {
   subscribe: (command: string, callback: TCommandCallback) => void;
   run: () => Promise<void>;
   stop: () => void;

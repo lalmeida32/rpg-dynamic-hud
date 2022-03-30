@@ -1,12 +1,12 @@
 import { TCommandCallback } from '../command_callback';
-import { ICommandManager } from './ICommandManager';
+import { IServerCommands } from './IServerCommands';
 import readline from 'readline';
 
 const commandsHash: Record<string, TCommandCallback> = {};
 let stdio: readline.Interface | null = null;
 const isRunning = () => stdio !== null;
 
-export const commandManager: ICommandManager = {
+export const serverCommands: IServerCommands = {
   subscribe: (command, callback) => {
     commandsHash[command] = callback;
   },
