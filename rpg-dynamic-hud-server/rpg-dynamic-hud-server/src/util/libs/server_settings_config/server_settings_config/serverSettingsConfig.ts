@@ -22,7 +22,8 @@ for (const key in launchOptions.optional)
 
 /* Run dotenv */
 if (serverSettingsModel.dotenv === undefined)
-  serverSettingsModel.dotenv = defaultServerSettings.dotenv;
+  serverSettingsModel.dotenv =
+    process.env.DOTENV || defaultServerSettings.dotenv;
 
 if (serverSettingsModel.dotenv === 'cwd') {
   const { error } = dotenv.config();
