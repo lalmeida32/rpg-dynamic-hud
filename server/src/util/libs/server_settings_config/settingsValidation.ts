@@ -4,11 +4,15 @@ import {
 } from 'util/constants/server_settings';
 import { TServerSettingsModel } from './TServerSettingsModel';
 
+/* Util types */
+
 type TSettingsValidation = (
   serverSettingsModel: TServerSettingsModel
 ) => Readonly<IServerSettings>;
 
 type TValidate<T> = (tStr?: string) => T;
+
+/* Generic validation */
 
 const genericError = (name: string, tStr?: string) =>
   Error(`${tStr} is not a valid value for ${name}.`);
@@ -39,6 +43,8 @@ const createGenericValidateBoolean: (
     throw genericError(name, tStr);
   };
 };
+
+/* Specific validation */
 
 const validatePort = createGenericValidateNumber('port');
 
@@ -73,6 +79,8 @@ const validateDatabaseUsername =
   createGenericValidateString('database_username');
 const validateDatabasePassword =
   createGenericValidateString('database_password');
+
+/* Exporting validations */
 
 export const settingsValidation: TSettingsValidation = serverSettingsModel => {
   return {
