@@ -1,5 +1,12 @@
-import { defaultServerSettings } from 'util/constants/server_settings';
-import { TSettingsValidation } from './TSettingsValidation';
+import {
+  defaultServerSettings,
+  IServerSettings,
+} from 'util/constants/server_settings';
+import { TServerSettingsModel } from './TServerSettingsModel';
+
+type TSettingsValidation = (
+  serverSettingsModel: TServerSettingsModel
+) => Readonly<IServerSettings>;
 
 type TValidate<T> = (tStr?: string) => T;
 
@@ -34,12 +41,17 @@ const createGenericValidateBoolean: (
 };
 
 const validatePort = createGenericValidateNumber('port');
-const validateCommands = createGenericValidateBoolean('commands');
 
 type TDotenv = typeof defaultServerSettings.dotenv;
 const validateDotenv: TValidate<TDotenv> = dotenv => {
   if (dotenv === 'none' || dotenv === 'cwd' || dotenv === 'bin') return dotenv;
   throw genericError('dotenv', dotenv);
+};
+
+type TMorgan = typeof defaultServerSettings.morgan;
+const validateMorgan: TValidate<TMorgan> = morgan => {
+  if (morgan === 'none' || morgan === 'tiny' || morgan === 'dev') return morgan;
+  throw genericError('morgan', morgan);
 };
 
 const validateDebug = createGenericValidateString('debug');
@@ -65,7 +77,7 @@ const validateDatabasePassword =
 export const settingsValidation: TSettingsValidation = serverSettingsModel => {
   return {
     port: validatePort(serverSettingsModel.port),
-    commands: validateCommands(serverSettingsModel.commands),
+    morgan: validateMorgan(serverSettingsModel.morgan),
     dotenv: validateDotenv(serverSettingsModel.dotenv),
     debug: validateDebug(serverSettingsModel.debug),
     node_env: validateNodeEnv(serverSettingsModel.node_env),

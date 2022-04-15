@@ -1,11 +1,12 @@
 import dotenv from 'dotenv';
 
-import { defaultServerSettings } from 'util/constants/server_settings';
-
-import { TServerSettingsModel } from '../server_settings_model';
-import { ISolvedArgs, argsSolver } from 'util/libs/args_solver';
 import path from 'path';
-import { settingsValidation } from '../settings_validation';
+
+import { defaultServerSettings } from 'util/constants/server_settings';
+import { ISolvedArgs, argsSolver } from 'util/libs/args_solver';
+
+import { TServerSettingsModel } from './TServerSettingsModel';
+import { settingsValidation } from './settingsValidation';
 
 const serverSettingsModel: TServerSettingsModel = {};
 for (const key in defaultServerSettings)
