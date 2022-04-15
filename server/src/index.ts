@@ -1,5 +1,7 @@
 import { serverSettings } from 'util/libs/server_settings_config';
 
+import path from 'path';
+
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -9,11 +11,12 @@ debug('app:setup')(`Starting ${serverSettings.node_env} environment debug`);
 
 const app = express();
 
-app.use(express.json());
 app.use(helmet());
 app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Express + TypeScript Server');
 });
 
