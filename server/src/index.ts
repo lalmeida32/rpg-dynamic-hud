@@ -11,8 +11,13 @@ debug('app:setup')(`Starting ${serverSettings.node_env} environment debug`);
 
 const app = express();
 
+// MIDDLEWARES
+
 app.use(helmet());
-app.use(morgan('dev'));
+if (serverSettings.morgan !== 'none') {
+  debug('app:setup')(`Morgan enabled with ${serverSettings.morgan}`);
+  app.use(morgan(serverSettings.morgan));
+}
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
