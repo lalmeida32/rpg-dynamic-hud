@@ -6,6 +6,7 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import debug from 'debug';
+import gracefulShutdown from 'http-graceful-shutdown';
 
 const app = express();
 
@@ -30,6 +31,8 @@ app.get('/api', (req, res) => {
 // LISTEN
 
 const port = serverSettings.port;
-app.listen(port, () =>
+const server = app.listen(port, () =>
   debug('app:setup')(`Server is running at http://localhost:${port}`)
 );
+
+gracefulShutdown(server);
