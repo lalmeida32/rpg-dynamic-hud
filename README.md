@@ -49,7 +49,7 @@ Extra
 
 ### Project Description
 
-A role-playing game (RPG) is a very popular game genre. The most traditional way to play it is in person, each player has its own character sheet and the game master (GM) usually owns the game rules book, and guides the session. Dices and boards are other important elements of this type of game.
+A role-playing game (RPG) is a very popular game genre. The most traditional way to play it is in person, where each player has its own character sheet and the game master (GM) usually owns the game rules book, and guides the session. Dices and boards are other important elements of this type of game.
 
 The main goal of this project is to facilitate remote RPG sessions, where players and the GM are connected by internet. More than that, it provides features that cannot be possible at a physical environment, and provides a good support for livestreams.
 
