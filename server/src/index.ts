@@ -35,4 +35,6 @@ const server = app.listen(port, () =>
   debug('app:setup')(`Server is running at http://localhost:${port}`)
 );
 
+// EVENTS
+
 gracefulShutdown(server);
