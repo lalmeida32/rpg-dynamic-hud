@@ -1,5 +1,6 @@
-import { ISolvedArgs } from '../solved_args';
-import { TArgsSolver } from './TArgsSolver';
+import { ISolvedArgs } from './ISolvedArgs';
+
+type TArgsSolver = (args: string[]) => ISolvedArgs;
 
 type checkArg = (arg: string) => boolean;
 
