@@ -4,7 +4,6 @@
 
 This is an open source project, but it's also a college subject final project. The name and code of the students involved are required.
 
-- André Guarnier De Mitri - 
 - Guilherme Ramos Costa Paixão - 11796079
 - Lucas Ferreira de Almeida - 11262063
 
