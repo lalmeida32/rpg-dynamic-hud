@@ -29,6 +29,7 @@ Specification
 
 Contributing
 - [Project Structure](#project-structure)
+- [Tools and Libraries Used](#tools-and-libraries-used)
 - [Development Suggestions](#development-suggestions)
 - [Test Plans](#test-plans)
 - [Test Results](#test-results)
@@ -122,6 +123,25 @@ Despite that, for many cases localtunnel should be worth to use. Here is a
 ---
 
 ### Project Structure
+### Tools and Libraries Used
+
+On the client-side:
+
+- Node JS with Yarn
+- Typescript
+- React JS
+
+On the server-side:
+
+- Node JS with Yarn
+- Typescript
+- Express JS
+- Webpack
+
+On project building:
+
+- Vercel Pkg
+
 ### Development Suggestions
 ### Test Plans
 ### Test Results
