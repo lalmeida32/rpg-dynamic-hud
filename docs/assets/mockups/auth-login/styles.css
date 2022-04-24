@@ -99,3 +99,7 @@ main ul li:first-child {
 main ul li {
     cursor: pointer;
 }
+
+main ul li p {
+    text-decoration: underline;
+}
