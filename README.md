@@ -130,6 +130,7 @@ On the client-side:
 - Node JS with Yarn
 - Typescript
 - React JS
+- Vite
 
 On the server-side:
 
@@ -137,6 +138,7 @@ On the server-side:
 - Typescript
 - Express JS
 - Webpack
+- Nodemon
 
 On project building:
 
