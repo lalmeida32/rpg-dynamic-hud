@@ -1,0 +1,114 @@
+/* IMPORT */
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+/* GLOBAL SETTINGS */
+
+:root {
+    --text-color: white;
+    --button-font-size: 1.4em;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--text-color);
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    background: none;
+    border: none;
+}
+
+/* NAVBAR */
+
+#navbar {
+    display: flex;
+    height: 80px;
+    background: hsl(230deg, 15%, 15%);
+    border-bottom: 5px solid black;
+}
+
+#navbar li {
+    height: 100%;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#navbar li img {
+    height: 100%;
+    object-fit: cover;
+}
+
+#navbar li button {
+    cursor: pointer;
+    border-bottom: 2px solid var(--text-color);
+    font-size: var(--button-font-size);
+    transition: all 0.2s ease-in-out;
+}
+
+#navbar li button:hover {
+    font-size: 1.7em;
+}
+
+/* Selecting empty space */
+#navbar li:nth-last-child(2) {
+    flex-grow: 1;
+}
+
+#navbar li:last-child button {
+    background: white;
+    border-radius: 100px;
+    padding: 10px 15px;
+    color:black;
+    border:none;
+}
+
+#navbar li:last-child button:hover {
+    font-size: var(--button-font-size);
+    opacity: 0.9;
+}
+
+main {
+    background: hsl(230deg, 15%, 30%);
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+main ul {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100%;
+    width: 80vw;
+}
+
+main li {
+    margin-right: 60px;
+
+}
+
+main img {
+    width: 500px;
+}
+
+main p {
+    text-align: justify;
+    font-size: x-large;
+}
