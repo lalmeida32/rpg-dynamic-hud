@@ -4,7 +4,6 @@
 
 This is an open source project, but it's also a college subject final project. The name and code of the students involved are required.
 
-- André Guarnier De Mitri - 
 - Guilherme Ramos Costa Paixão - 11796079
 - Lucas Ferreira de Almeida - 11262063
 
@@ -18,13 +17,14 @@ This is an open source project, but it's also a college subject final project. T
 --- 
 
 Using
-- [Project Description](#project-description)
+- [Overview](#overview)
 - [Use Cases](#use-cases)
 - [How to Use](#how-to-use)
 - [How to Host](#how-to-host)
 
 Specification
 - [Requirements](#requirements)
+- [Project Description](#project-description)
 - [Mockups](#mockups)
 
 Contributing
@@ -47,7 +47,7 @@ Extra
 
 ---
 
-### Project Description
+### Overview
 
 A role-playing game (RPG) is a very popular game genre. The most traditional way to play it is in person, each player has its own character sheet and the game master (GM) usually owns the game rules book, and guides the session. Dices and boards are other important elements of this type of game.
 
@@ -66,12 +66,15 @@ When the gameplay finishes, the GM can close the room, but the program keeps the
 
 ### How to Use
 
+<!--
 First, you must host the server or find an host.
+-->
 
 <!-- TODO -->
 
 ### How to Host
 
+<!--
 First things first, it's **highly recommended talking with an IT student or professional** before following the instructions below.
 
 This project is designed to be easy to host, but there are unavoidable considerations to take. To host this project you must:
@@ -80,15 +83,18 @@ This project is designed to be easy to host, but there are unavoidable considera
 - Download a MongoDB database.
 - Find a way to provide this server a internet connection.
 
+-->
+
 <!-- TODO EXECUTABLE -->
 
 <!-- TODO DATABASE -->
-
+<!-- 
 There are many ways to provide a internet connection, but many of them are not that simple and free. Aside from that, **security is a very important thing be aware when hosting any application on the internet**.
 
 Using localtunnel is quite simple and free, but it's unstable and it exposes a port of your personal computer to the world.
 
 Despite that, for many cases localtunnel should be worth to use. Here is a 
+-->
 <!-- TODO HOST -->
 
 <!-- In a professional environment, deploy server, cloud services aws azure google cloud heroku -->
@@ -103,6 +109,7 @@ Despite that, for many cases localtunnel should be worth to use. Here is a
 ---
 
 ### Requirements
+### Project Description
 ### Mockups
 
 ---
