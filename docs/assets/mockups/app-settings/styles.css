@@ -74,7 +74,7 @@ main input {
 }
 
 main button {
-    background: hsl(230deg, 30%, 80%);;
+    background: hsl(120deg, 30%, 80%);;
     color: black;
     border-radius: 100px;
     font-size: 1em;
