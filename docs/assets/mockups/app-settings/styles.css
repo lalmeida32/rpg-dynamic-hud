@@ -1,0 +1,96 @@
+/* IMPORT */
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+/* GLOBAL SETTINGS */
+
+:root {
+    --text-color: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--text-color);
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    padding: 100px 0;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    background: none;
+    border: none;
+}
+
+/* MAIN */
+
+main {
+    display: flex;
+    height: 80%;
+    width: 600px;
+    flex-direction: column;
+    border-radius: 50px;
+    padding: 50px;
+    background-color: hsl(230deg, 15%, 30%);
+    position: relative;
+
+}
+
+main h2 {
+    margin: 20px 0;
+    font-weight: normal;
+    font-size: 1.4em;
+}
+
+main h2:first-of-type {
+    margin-top: 0;
+}
+
+main input {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 100px;
+    font-size: 1.2em;
+    text-align: center;
+    margin: 10px 0;
+    color: black;
+    background: white;
+    width: 100%;
+}
+
+main button {
+    background: hsl(120deg, 30%, 80%);;
+    color: black;
+    border-radius: 100px;
+    font-size: 1em;
+    padding: 5px 40px;
+    transition: all 0.2s;
+}
+
+main button:hover {
+    opacity: 0.9;
+}
+
+#close-button {
+    width: 40px;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    cursor: pointer;
+    filter: invert(100%);
+}

@@ -29,6 +29,7 @@ Specification
 
 Contributing
 - [Project Structure](#project-structure)
+- [Tools and Libraries Used](#tools-and-libraries-used)
 - [Development Suggestions](#development-suggestions)
 - [Test Plans](#test-plans)
 - [Test Results](#test-results)
@@ -109,6 +110,25 @@ Despite that, for many cases localtunnel should be worth to use. Here is a
 ---
 
 ### Requirements
+
+- The system's home screen must show currently user status if logged in
+- The system's home screen must show a text 
+- The system must allow any person, over 13 years old, to create an account
+- The system must allow a user to change it's settings
+- The system must allow a user to create a room
+- The system must allow a user to invite another user to a room
+- The system must allow a user to join a room given it's Room Code
+- The system must allow a user to kick/ban annother user from it's room
+- The system must allow the room's creator to delete the room
+- The system must allow the room's creator to set the game master
+- Each room must have dice options (i.e. D6, D12, D20...) 
+- Each room must have a text chat
+- Each room must have a room's members list
+- The game master's view must show all players status and dices
+- The player's view must show all players status, dices and their items
+- Each player's status must show their xp, hp and picture 
+
+
 ### Project Description
 ### Mockups
 
@@ -122,6 +142,27 @@ Despite that, for many cases localtunnel should be worth to use. Here is a
 ---
 
 ### Project Structure
+### Tools and Libraries Used
+
+On the client-side:
+
+- Node JS with Yarn
+- Typescript
+- React JS
+- Vite
+
+On the server-side:
+
+- Node JS with Yarn
+- Typescript
+- Express JS
+- Webpack
+- Nodemon
+
+On project building:
+
+- Vercel Pkg
+
 ### Development Suggestions
 ### Test Plans
 ### Test Results
