@@ -62,7 +62,9 @@ main form {
     align-items: center;
 }
 
-main form input[type=text] {
+main form input[type=text],
+main form input[type=email],
+main form input[type=password] {
     padding: 5px 10px;
     border: none;
     border-radius: 100px;
