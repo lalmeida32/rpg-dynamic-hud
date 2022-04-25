@@ -132,9 +132,9 @@ Despite that, for many cases localtunnel should be worth to use. Here is a
 ### Project Description
 ### Mockups
 
-![alt text](http://www.github.com/lalmeida32/rpg-dynamic-hud/blob/main/docs/assets/mockups/img1.png?raw=true)
-![alt text](http://www.github.com/lalmeida32/rpg-dynamic-hud/blob/main/docs/assets/mockups/img2.png?raw=true)
-![alt text](http://www.github.com/lalmeida32/rpg-dynamic-hud/blob/main/docs/assets/mockups/img3.png?raw=true)
+![alt text](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/img.png)
+![alt text](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/img2.png)
+![alt text](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/img3.png)
 
 
 ---
