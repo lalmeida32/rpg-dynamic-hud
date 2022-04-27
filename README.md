@@ -116,29 +116,28 @@ Despite that, for many cases localtunnel should be worth to use. Here is a
 - The system must allow any person, over 13 years old, to create an account
 - The system must allow a user to change it's settings
 - The system must allow a user to create a room
-- The system must allow a user to invite another user to a room
 - The system must allow a user to join a room given it's Room Code
-- The system must allow a user to kick/ban annother user from it's room
-- The system must allow the room's creator to delete the room
-- The system must allow the room's creator to set the game master
+- The system must allow the game master to kick/ban another user from it's room
+- The system must allow the game master to change the room settings
+- The system must allow the game master to lock/unlock a room
+- The system must allow the game master to delete the room
 - Each room must have dice options (i.e. D6, D12, D20...) 
-- Each room must have a text chat
 - Each room must have a room's members list
-- The game master's view must show all players status and dices
-- The player's view must show all players status, dices and their items
-- Each player's status must show their xp, hp and picture 
+- The game master's view must show all players status and dices, in real-time
+- The player's view must show all players status, dices and their character sheets, in real-time
+- Each player's character sheet must show character's name, character's photo, status bars and attributes 
 
 
 ### Project Description
 
 The navigation diagram below will help us describing how we will implement the requirements funcionalities.
 
-![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/ repo/docs/milestone-1/docs/assets/mockups/readme/diagram.png)
+![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/repo/docs/milestone-1/docs/assets/mockups/readme/diagram.png)
 
-The mockups can be found here: <a href="https://github.com/lalmeida32/rpg-dynamic-hud/tree/ repo/docs/milestone-1/docs/assets/mockups" target="_blank">Mockups</a>
+The mockups can be found here: <a href="https://github.com/lalmeida32/rpg-dynamic-hud/tree/repo/docs/milestone-1/docs/assets/mockups" target="_blank">Mockups</a>
 
 The user will see a landing page that can navigate over static pages like "About" or "Contact us". Then, the user can logging in or sign up to enter the application.
-The application is made of rooms, each user can create their own rooms, which make them GMs for that particular rooms. When creating a room, a user can choose the character information that can be manipulated by the players, like stat bars and attributes. He can also choose which dices players will can toss.
+The application is made of rooms, each user can create their own rooms, which make them GMs for that particular rooms. When creating a room, an user can choose the character information that can be manipulated by the players, like stat bars and attributes. He can also choose which dices players can toss.
 The players can enter the room via an auto-generated code. The GM can lock or unlock a room, and can kick/ban players.
 Players can enter rooms using a code, create and update their own character.
 The information of all characters will change in real-time, using WebSockets technology.
@@ -147,6 +146,8 @@ We will save on the server database: the users register information, the rooms i
 
 
 ### Mockups
+
+Note: All mockups are not responsive. The recommended resolution to display them is 1366x768.
 
 ![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/repo/docs/milestone-1/docs/assets/mockups/readme/img.png)
 ![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/repo/docs/milestone-1/docs/assets/mockups/readme/img2.png)
