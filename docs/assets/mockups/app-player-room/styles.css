@@ -109,6 +109,13 @@ main {
     flex-direction: column;
 }
 
+#settings-button {
+    position: absolute;
+    width: 60px;
+    top: 10px;
+    right: 10px;
+}
+
 #hud {
     height: calc(100% - var(--dices-height));
     display: flex;
