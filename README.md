@@ -180,6 +180,7 @@ On the server-side:
 - Express JS
 - Webpack
 - Nodemon
+- Socket.io
 
 On project building:
 
