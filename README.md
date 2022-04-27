@@ -133,7 +133,7 @@ Despite that, for many cases localtunnel should be worth to use. Here is a
 
 The navigation diagram below will help us describing how we will implement the requirements funcionalities.
 
-![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/diagram.png)
+![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/utils/diagram.png)
 
 The mockups can be found here: <a href="https://github.com/lalmeida32/rpg-dynamic-hud/tree/main/docs/assets/mockups" target="_blank">Mockups</a>
 
@@ -148,9 +148,9 @@ We will save on the server database: the users register information, the rooms i
 
 ### Mockups
 
-![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/img.png)
-![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/img2.png)
-![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/img3.png)
+![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/utils/img.png)
+![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/utils/img2.png)
+![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/utils/img3.png)
 
 
 ---
