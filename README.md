@@ -133,9 +133,9 @@ Despite that, for many cases localtunnel should be worth to use. Here is a
 
 The navigation diagram below will help us describing how we will implement the requirements funcionalities.
 
-![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/readme/diagram.png)
+![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/ repo/docs/milestone-1/docs/assets/mockups/readme/diagram.png)
 
-The mockups can be found here: <a href="https://github.com/lalmeida32/rpg-dynamic-hud/tree/main/docs/assets/mockups" target="_blank">Mockups</a>
+The mockups can be found here: <a href="https://github.com/lalmeida32/rpg-dynamic-hud/tree/ repo/docs/milestone-1/docs/assets/mockups" target="_blank">Mockups</a>
 
 The user will see a landing page that can navigate over static pages like "About" or "Contact us". Then, the user can logging in or sign up to enter the application.
 The application is made of rooms, each user can create their own rooms, which make them GMs for that particular rooms. When creating a room, a user can choose the character information that can be manipulated by the players, like stat bars and attributes. He can also choose which dices players will can toss.
@@ -148,10 +148,10 @@ We will save on the server database: the users register information, the rooms i
 
 ### Mockups
 
-![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/readme/img.png)
-![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/readme/img2.png)
-![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/readme/img3.png)
-![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/main/docs/assets/mockups/readme/img4.png)
+![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/repo/docs/milestone-1/docs/assets/mockups/readme/img.png)
+![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/repo/docs/milestone-1/docs/assets/mockups/readme/img2.png)
+![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/repo/docs/milestone-1/docs/assets/mockups/readme/img3.png)
+![](https://raw.githubusercontent.com/lalmeida32/rpg-dynamic-hud/repo/docs/milestone-1/docs/assets/mockups/readme/img4.png)
 
 
 ---
