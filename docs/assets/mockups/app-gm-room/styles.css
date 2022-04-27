@@ -1,0 +1,120 @@
+/* IMPORT */
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+/* GLOBAL SETTINGS */
+
+:root {
+    --text-color: white;
+    --dices-height: 50px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--text-color);
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background: hsl(230deg, 15%, 15%);
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    background: none;
+    border: none;
+}
+
+/* MAIN (HUD) */
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#settings-button {
+    position: absolute;
+    width: 60px;
+    top: 10px;
+    right: 10px;
+}
+
+#hud {
+    height: calc(100% - var(--dices-height));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-hud {
+    position: relative;
+    margin-right: 100px;
+}
+
+.player-hud p{
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.player-hud img {
+    width: 180px;
+}
+
+.player-hud .bar {
+    position: absolute;
+    width: 120px;
+    height: 12px;
+    z-index: -1;
+    border-radius: 20px;
+    left: 150px;
+}
+
+.player-hud .health-bar {
+    background: hsl(0deg, 60%, 30%);
+    top: calc(50% - 12px);
+}
+
+.player-hud .stamina-bar {
+    background: hsl(60deg, 60%, 30%);
+    top: 50%;
+}
+
+.player-hud .health-bar.p1-bar {
+    width: 84px;
+}
+.player-hud .stamina-bar.p1-bar {
+    width: 48px;
+}
+.player-hud .health-bar.p2-bar {
+    width: 20px;
+}
+.player-hud .stamina-bar.p2-bar {
+    width: 120px;
+}
+
+
+
+#dices {
+    height: var(--dices-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+}
+
+#dices img {
+    height: var(--dices-height);
+    margin: 0 20px;
+
+}
