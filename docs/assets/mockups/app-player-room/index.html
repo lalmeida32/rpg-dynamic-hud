@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Player Room</title>
+    <link rel="stylesheet" href="../utils/normalize.css">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <aside>
+      <input type="text" placeholder="Username" value="Player1 Character"/>
+      <img src="../utils/unknown-character.gif">
+      <div class="stat-bar-input">
+        <input type="text" placeholder="Actual Health" value="70" />
+        <input type="text" placeholder="Max Health" value="100" />
+      </div>
+      <div class="stat-bar-input">
+        <input type="text" placeholder="Actual Stamina" value="10" />
+        <input type="text" placeholder="Max Stamina" value="25" />
+      </div>
+      <div class="attributes-input">
+        <input type="text" value="4" inputmode="numeric"/>
+        <p>Strength</p>
+      </div>
+      <div class="attributes-input">
+        <input type="text" value="3" inputmode="numeric"/>
+        <p>Agility</p>
+      </div>
+      <div class="attributes-input">
+        <input type="text" value="6" inputmode="numeric"/>
+        <p>Intelligence</p>
+      </div>
+
+    </aside>
+    <main>
+      <img id="settings-button" src="../utils/settings.svg">
+      <div id="hud">
+        <div class="player-hud">
+          <img src="../utils/unknown-character.gif" />
+          <div class="bar health-bar p1-bar"></div>
+          <div class="bar stamina-bar p1-bar"></div>
+          <p>Player1 Character</p>
+        </div>
+        <div class="player-hud">
+          <img src="../utils/unknown-character.gif" />
+          <div class="bar health-bar p2-bar"></div>
+          <div class="bar stamina-bar p2-bar"></div>
+          <p>Player2 Character</p>
+        </div>
+      </div>
+      <div id="dices">
+        <img src="../utils/logo.svg">
+        <img src="../utils/logo.svg">
+        <img src="../utils/logo.svg">
+      </div>
+    </main>
+
+
+  </body>
+</html>

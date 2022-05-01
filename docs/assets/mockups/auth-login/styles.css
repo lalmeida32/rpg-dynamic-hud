@@ -22,7 +22,7 @@
 body {
     width: 100vw;
     height: 100vh;
-    background: url("../landscape.jpg");
+    background: url("../utils/landscape.jpg");
     background-size: cover;
     background-position: center;
     display: flex;
