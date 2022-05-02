@@ -1,7 +1,5 @@
-import {
-  defaultServerSettings,
-  IServerSettings,
-} from 'util/constants/server_settings';
+import { IServerSettings } from './IServerSettings';
+import { defaultServerSettings } from './defaultServerSettings';
 import { TServerSettingsModel } from './TServerSettingsModel';
 
 /* Util types */

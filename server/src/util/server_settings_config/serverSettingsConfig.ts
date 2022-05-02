@@ -2,8 +2,8 @@ import dotenv from 'dotenv';
 
 import path from 'path';
 
-import { defaultServerSettings } from 'util/constants/server_settings';
-import { ISolvedArgs, argsSolver } from 'util/libs/args_solver';
+import { defaultServerSettings } from './defaultServerSettings';
+import { ISolvedArgs, argsSolver } from 'util/args_solver';
 
 import { TServerSettingsModel } from './TServerSettingsModel';
 import { settingsValidation } from './settingsValidation';
