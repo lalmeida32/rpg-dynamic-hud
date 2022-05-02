@@ -31,7 +31,7 @@ const createGenericValidateNumber: (
     throw genericError(name, tStr);
   };
 };
-
+/*
 const createGenericValidateBoolean: (
   name: string
 ) => TValidate<boolean> = name => {
@@ -41,6 +41,7 @@ const createGenericValidateBoolean: (
     throw genericError(name, tStr);
   };
 };
+*/
 
 /* Specific validation */
 

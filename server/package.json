@@ -6,9 +6,9 @@
     "build": "webpack",
     "start": "node dist",
     "dev": "nodemon src/index.ts",
-    "linter": "eslint src/**/*.ts",
-    "formatter": "prettier --write src/**/*.ts",
-    "formatter:check": "prettier --check src/**/*.ts"
+    "linter": "eslint .",
+    "formatter": "prettier --write .",
+    "formatter:check": "prettier --check ."
   },
   "dependencies": {
     "debug": "^4.3.4",
