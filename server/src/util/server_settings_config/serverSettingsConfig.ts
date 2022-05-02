@@ -19,8 +19,7 @@ for (const key in defaultServerSettings)
 const launchOptions: ISolvedArgs = argsSolver(process.argv.splice(2));
 for (const key in launchOptions.optional)
   if (key in serverSettingsModel)
-    serverSettingsModel[key as TKey] =
-      launchOptions.optional[key];
+    serverSettingsModel[key as TKey] = launchOptions.optional[key];
   else throw Error(`${key} launch option is not valid.`);
 
 /* Run dotenv */
@@ -55,8 +54,7 @@ for (const key in serverSettingsModel) {
 
 /* Save back to environment variables to be consistent */
 for (const key in serverSettingsModel) {
-  process.env[key.toUpperCase()] =
-    serverSettingsModel[key as TKey];
+  process.env[key.toUpperCase()] = serverSettingsModel[key as TKey];
 }
 
 /* Validation and exporting */

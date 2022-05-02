@@ -5,7 +5,10 @@
   "scripts": {
     "build": "webpack",
     "start": "node dist",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "linter": "eslint src/**/*.ts",
+    "formatter": "prettier --write src/**/*.ts",
+    "formatter:check": "prettier --check src/**/*.ts"
   },
   "dependencies": {
     "debug": "^4.3.4",
@@ -20,7 +23,13 @@
     "@types/express": "^4.17.13",
     "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.23",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "nodemon": "^2.0.15",
+    "prettier": "^2.6.2",
     "sucrase": "^3.20.3",
     "ts-loader": "^9.2.8",
     "tsconfig-paths": "^3.14.1",
