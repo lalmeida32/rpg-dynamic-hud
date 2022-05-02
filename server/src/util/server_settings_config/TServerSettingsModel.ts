@@ -1,4 +1,4 @@
-import { IServerSettings } from 'util/constants/server_settings';
+import { IServerSettings } from './IServerSettings';
 
 export type TServerSettingsModel = {
   [key in keyof IServerSettings]?: string;

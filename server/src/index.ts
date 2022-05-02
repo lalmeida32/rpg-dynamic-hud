@@ -1,4 +1,4 @@
-import { serverSettings } from 'util/libs/server_settings_config';
+import { serverSettings } from 'util/server_settings_config';
 
 import path from 'path';
 

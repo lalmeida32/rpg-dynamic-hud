@@ -1,7 +1,5 @@
-import {
-  defaultServerSettings,
-  IServerSettings,
-} from 'util/constants/server_settings';
+import { IServerSettings } from './IServerSettings';
+import { defaultServerSettings } from './defaultServerSettings';
 import { TServerSettingsModel } from './TServerSettingsModel';
 
 /* Util types */
@@ -33,7 +31,7 @@ const createGenericValidateNumber: (
     throw genericError(name, tStr);
   };
 };
-
+/*
 const createGenericValidateBoolean: (
   name: string
 ) => TValidate<boolean> = name => {
@@ -43,6 +41,7 @@ const createGenericValidateBoolean: (
     throw genericError(name, tStr);
   };
 };
+*/
 
 /* Specific validation */
 
