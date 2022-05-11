@@ -1,6 +1,25 @@
 @font-face {
   font-family: 'Ubuntu';
   src: url('../fonts/Ubuntu-Light.ttf');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('../fonts/Ubuntu-Regular.ttf');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('../fonts/Ubuntu-Medium.ttf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('../fonts/Ubuntu-Bold.ttf');
+  font-weight: 400;
 }
 
 * {
@@ -10,10 +29,11 @@
   overflow: hidden;
   outline: none;
   font-family: 'Ubuntu', sans-serif;
+  font-weight: 100;
 }
 
 body {
-  background: var(--colorDarkerBG);
+  background: hsl(230deg, 15%, 15%);
 }
 
 /* REMOVING ARROWS/SPINNERS */

@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { AppRoom } from './app/app_room/AppRoom';
 import './shared/style/normalize.css';
-import './shared/style/colors.css';
 import './shared/style/global.css';
+import { AppGameRoom } from './app/AppGameRoom';
 
 const root = document.getElementById('root');
 
 if (root !== null) {
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
-      <AppRoom />
+      <AppGameRoom />
     </React.StrictMode>
   );
 }

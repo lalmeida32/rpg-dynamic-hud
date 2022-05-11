@@ -1,8 +1,0 @@
-.textLikeInput {
-  border-radius: 100vmax;
-  border: none;
-  background: var(--colorDarkerBG);
-  color: var(--colorWhite);
-  padding: 5px 10px;
-  text-align: center;
-}
