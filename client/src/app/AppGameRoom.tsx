@@ -1,7 +1,4 @@
-import { TextLikeInput } from '../shared/components/TextLikeInput';
-import { getDefaultColors } from '../shared/constants/colors';
-
-const colors = getDefaultColors();
+import { CharacterSheet } from './CharacterSheet';
 
 export const AppGameRoom = () => {
   return (
@@ -10,12 +7,9 @@ export const AppGameRoom = () => {
         display: 'flex',
         width: '100vw',
         height: '100vh',
-        justifyContent: 'center',
-        alignItems: 'center',
-        background: colors.dark,
       }}
     >
-      <TextLikeInput padding="10px 20px" />
+      <CharacterSheet />
     </div>
   );
 };

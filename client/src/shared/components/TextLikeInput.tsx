@@ -3,7 +3,9 @@ import { getDefaultColors } from '../constants/colors';
 const colors = getDefaultColors();
 
 interface ITextLikeInputProps {
-  padding: string;
+  padding?: string;
+  backgroundColor?: string;
+  textColor?: string;
 }
 
 export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
@@ -12,9 +14,10 @@ export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
       style={{
         border: 'none',
         borderRadius: '100vmax',
-        background: colors.darker,
-        color: colors.white,
-        padding: props.padding,
+        background: props.backgroundColor || colors.darker,
+        color: props.textColor || colors.white,
+        width: '100%',
+        padding: props.padding || '10px 20px',
       }}
     />
   );
