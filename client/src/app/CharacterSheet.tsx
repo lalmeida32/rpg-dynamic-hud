@@ -2,6 +2,7 @@ import { FlexBox } from '../shared/components/layout/FlexBox';
 import { SizedBox } from '../shared/components/layout/SizedBox';
 import { TextLikeInput } from '../shared/components/TextLikeInput';
 import { getDefaultColors } from '../shared/constants/colors';
+import unknownCharacter from '../shared/images/unknown_character.webm';
 
 const colors = getDefaultColors();
 
@@ -17,7 +18,7 @@ export const CharacterSheet = () => {
       padding="20px"
     >
       <TextLikeInput />
-      <SizedBox height="60px" />
+      <video width="320" height="240" autoPlay loop src={unknownCharacter} />
       <FlexBox width="100%">
         <TextLikeInput />
         <SizedBox width="20px" />
