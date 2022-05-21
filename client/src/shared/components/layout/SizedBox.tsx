@@ -7,7 +7,7 @@ interface ISizedBoxProps {
 
 export const SizedBox: React.FC<ISizedBoxProps> = props => {
   return (
-    <div style={{ width: props.width || 0, height: props.height || 0 }}>
+    <div style={{ width: props.width, height: props.height }}>
       {props.children}
     </div>
   );

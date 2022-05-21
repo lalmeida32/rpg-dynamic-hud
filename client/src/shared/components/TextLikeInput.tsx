@@ -6,19 +6,24 @@ interface ITextLikeInputProps {
   padding?: string;
   backgroundColor?: string;
   textColor?: string;
+  width?: string;
+  paragraph?: boolean;
+  text?: string;
+  type?: React.HTMLInputTypeAttribute;
 }
 
 export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
-  return (
-    <input
-      style={{
-        border: 'none',
-        borderRadius: '100vmax',
-        background: props.backgroundColor || colors.darker,
-        color: props.textColor || colors.white,
-        width: '100%',
-        padding: props.padding || '10px 20px',
-      }}
-    />
-  );
+  const style: React.CSSProperties = {
+    border: 'none',
+    borderRadius: '100vmax',
+    background: props.backgroundColor || colors.darker,
+    color: props.textColor || colors.white,
+    width: props.width || '100%',
+    padding: props.padding || 0,
+    textAlign: 'center',
+  };
+
+  if (props.paragraph) return <p style={style}>{props.text}</p>;
+
+  return <input style={style} type={props.type || 'text'} />;
 };
