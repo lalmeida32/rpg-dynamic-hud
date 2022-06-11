@@ -10,6 +10,8 @@ interface ITextLikeInputProps {
   paragraph?: boolean;
   text?: string;
   type?: React.HTMLInputTypeAttribute;
+  maxLength?: number;
+  textSize?: string;
 }
 
 export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
@@ -21,9 +23,16 @@ export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
     width: props.width || '100%',
     padding: props.padding || 0,
     textAlign: 'center',
+    fontSize: props.textSize,
   };
 
   if (props.paragraph) return <p style={style}>{props.text}</p>;
 
-  return <input style={style} type={props.type || 'text'} />;
+  return (
+    <input
+      style={style}
+      type={props.type || 'text'}
+      maxLength={props.maxLength}
+    />
+  );
 };

@@ -28,6 +28,7 @@
   box-sizing: border-box;
   overflow: hidden;
   outline: none;
+  font-size: 1em;
   font-family: 'Ubuntu', sans-serif;
   font-weight: 100;
 }
