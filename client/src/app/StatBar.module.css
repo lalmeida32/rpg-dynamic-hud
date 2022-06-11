@@ -1,0 +1,42 @@
+.stat_bar_container {
+  margin-top: 4px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.stat_bar_container > p {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.stat_bar {
+  display: flex;
+  width: 90%;
+  border-radius: 100vmax;
+  margin-top: 2px;
+}
+
+.stat_bar input {
+  padding: 5px 10px;
+  width: 0%;
+  background: transparent;
+  flex-grow: 1;
+}
+
+.stat_bar_label {
+  align-self: center;
+}
+
+.red {
+  background: var(--red-background);
+}
+.yellow {
+  background: var(--yellow-background);
+}
+.blue {
+  background: var(--blue-background);
+}
+.purple {
+  background: var(--purple-background);
+}

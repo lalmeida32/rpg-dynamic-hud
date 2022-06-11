@@ -13,42 +13,19 @@
   font-size: 1.3em;
   padding: 10px 15px;
   background: transparent;
+  font-weight: 200;
 }
 
 .character_image {
   border: 2px solid transparent;
   border-radius: 100vmax;
   transition: all 0.3s;
-  margin: 10px 0;
 }
 
 .character_image:hover {
   border-color: var(--alternative);
 }
 
-.stat_bar,
-.attribute {
-  display: flex;
-  width: 100%;
-  margin-top: 5px;
-}
-
-.stat_bar input,
-.attribute input,
-.attribute p {
-  padding: 5px 10px;
-  width: 0%;
-}
-
-.stat_bar input,
-.attribute input {
-  flex-grow: 1;
-}
-
-.attribute p {
-  flex-grow: 5;
-}
-
-.space_between_input {
-  width: 10px;
+.stat_bars_and_attributes_gap {
+  height: 10px;
 }

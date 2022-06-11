@@ -1,28 +1,8 @@
 import { TextLikeInput } from '../shared/components/TextLikeInput';
 import unknownCharacter from '../shared/images/unknown_character.webm';
+import { Attribute } from './Attribute';
 import classes from './CharacterSheet.module.css';
-
-const StatBar = () => {
-  const maxLength = 5;
-
-  return (
-    <div className={classes.stat_bar}>
-      <TextLikeInput maxLength={maxLength} />
-      <div className={classes.space_between_input} />
-      <TextLikeInput maxLength={maxLength} />
-    </div>
-  );
-};
-
-const Attribute = () => {
-  return (
-    <div className={classes.attribute}>
-      <TextLikeInput maxLength={3} />
-      <div className={classes.space_between_input} />
-      <TextLikeInput paragraph text="Testando" />
-    </div>
-  );
-};
+import { StatBar } from './StatBar';
 
 export const CharacterSheet = () => {
   return (
@@ -32,7 +12,7 @@ export const CharacterSheet = () => {
     >
       <TextLikeInput
         className={classes.character_name}
-        maxLength={35}
+        maxLength={32}
         placeholder="Character Name"
       />
       <video
@@ -44,11 +24,14 @@ export const CharacterSheet = () => {
         loop
         src={unknownCharacter}
       />
-      <StatBar />
-      <StatBar />
-      <Attribute />
-      <Attribute />
-      <Attribute />
+      <StatBar name="Health" color="red" />
+      <StatBar name="Mana" color="blue" />
+      <StatBar name="Stamina" color="yellow" />
+      <div className={classes.stat_bars_and_attributes_gap} />
+      <Attribute name="Strength" />
+      <Attribute name="Intelligence" />
+      <Attribute name="Agility" />
+      <Attribute name="Vitality" />
     </form>
   );
 };

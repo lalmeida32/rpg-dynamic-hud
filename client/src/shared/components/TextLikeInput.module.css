@@ -7,3 +7,11 @@
   background: var(--background);
   color: var(--background-contrast);
 }
+
+.text_like_input::placeholder {
+  color: var(--background-contrast);
+}
+
+.text_like_input:focus::placeholder {
+  color: transparent;
+}

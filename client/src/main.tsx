@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './shared/style/normalize.css';
-import './shared/style/global.css';
 import './shared/style/theme.css';
+import './shared/style/global.css';
 import { AppGameRoom } from './app/AppGameRoom';
 
 const root = document.getElementById('root');
