@@ -1,14 +1,9 @@
 import { CharacterSheet } from './CharacterSheet';
+import classes from './AppGameRoom.module.css';
 
 export const AppGameRoom = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        width: '100vw',
-        height: '100vh',
-      }}
-    >
+    <div className={classes.app_game_room}>
       <CharacterSheet />
     </div>
   );

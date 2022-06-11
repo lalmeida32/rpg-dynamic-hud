@@ -1,38 +1,25 @@
-import { getDefaultColors } from '../constants/colors';
-
-const colors = getDefaultColors();
+import classes from './TextLikeInput.module.css';
 
 interface ITextLikeInputProps {
-  padding?: string;
-  backgroundColor?: string;
-  textColor?: string;
-  width?: string;
   paragraph?: boolean;
   text?: string;
   type?: React.HTMLInputTypeAttribute;
   maxLength?: number;
-  textSize?: string;
+  className?: string;
+  placeholder?: string;
 }
 
 export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
-  const style: React.CSSProperties = {
-    border: 'none',
-    borderRadius: '100vmax',
-    background: props.backgroundColor || colors.darker,
-    color: props.textColor || colors.white,
-    width: props.width || '100%',
-    padding: props.padding || 0,
-    textAlign: 'center',
-    fontSize: props.textSize,
-  };
+  const className = `${classes.text_like_input} ${props.className}`;
 
-  if (props.paragraph) return <p style={style}>{props.text}</p>;
+  if (props.paragraph) return <p className={className}>{props.text}</p>;
 
   return (
     <input
-      style={style}
+      className={className}
       type={props.type || 'text'}
       maxLength={props.maxLength}
+      placeholder={props.placeholder}
     />
   );
 };

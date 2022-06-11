@@ -1,0 +1,11 @@
+:root {
+  --alternative: orange;
+  --background: hsl(230deg, 15%, 15%);
+  --secondary-background: hsl(230deg, 15%, 30%);
+  --alternative-background: black;
+  --background-contrast: white;
+}
+
+.bg__background {
+  background: var(--background);
+}
