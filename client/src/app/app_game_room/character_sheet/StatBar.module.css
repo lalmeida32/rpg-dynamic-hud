@@ -3,6 +3,7 @@
   flex-direction: column;
   display: flex;
   align-items: center;
+  min-height: 50px;
 }
 
 .stat_bar_container > p {
