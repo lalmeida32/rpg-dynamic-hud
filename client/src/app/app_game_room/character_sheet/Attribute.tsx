@@ -1,4 +1,4 @@
-import { TextLikeInput } from '../shared/components/TextLikeInput';
+import { TextLikeInput } from 'shared/components/TextLikeInput';
 import classes from './Attribute.module.css';
 
 interface IAttributeProps {

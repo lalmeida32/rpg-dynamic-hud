@@ -1,4 +1,4 @@
-import { CharacterSheet } from './CharacterSheet';
+import { CharacterSheet } from './character_sheet/CharacterSheet';
 import classes from './AppGameRoom.module.css';
 
 export const AppGameRoom = () => {

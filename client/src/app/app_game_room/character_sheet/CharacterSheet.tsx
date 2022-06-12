@@ -1,5 +1,5 @@
-import { TextLikeInput } from '../shared/components/TextLikeInput';
-import unknownCharacter from '../shared/images/unknown_character.webm';
+import { TextLikeInput } from 'shared/components/TextLikeInput';
+import unknownCharacter from 'shared/images/unknown_character.webm';
 import { Attribute } from './Attribute';
 import classes from './CharacterSheet.module.css';
 import { StatBar } from './StatBar';
