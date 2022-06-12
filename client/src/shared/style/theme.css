@@ -4,6 +4,7 @@
   --secondary-background: hsl(230deg, 15%, 30%);
   --alternative-background: black;
   --background-contrast: white;
+  --alternative-background-contrast: #ddd;
   --red-background: hsl(0deg, 55%, 35%);
   --yellow-background: hsl(60deg, 55%, 35%);
   --blue-background: hsl(240deg, 55%, 35%);

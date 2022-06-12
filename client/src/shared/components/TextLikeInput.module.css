@@ -9,7 +9,7 @@
 }
 
 .text_like_input::placeholder {
-  color: var(--background-contrast);
+  color: var(--alternative-background-contrast);
 }
 
 .text_like_input:focus::placeholder {
