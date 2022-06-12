@@ -1,6 +1,5 @@
 .dice_chooser {
   height: 80px;
-  width: 100%;
   background: var(--alternative-background);
   display: flex;
   align-items: center;

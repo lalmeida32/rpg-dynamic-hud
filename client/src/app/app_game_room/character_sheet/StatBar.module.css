@@ -13,7 +13,7 @@
 
 .stat_bar {
   display: flex;
-  width: 90%;
+  width: 100%;
   border-radius: 100vmax;
   margin-top: 2px;
 }

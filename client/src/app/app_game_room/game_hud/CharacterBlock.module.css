@@ -1,0 +1,38 @@
+.character_block {
+  width: 400px;
+  height: 200px;
+  display: flex;
+  position: relative;
+}
+
+.character_image {
+  min-width: 200px;
+  width: 200px;
+  height: 200px;
+  z-index: 2;
+}
+
+.stat_bars {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 160px;
+  bottom: 40px;
+  z-index: 1;
+}
+
+.stat_bars > * {
+  border-radius: 100vmax;
+}
+
+.stat_bars > *:nth-child(1) {
+  width: 200px;
+  height: 25px;
+  background: var(--red-background);
+}
+
+.stat_bars > *:nth-child(2) {
+  width: 150px;
+  height: 15px;
+  background: var(--blue-background);
+}
