@@ -11,6 +11,7 @@ export const CharacterBlock = () => {
         muted
         loop
       />
+      <p className={classes.character_name}>Character Name</p>
       <div className={classes.stat_bars}>
         <div />
         <div />

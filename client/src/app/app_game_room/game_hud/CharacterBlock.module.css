@@ -1,8 +1,15 @@
 .character_block {
+  border: 2px solid transparent;
   width: 400px;
   height: 200px;
   display: flex;
   position: relative;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.character_block:hover {
+  border-color: var(--alternative);
 }
 
 .character_image {
@@ -35,4 +42,11 @@
   width: 150px;
   height: 15px;
   background: var(--blue-background);
+}
+
+.character_name {
+  position: absolute;
+  top: 85px;
+  left: 180px;
+  font-size: 1.3em;
 }
