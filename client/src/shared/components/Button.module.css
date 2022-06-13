@@ -6,6 +6,7 @@
   text-align: center;
   background: var(--background);
   color: var(--background-contrast);
+  cursor: pointer;
 }
 
 .button:hover,

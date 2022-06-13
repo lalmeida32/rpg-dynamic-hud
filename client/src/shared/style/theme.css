@@ -10,6 +10,7 @@
   --blue-background: hsl(240deg, 55%, 35%);
   --purple-background: hsl(300deg, 55%, 35%);
   --orange-background: hsl(30deg, 55%, 35%);
+  --cyan-background: hsl(200deg, 55%, 35%);
 }
 
 .bg__background {
