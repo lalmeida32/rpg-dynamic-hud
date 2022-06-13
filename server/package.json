@@ -1,7 +1,7 @@
 {
   "name": "rpg-dynamic-hud-server",
   "version": "0.1.0",
-  "license": "ISC",
+  "license": "AGPL-3.0",
   "scripts": {
     "build": "webpack",
     "start": "node dist",
