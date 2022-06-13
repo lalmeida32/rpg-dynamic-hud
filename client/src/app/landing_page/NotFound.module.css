@@ -1,0 +1,15 @@
+.not_found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+}
+
+.not_found p {
+  margin-bottom: 30px;
+}
+
+.not_found button {
+  padding: 10px 50px;
+}

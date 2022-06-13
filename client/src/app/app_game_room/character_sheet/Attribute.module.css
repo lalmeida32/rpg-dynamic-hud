@@ -1,0 +1,19 @@
+.attribute {
+  display: flex;
+  width: 100%;
+  margin-top: 8px;
+  min-height: 28px;
+}
+
+.attribute input {
+  flex-grow: 1;
+  margin-right: 5px;
+  padding: 5px 10px;
+  width: 0%;
+}
+
+.attribute p {
+  padding: 5px 10px;
+  width: 0%;
+  flex-grow: 5;
+}
