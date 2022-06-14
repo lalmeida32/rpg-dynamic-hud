@@ -1,4 +1,12 @@
-.rooms {
+.rooms_container {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rooms {
+  width: 80%;
+  height: 80%;
 }

@@ -9,10 +9,10 @@ export const RegisterForm = () => {
         It{"'"}s time to play! Log in or create an account to enter the game.
       </p>
       <TextLikeInput placeholder="Username" />
-      <TextLikeInput placeholder="E-mail" />
+      <TextLikeInput placeholder="E-mail" type="email" />
       <TextLikeInput placeholder="Password" type="password" />
       <TextLikeInput placeholder="Confirm Password" type="password" />
-      <Button text="Register" />
+      <Button text="Register" type="submit" />
       <div>
         <Link to="/auth/login">Log in</Link>
         <Link to="/auth/reset">Reset Password</Link>

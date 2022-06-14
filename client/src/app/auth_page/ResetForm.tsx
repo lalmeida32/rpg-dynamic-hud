@@ -6,8 +6,8 @@ export const ResetForm = () => {
   return (
     <form>
       <p>Enter your e-mail to receive a recovery link.</p>
-      <TextLikeInput placeholder="E-mail" />
-      <Button text="Reset" />
+      <TextLikeInput placeholder="E-mail" type="email" />
+      <Button text="Reset" type="submit" />
       <div>
         <Link to="/auth/login">Log in</Link>
         <Link to="/auth/register">Register</Link>

@@ -11,7 +11,7 @@ export const LogInForm = () => {
       </p>
       <TextLikeInput placeholder="Username/E-mail" />
       <TextLikeInput placeholder="Password" type="password" />
-      <Button text="Log in" onClick={() => navigate('/rooms')} />
+      <Button text="Log in" type="submit" onClick={() => navigate('/rooms')} />
 
       <div>
         <Link to="/auth/register">Register</Link>
