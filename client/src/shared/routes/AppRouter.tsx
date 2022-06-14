@@ -10,6 +10,7 @@ import { AuthTemplate } from 'app/auth_page/AuthTemplate';
 import { LogInForm } from 'app/auth_page/LogInForm';
 import { RegisterForm } from 'app/auth_page/RegisterForm';
 import { ResetForm } from 'app/auth_page/ResetForm';
+import { Rooms } from 'app/rooms_page/Rooms';
 
 export const AppRouter = () => {
   return (
@@ -30,6 +31,7 @@ export const AppRouter = () => {
           <Route path="register" element={<RegisterForm />} />
           <Route path="reset" element={<ResetForm />} />
         </Route>
+        <Route path="rooms" element={<Rooms />} />
         <Route path="game-room" element={<GameRoom />} />
         <Route path="*" element={<Navigate to="/home/not-found" />} />
       </Routes>
