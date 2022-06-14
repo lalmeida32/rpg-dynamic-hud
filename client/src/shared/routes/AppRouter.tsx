@@ -9,6 +9,7 @@ import { ContactText } from 'app/landing_page/ContactText';
 import { AuthTemplate } from 'app/auth_page/AuthTemplate';
 import { LogInForm } from 'app/auth_page/LogInForm';
 import { RegisterForm } from 'app/auth_page/RegisterForm';
+import { ResetForm } from 'app/auth_page/ResetForm';
 
 export const AppRouter = () => {
   return (
@@ -27,6 +28,7 @@ export const AppRouter = () => {
           <Route index element={<Navigate to="/auth/login" />} />
           <Route path="login" element={<LogInForm />} />
           <Route path="register" element={<RegisterForm />} />
+          <Route path="reset" element={<ResetForm />} />
         </Route>
         <Route path="game-room" element={<GameRoomPage />} />
         <Route path="*" element={<Navigate to="/home/not-found" />} />
