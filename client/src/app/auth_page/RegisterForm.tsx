@@ -2,18 +2,19 @@ import { Link } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 
-export const LogInForm = () => {
+export const RegisterForm = () => {
   return (
     <form>
       <p>
         It{"'"}s time to play! Log in or create an account to enter the game.
       </p>
-      <TextLikeInput placeholder="Username/E-mail" />
+      <TextLikeInput placeholder="Username" />
+      <TextLikeInput placeholder="E-mail" />
       <TextLikeInput placeholder="Password" type="password" />
-      <Button text="Log in" />
-
+      <TextLikeInput placeholder="Confirm Password" type="password" />
+      <Button text="Register" />
       <div>
-        <Link to="/auth/register">Register</Link>
+        <Link to="/auth/login">Log in</Link>
         <Link to="/auth/reset">Reset Password</Link>
       </div>
     </form>

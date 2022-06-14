@@ -16,7 +16,42 @@
   border-radius: 40px;
   background: var(--background);
   display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4em;
+  text-align: center;
+}
+
+.form_container form {
+  width: 80%;
+  max-width: 900px;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.form_container form > * {
+  margin: 5px 0;
+}
+
+.form_container p {
+  font-size: 1.2em;
+}
+
+.form_container input {
+  background: var(--secondary-background);
+  width: 400px;
+}
+
+.form_container button {
+  font-size: 1.1em;
+  background: var(--background-contrast);
+  color: var(--alternative-background);
+  width: 200px;
+}
+
+.form_container a {
+  font-size: 0.8em;
+  margin: 0 5px;
 }
