@@ -1,4 +1,4 @@
-import { AppGameRoom } from 'app/app_game_room/AppGameRoom';
+import { GameRoomPage } from 'app/game_room_page/GameRoomPage';
 import { LandingTextTemplate } from 'app/landing_page/LandingTextTemplate';
 import { LandingTemplate } from 'app/landing_page/LandingTemplate';
 import { NotFound } from 'app/landing_page/NotFound';
@@ -20,7 +20,7 @@ export const AppRouter = () => {
           </Route>
           <Route path="not-found" element={<NotFound />} />
         </Route>
-        <Route path="app-game-room" element={<AppGameRoom />} />
+        <Route path="game-room" element={<GameRoomPage />} />
         <Route path="*" element={<Navigate to="/home/not-found" />} />
       </Routes>
     </BrowserRouter>

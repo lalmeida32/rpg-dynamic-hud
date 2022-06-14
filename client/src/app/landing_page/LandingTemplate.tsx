@@ -19,8 +19,7 @@ export const LandingTemplate = () => {
           </Link>
         </div>
         <div className={classes.right_buttons}>
-          <Button text="Sign in"></Button>
-          <Button text="Sign up"></Button>
+          <Button text="Log in"></Button>
         </div>
       </header>
       <main>

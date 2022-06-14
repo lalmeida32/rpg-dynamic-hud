@@ -1,4 +1,4 @@
-.landing_page {
+.landing_text_template {
   width: 100%;
   height: 100%;
   display: flex;
@@ -8,11 +8,11 @@
   overflow-y: auto;
 }
 
-.landing_page img {
+.landing_text_template img {
   width: 800px;
 }
 
-.landing_page p {
+.landing_text_template p {
   width: 800px;
   font-size: 1.3em;
   margin: 20px;
