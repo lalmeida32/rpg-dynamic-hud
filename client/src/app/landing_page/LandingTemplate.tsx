@@ -1,9 +1,11 @@
 import classes from './LandingTemplate.module.css';
 import logo from 'shared/images/game_die.svg';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
 
 export const LandingTemplate = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={classes.landing_template}>
       <header>
@@ -19,7 +21,7 @@ export const LandingTemplate = () => {
           </Link>
         </div>
         <div className={classes.right_buttons}>
-          <Button text="Log in"></Button>
+          <Button text="Log in" onClick={() => navigate('/auth')} />
         </div>
       </header>
       <main>

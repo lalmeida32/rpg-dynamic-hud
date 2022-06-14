@@ -1,0 +1,22 @@
+.auth_template {
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  background: url('../../shared/images/landscape.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_container {
+  width: 80%;
+  height: 80%;
+  border-radius: 40px;
+  background: var(--background);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
