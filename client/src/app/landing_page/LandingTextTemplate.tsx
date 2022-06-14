@@ -6,7 +6,9 @@ export const LandingTextTemplate: React.FC = () => {
   return (
     <div className={classes.landing_text_template}>
       <img src={dragon} />
-      <Outlet />
+      <div className={classes.landing_text_container}>
+        <Outlet />
+      </div>
     </div>
   );
 };

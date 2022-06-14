@@ -1,12 +1,12 @@
 export const HomeText = () => {
   return (
-    <p>
-      Home. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi
-      repudiandae architecto, laborum dicta qui cupiditate quos, sit ipsum
-      cumque possimus totam reiciendis repellendus aspernatur, voluptate rem
-      doloribus ab deserunt. Quasi, aliquam aspernatur eligendi molestias minima
-      optio ab iure id, quidem cupiditate voluptatem aut odio voluptatum aperiam
-      explicabo. Quibusdam, soluta pariatur!
-    </p>
+    <div>
+      <h1>Home</h1>
+      <p>
+        The RPG Dynamic HUD is an open source application to connect RPG
+        players, assisting character sheet managing and providing a beautiful
+        game interface for livestreams.
+      </p>
+    </div>
   );
 };

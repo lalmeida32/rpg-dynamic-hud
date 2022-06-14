@@ -12,9 +12,16 @@
   width: 800px;
 }
 
-.landing_text_template p {
+.landing_text_container {
   width: 800px;
-  font-size: 1.3em;
   margin: 20px;
+}
+
+.landing_text_container p {
+  font-size: 1.3em;
   text-align: justify;
+}
+
+.landing_text_container h1 {
+  font-size: 2em;
 }
