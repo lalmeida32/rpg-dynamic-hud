@@ -1,0 +1,42 @@
+.room_card {
+  width: 400px;
+  height: 250px;
+  margin: 5px;
+  background: var(--secondary-background);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 1.1em;
+}
+
+.room_card > button {
+  width: 80px;
+  background: var(--light-green-background);
+  color: var(--alternative-background);
+}
+
+.room_card > p:first-of-type {
+  font-size: 1.4em;
+  margin-bottom: 5px;
+}
+
+.room_card > p:last-of-type {
+  margin-bottom: 5px;
+}
+
+.card_buttons {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.card_buttons > img {
+  width: 35px;
+}
+
+.card_buttons > img:hover {
+  opacity: 0.8;
+}
