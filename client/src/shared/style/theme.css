@@ -5,12 +5,14 @@
   --alternative-background: black;
   --background-contrast: white;
   --alternative-background-contrast: #ddd;
-  --red-background: hsl(0deg, 55%, 35%);
-  --yellow-background: hsl(60deg, 55%, 35%);
-  --blue-background: hsl(240deg, 55%, 35%);
-  --purple-background: hsl(300deg, 55%, 35%);
-  --orange-background: hsl(30deg, 55%, 35%);
-  --cyan-background: hsl(200deg, 55%, 35%);
+  --red-background: hsl(0deg, 55%, 30%);
+  --yellow-background: hsl(60deg, 55%, 30%);
+  --blue-background: hsl(240deg, 55%, 30%);
+  --purple-background: hsl(300deg, 55%, 30%);
+  --orange-background: hsl(30deg, 55%, 30%);
+  --cyan-background: hsl(200deg, 55%, 30%);
+  --green-background: hsl(140deg, 55%, 30%);
+  --light-green-background: hsl(140deg, 55%, 45%);
 }
 
 .bg__background {
