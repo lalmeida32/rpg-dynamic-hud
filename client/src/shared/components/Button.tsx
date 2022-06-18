@@ -13,6 +13,7 @@ export const Button: React.FC<IButtonProps> = props => {
       type={props.type}
       className={`${classes.button} ${props.className}`}
       onClick={props.onClick}
+      id={props.id}
     >
       {props.text}
     </button>

@@ -1,7 +1,6 @@
+import { login } from 'mocks/login'
 
-
-
-class User {
+export class User {
     private username: string;
     private password: string;
     private email: string;
@@ -33,20 +32,12 @@ class User {
         this.email = email;
     }
 
-    public auth(): string {
+    public auth() {
         // receives, in success, {token, userinfo, authoroties}
-        try {
-            const user_auth = login(this.username, this.password);
-        } catch (e) {
-            throw('Invalid User and/or password!');
-        }
-
-        
-
-        this.token = user_auth.token;
+        this.token = login(username.value, password.value);
+        console.log(this.token);
         this.password = null;
         
-        return this.token;
     }
 
 }

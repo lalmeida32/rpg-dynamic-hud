@@ -6,12 +6,16 @@ class Room {
     private creator: User;
     private maxPlayers: number;
     private characters: Character[];
-
+    private code: string;
 
     constructor(name: string, creator: User) {
         this.name = name;
         this.creator = creator;
         this.characters: Character[] = [];
+    }
+
+    public getCode(): string {
+        return this.code;
     }
 
     public getName(): string {
