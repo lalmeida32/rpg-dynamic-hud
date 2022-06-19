@@ -8,6 +8,10 @@
   color: var(--background-contrast);
 }
 
+.text_like_input_error {
+    border: solid red 2px;
+}
+
 .text_like_input::placeholder {
   color: var(--alternative-background-contrast);
 }

@@ -11,7 +11,6 @@ interface ITextLikeInputProps {
 
 export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
   const className = `${classes.text_like_input} ${props.className}`;
-
   if (props.paragraph) return <p className={className}>{props.text}</p>;
 
   return (
@@ -20,6 +19,8 @@ export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
       type={props.type || 'text'}
       maxLength={props.maxLength}
       placeholder={props.placeholder}
+      id={props.id ? props.id : ''}
+      onChange={props.onChange}
     />
   );
 };
