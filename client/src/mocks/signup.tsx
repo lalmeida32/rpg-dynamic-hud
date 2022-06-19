@@ -1,4 +1,4 @@
-import { dbInsert, dbSearchByUsername, dbSearchByEmail } from 'mocks/database'
+import { dbInsert, dbSearchByUsername, dbSearchByEmail } from 'mocks/userdb'
 
 
 function validate(username: string, email: string, password: string) {

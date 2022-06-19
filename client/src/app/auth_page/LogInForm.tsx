@@ -3,8 +3,8 @@ import { Button } from 'shared/components/Button';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 import { User } from 'model/User'
 
-function submitPasswd(navigate) {
-    
+function submitPasswd(e, navigate) {
+    e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const user = new User(username, username, password);
@@ -21,6 +21,7 @@ function submitPasswd(navigate) {
 export const LogInForm = () => {
   const navigate = useNavigate();
 
+
   return (
     <form>
       <p>
@@ -28,7 +29,7 @@ export const LogInForm = () => {
       </p>
       <TextLikeInput id="username" placeholder="Username/E-mail" />
       <TextLikeInput id="password" placeholder="Password" type="password" />
-      <Button text="Log in" type="submit" onClick={() => submitPasswd(navigate)} />
+      <Button text="Log in" type="submit" onClick={(e) => submitPasswd(e, navigate)} />
 
       <div>
         <Link to="/auth/register">Register</Link>

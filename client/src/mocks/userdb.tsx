@@ -1,8 +1,14 @@
 
+export
+let loggedUser: string = null;
+
 const users = [
     {username: 'fulano', password: '12345678', email: 'fulano@email.net'},
     {username: 'siclano', password: '12345678', email: 'siclano@email.com'}
 ];
+
+export
+const setLoggedUser = (user: string) => {loggedUser = user};
 
 export
 function dbInsert(username: string, email: string, password: string) {

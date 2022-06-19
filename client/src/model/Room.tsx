@@ -1,40 +1,82 @@
-
+import { roomsInsert, roomsByOwner, roomById } from 'mocks/roomsdb'
+import { User } from 'model/User.tsx'
 
 
 class Room {
     private name: string;
-    private creator: User;
+    private owner: User;
     private maxPlayers: number;
-    private characters: Character[];
-    private code: string;
+    private players: Character[];
+    private id: number;
+    private priv: boolean;
 
-    constructor(name: string, creator: User) {
+    constructor(id: number, maxPlayers: number, 
+                name: string, players: User[], 
+                owner: User, priv: boolean) {
         this.name = name;
-        this.creator = creator;
-        this.characters: Character[] = [];
+        this.owner = owner;
+        this.players = players.slice();
+        this.id = id;
+        this.maxPlayers = maxPlayers;
+        this.priv = priv
     }
 
-    public getCode(): string {
-        return this.code;
+    public getId(): string {
+        return this.id;
     }
 
     public getName(): string {
         return this.name;
     }
 
-    public getCreator(): User {
-        return this.creator;
+    public getOwner(): User {
+        return this.owner;
     }
 
-    public getCharacters(): Character[] {
-        return this.characters.slice();
+    public getPlayers(): Character[] {
+        return this.players.slice();
+    }
+
+    public getMaxPlayers(): number {
+        return this.maxPlayers;
     }
 
     public addCharacter(character: Character) {
-        if (this.characters.length >= this.maxPlayers)
+        if (this.players.length >= this.maxPlayers)
             throw new Error("Full Room");
         
-        this.characters.push(character);
-    } 
+        this.players.push(character);
+    }
+    public isPrivate(): boolean {
+        return this.priv;
+    }
 
+}
+
+export
+function getRoomsByOwner(user: string): Room[] {
+    const rooms = roomsByOwner(user);
+    let roomsObj = [];
+    for (let i in rooms) {
+        roomsObj.push( 
+            new Room(
+                rooms[i].id,
+                rooms[i].maxPlayers,
+                rooms[i].name,
+                rooms[i].players,
+                rooms[i].owner,
+                rooms[i].priv
+            )
+        );
+    }
+    return roomsObj;
+}
+
+export
+function getRoomById(id: number): Room {
+    try {
+        return roomById(id);
+    } catch(err) {
+        throw new Error('This room does not exists!');
+    }
 }
