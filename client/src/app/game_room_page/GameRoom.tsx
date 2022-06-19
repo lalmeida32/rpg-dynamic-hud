@@ -2,22 +2,23 @@ import { CharacterSheet } from './character_sheet/CharacterSheet';
 import classes from './GameRoom.module.css';
 import { GameHud } from './game_hud/GameHud';
 import { DiceChooser } from './DiceChooser';
-import { React } from 'react'
+import React from 'react'
 import { Room, getRoomById } from 'model/Room'
 
 export 
-class GameRoom extends React.Components {
+class GameRoom extends React.Component {
 
     constructor(props) {
         super(props);
-        const room = getRoomById(props.id);
-        this.state = {
+        //console.log(props.id);
+        //const room = getRoomById(props.id);
+        /*this.state = {
             players: room.getPlayers(),
             name: room.getName(),
             priv: room.isPrivate(),
             maxPlayers: room.maxPlayers,
             owner: room.getOwner()
-        };
+        };*/
     }
 
     render() {

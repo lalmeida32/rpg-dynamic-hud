@@ -1,4 +1,5 @@
 import { login } from 'mocks/login'
+import { signup } from 'mocks/signup'
 
 export class User {
     private username: string;
@@ -40,4 +41,9 @@ export class User {
         
     }
 
+    public commit = () => {
+        console.log(this.username);
+        signup(this.username, this.email, this.password);
+    }
 }
+

@@ -6,7 +6,7 @@ class Room {
     private name: string;
     private owner: User;
     private maxPlayers: number;
-    private players: Character[];
+    private players: User[];
     private id: number;
     private priv: boolean;
 

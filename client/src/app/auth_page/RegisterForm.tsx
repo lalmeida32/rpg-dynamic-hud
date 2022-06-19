@@ -1,17 +1,23 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
-import { signup } from 'mocks/signup'
-
+import { userCreate } from 'services/user'
 
 const sendUserData = (e, navigate) => {
     e.preventDefault();
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const repeatPassword = document.getElementById('repeat-passwd').value;
     
+    if (password !== repeatPassword) {
+        alert("Passwords does not match!");
+        return ;
+    }
+
+
     try {
-        signup(username, email, password);
+        userCreate(username, email, password);
         navigate('/auth/login');
         alert('Account created with success!');
     } catch(err) {

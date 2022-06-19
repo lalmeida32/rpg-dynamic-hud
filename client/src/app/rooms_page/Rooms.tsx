@@ -3,10 +3,9 @@ import { TextLikeInput } from 'shared/components/TextLikeInput';
 import { RoomCard } from './RoomCard';
 import gear from 'shared/images/gear.svg';
 import classes from './Rooms.module.css';
-import { Room, getRoomsByOwner } from 'model/Room';
-import { User } from 'model/User';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { getUserRooms } from 'services/room.tsx'
 import { loggedUser } from 'mocks/userdb.tsx';
 
 export 
@@ -15,12 +14,12 @@ class Rooms extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            rooms: getRoomsByOwner(loggedUser)
+            rooms: getUserRooms() 
         };
     }
 
     represhRooms() {
-        this.setState({rooms: getRoomsByOwner(loggedUser)});
+        this.setState({rooms: getUserRooms()});
     }
 
 
@@ -32,11 +31,6 @@ class Rooms extends React.Component {
     }
 
     render() {
-        /*if (!loggedUser)
-            return (
-                alert('You must login to access this page!')
-
-            );*/
         return (
             <div className={classes.rooms_container}>
             <div className={classes.rooms}>

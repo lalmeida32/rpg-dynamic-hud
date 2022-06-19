@@ -1,16 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
-import { User } from 'model/User'
+import { userAuthenticate } from 'services/user'
 
 function submitPasswd(e, navigate) {
     e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    const user = new User(username, username, password);
-    user.auth();
-
-    if (user.token)
+    
+    if (userAuthenticate(username, password))
         navigate('/rooms');
 
     else
