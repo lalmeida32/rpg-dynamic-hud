@@ -3,8 +3,8 @@ import { IServerService } from '../IServerService';
 import { roomDb } from './roomDb';
 
 export const serverServiceMock: IServerService = {
-  logIn: (username, password) => {
-    console.log(username, password);
+  logIn: (user, password) => {
+    console.log(user, password);
     return 'tokenstring';
   },
   roomCardPagination: (username, page) => {
