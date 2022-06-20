@@ -1,13 +1,14 @@
+import { delay } from 'shared/lib/delay';
 import { IRoomCardModel } from 'shared/models/IRoomCardModel';
 import { IServerService } from '../IServerService';
 import { roomDb } from './roomDb';
 
 export const serverServiceMock: IServerService = {
-  logIn: (user, password) => {
+  logIn: async (user, password) => {
     console.log(user, password);
-    return 'tokenstring';
+    return delay('tokenstring');
   },
-  roomCardPagination: (username, page) => {
+  roomCardPagination: async (username, page) => {
     console.log(username, page);
     const result: IRoomCardModel[] = [];
     for (const uniqueCode in roomDb) {
@@ -19,6 +20,6 @@ export const serverServiceMock: IServerService = {
         uniqueCode: uniqueCode,
       });
     }
-    return result;
+    return delay(result);
   },
 };

@@ -10,12 +10,12 @@ export const LogInForm = () => {
 
   return (
     <form
-      onSubmit={e => {
+      onSubmit={async e => {
         e.preventDefault();
         const target = e.target as HTMLFormElement;
-        userLogin.login(
-          serverService.logIn(target['user'].value, target['password'].value)
-        );
+        const user = target['user'].value;
+        const password = target['password'].value;
+        userLogin.login(await serverService.logIn(user, password));
       }}
     >
       <p>
