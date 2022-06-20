@@ -1,4 +1,5 @@
-import { createContext, useCallback, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface IUserLoginContextData {
   token: string | null;
@@ -18,6 +19,8 @@ export const UserLoginProvider: React.FC<IUserLoginProviderProps> = ({
   children,
 }) => {
   const [token, setToken] = useState<string | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleLogin = useCallback((token: string) => {
     setToken(token);
@@ -26,6 +29,17 @@ export const UserLoginProvider: React.FC<IUserLoginProviderProps> = ({
   const handleLogout = useCallback(() => {
     setToken(null);
   }, []);
+
+  useEffect(() => {
+    if (
+      token === null &&
+      (location.pathname.startsWith('/room') ||
+        location.pathname.startsWith('/rooms'))
+    )
+      navigate('/auth');
+    else if (token !== null && location.pathname.startsWith('/auth'))
+      navigate('/rooms');
+  }, [token, location, navigate]);
 
   return (
     <UserLoginContext.Provider

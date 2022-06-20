@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 import gear from 'shared/images/gear.svg';
@@ -5,6 +6,8 @@ import classes from './Rooms.module.css';
 import { RoomSelection } from './RoomSelection';
 
 export const Rooms = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={classes.rooms_container}>
       <div className={classes.rooms}>
@@ -20,7 +23,7 @@ export const Rooms = () => {
         <div className={classes.room_pagination}>
           <RoomSelection page={1} />
           <div className={classes.page_selection}>
-            <Button text="<<" />
+            <Button text="<<" onClick={() => navigate('/auth/login')} />
             <Button text="<" />
             <p>Page 1</p>
             <Button text=">" />
