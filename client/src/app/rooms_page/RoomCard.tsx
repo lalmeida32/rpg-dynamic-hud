@@ -2,18 +2,23 @@ import classes from './RoomCard.module.css';
 import locked from 'shared/images/locked.svg';
 import closed_book from 'shared/images/closed_book.svg';
 import { Button } from 'shared/components/Button';
+import { IRoomCardModel } from 'shared/model/IRoomCardModel';
 
-export const RoomCard = () => {
+interface IRoomCardProps {
+  info: IRoomCardModel;
+}
+
+export const RoomCard: React.FC<IRoomCardProps> = props => {
   return (
     <div className={classes.room_card}>
       <div className={classes.card_buttons}>
-        <img src={locked} />
+        {props.info.private ? <img src={locked} /> : null}
         <img src={closed_book} />
       </div>
-      <p>MyRoom</p>
-      <p>#65471</p>
-      <p>Owned by Username</p>
-      <Button text="Enter" />
+      <p>{props.info.name}</p>
+      <p>#{props.info.uniqueCode}</p>
+      <p>Owned by {props.info.owner}</p>
+      <Button text="Enter" disabled={!props.info.opened} />
     </div>
   );
 };

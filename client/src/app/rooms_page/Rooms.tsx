@@ -1,8 +1,8 @@
 import { Button } from 'shared/components/Button';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
-import { RoomCard } from './RoomCard';
 import gear from 'shared/images/gear.svg';
 import classes from './Rooms.module.css';
+import { RoomSelection } from './RoomSelection';
 
 export const Rooms = () => {
   return (
@@ -18,13 +18,7 @@ export const Rooms = () => {
           <Button className={classes.create_room_button} text="Create room" />
         </div>
         <div className={classes.room_pagination}>
-          <div className={classes.room_selection}>
-            <RoomCard />
-            <RoomCard />
-            <RoomCard />
-            <RoomCard />
-            <RoomCard />
-          </div>
+          <RoomSelection page={1} />
           <div className={classes.page_selection}>
             <Button text="<<" />
             <Button text="<" />
