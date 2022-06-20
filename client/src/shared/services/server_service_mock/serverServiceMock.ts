@@ -5,6 +5,7 @@ import { roomDb } from './roomDb';
 export const serverServiceMock: IServerService = {
   logIn: (username, password) => {
     console.log(username, password);
+    return 'tokenstring';
   },
   roomCardPagination: (username, page) => {
     console.log(username, page);

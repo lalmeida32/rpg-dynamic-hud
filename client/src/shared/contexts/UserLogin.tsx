@@ -1,7 +1,8 @@
 import { createContext, useCallback, useState } from 'react';
 
 interface IUserLoginContextData {
-  username: string;
+  token: string | null;
+  login: (token: string) => void;
   logout: () => void;
 }
 
@@ -16,16 +17,21 @@ export const UserLoginContext = createContext<IUserLoginContextData>(
 export const UserLoginProvider: React.FC<IUserLoginProviderProps> = ({
   children,
 }) => {
-  const [name, setName] = useState('');
+  const [token, setToken] = useState<string | null>(null);
+
+  const handleLogin = useCallback((token: string) => {
+    setToken(token);
+  }, []);
 
   const handleLogout = useCallback(() => {
-    setName('Lucas');
+    setToken(null);
   }, []);
 
   return (
     <UserLoginContext.Provider
       value={{
-        username: name,
+        token: token,
+        login: handleLogin,
         logout: handleLogout,
       }}
     >
