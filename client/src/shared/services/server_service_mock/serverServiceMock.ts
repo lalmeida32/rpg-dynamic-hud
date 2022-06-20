@@ -1,4 +1,4 @@
-import { IRoomCardModel } from 'shared/model/IRoomCardModel';
+import { IRoomCardModel } from 'shared/models/IRoomCardModel';
 import { IServerService } from '../IServerService';
 import { roomDb } from './roomDb';
 

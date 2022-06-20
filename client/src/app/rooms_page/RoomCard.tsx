@@ -2,7 +2,7 @@ import classes from './RoomCard.module.css';
 import locked from 'shared/images/locked.svg';
 import closed_book from 'shared/images/closed_book.svg';
 import { Button } from 'shared/components/Button';
-import { IRoomCardModel } from 'shared/model/IRoomCardModel';
+import { IRoomCardModel } from 'shared/models/IRoomCardModel';
 
 interface IRoomCardProps {
   info: IRoomCardModel;

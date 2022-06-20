@@ -32,7 +32,7 @@ export const AppRouter = () => {
           <Route path="reset" element={<ResetForm />} />
         </Route>
         <Route path="rooms" element={<Rooms />} />
-        <Route path="game-room" element={<GameRoom />} />
+        <Route path="room" element={<GameRoom />} />
         <Route path="*" element={<Navigate to="/home/not-found" />} />
       </Routes>
     </BrowserRouter>

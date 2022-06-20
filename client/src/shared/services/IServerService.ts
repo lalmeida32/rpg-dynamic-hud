@@ -1,4 +1,4 @@
-import { IRoomCardModel } from 'shared/model/IRoomCardModel';
+import { IRoomCardModel } from 'shared/models/IRoomCardModel';
 
 export interface IServerService {
   roomCardPagination: (username: string, page: number) => IRoomCardModel[];

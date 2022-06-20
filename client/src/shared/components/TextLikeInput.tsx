@@ -7,6 +7,7 @@ interface ITextLikeInputProps {
   maxLength?: number;
   className?: string;
   placeholder?: string;
+  name?: string;
 }
 
 export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
@@ -20,6 +21,7 @@ export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
       type={props.type || 'text'}
       maxLength={props.maxLength}
       placeholder={props.placeholder}
+      name={props.name}
     />
   );
 };
