@@ -25,24 +25,30 @@ export const serverServiceMock: IServerService = {
 
   roomCardPagination: async (username, page) => {
     await delay();
-    console.log(username, page);
-    const result: IRoomCardModel[] = [];
-    for (const uniqueCode in roomDb) {
-      result.push({
-        name: roomDb[uniqueCode].name,
-        opened: roomDb[uniqueCode].opened,
-        owner: roomDb[uniqueCode].owner,
-        private: roomDb[uniqueCode].private,
-        uniqueCode: uniqueCode,
-      });
-    }
+    const roomCodes = Object.keys(roomDb).filter(
+      v => roomDb[v].owner === username
+    );
+
+    const result: IRoomCardModel[] = roomCodes
+      .map(v => ({
+        name: roomDb[v].name,
+        opened: roomDb[v].opened,
+        owner: roomDb[v].owner,
+        private: roomDb[v].private,
+        uniqueCode: v,
+      }))
+      .slice((page - 1) * 6, page * 6);
+
     return result;
   },
 
   roomPageCount: async username => {
     await delay();
-    console.log(username);
-    return 10;
+    const pageCount = Object.keys(roomDb).reduce<number>(
+      (p, c) => (roomDb[c].owner === username ? p + 1 : p),
+      0
+    );
+    return Math.floor(pageCount / 6) + 1;
   },
 
   registerUser: async user => {
