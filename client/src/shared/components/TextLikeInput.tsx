@@ -13,7 +13,10 @@ interface ITextLikeInputProps {
 
 export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
   const className = useMemo(
-    () => `${classes.text_like_input} ${props.className}`,
+    () =>
+      props.className !== undefined
+        ? `${classes.text_like_input} ${props.className}`
+        : classes.text_like_input,
     [props.className]
   );
 

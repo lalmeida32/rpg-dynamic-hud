@@ -52,7 +52,7 @@ export const UserConfigAlertContent = () => {
       <h3>Delete Account</h3>
       <form>
         <TextLikeInput placeholder="Username" name="username" />
-        <Button text="Delete Account" />
+        <Button text="Delete Account" type="submit" />
       </form>
     </React.Fragment>
   );
