@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
-import { ErrorAlertContent } from 'shared/components/ErrorAlertContent';
+import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
@@ -24,7 +24,9 @@ export const LogInForm = () => {
           userLogin.login(token);
         } catch (e) {
           if (e instanceof Error) {
-            currentAlert.setAlert(<ErrorAlertContent text={e.message} />);
+            currentAlert.setAlert(
+              <DefaultAlertContent text={e.message} error />
+            );
           }
         }
       }}
