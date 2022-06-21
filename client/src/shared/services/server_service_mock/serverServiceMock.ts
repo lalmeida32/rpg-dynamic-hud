@@ -20,7 +20,7 @@ export const serverServiceMock: IServerService = {
     if (userDb[username].password !== password)
       throw new Error('Invalid password!');
 
-    return 'tokenstring';
+    return [username, 'tokenstring'];
   },
 
   roomCardPagination: async (username, page) => {
@@ -37,6 +37,12 @@ export const serverServiceMock: IServerService = {
       });
     }
     return result;
+  },
+
+  roomPageCount: async username => {
+    await delay();
+    console.log(username);
+    return 10;
   },
 
   registerUser: async user => {

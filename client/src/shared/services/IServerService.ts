@@ -6,7 +6,8 @@ export interface IServerService {
     username: string,
     page: number
   ) => Promise<IRoomCardModel[]>;
-  logIn: (user: string, password: string) => Promise<string>;
+  roomPageCount: (username: string) => Promise<number>;
+  logIn: (user: string, password: string) => Promise<[string, string]>;
   registerUser: (user: IUserRegisterModel) => Promise<void>;
   sendResetPasswordEmail: (email: string) => Promise<void>;
 }

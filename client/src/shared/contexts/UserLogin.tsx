@@ -2,8 +2,9 @@ import { createContext, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 interface IUserLoginContextData {
+  username: string | null;
   token: string | null;
-  login: (token: string) => void;
+  login: (username: string, token: string) => void;
   logout: () => void;
 }
 
@@ -18,16 +19,19 @@ export const UserLoginContext = createContext<IUserLoginContextData>(
 export const UserLoginProvider: React.FC<IUserLoginProviderProps> = ({
   children,
 }) => {
+  const [username, setUsername] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleLogin = useCallback((token: string) => {
+  const handleLogin = useCallback((username: string, token: string) => {
     setToken(token);
+    setUsername(username);
   }, []);
 
   const handleLogout = useCallback(() => {
     setToken(null);
+    setUsername(null);
   }, []);
 
   useEffect(() => {
@@ -45,6 +49,7 @@ export const UserLoginProvider: React.FC<IUserLoginProviderProps> = ({
     <UserLoginContext.Provider
       value={{
         token: token,
+        username: username,
         login: handleLogin,
         logout: handleLogout,
       }}

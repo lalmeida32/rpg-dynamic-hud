@@ -20,8 +20,8 @@ export const LogInForm = () => {
         const password = target['password'].value;
 
         try {
-          const token = await serverService.logIn(user, password);
-          userLogin.login(token);
+          const [username, token] = await serverService.logIn(user, password);
+          userLogin.login(username, token);
         } catch (e) {
           if (e instanceof Error) {
             currentAlert.setAlert(
