@@ -6,6 +6,7 @@ import './shared/style/global.css';
 import { AppRouter } from 'shared/routes/AppRouter';
 import { UserLoginProvider } from 'shared/contexts/UserLogin';
 import { BrowserRouter } from 'react-router-dom';
+import { CurrentAlertProvider } from 'shared/contexts/CurrentAlert';
 
 const root = document.getElementById('root');
 
@@ -14,7 +15,9 @@ if (root !== null) {
     <React.StrictMode>
       <BrowserRouter>
         <UserLoginProvider>
-          <AppRouter />
+          <CurrentAlertProvider>
+            <AppRouter />
+          </CurrentAlertProvider>
         </UserLoginProvider>
       </BrowserRouter>
     </React.StrictMode>
