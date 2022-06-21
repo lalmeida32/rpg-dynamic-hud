@@ -2,7 +2,7 @@ import { delay } from 'shared/lib/delay';
 import { IRoomCardModel } from 'shared/models/IRoomCardModel';
 import { IServerService } from '../IServerService';
 import { roomDb } from './roomDb';
-import { getUsernameByEmail, userDb } from './userDb';
+import { getUsernameByEmail, userDb, validateEmail } from './userDb';
 
 export const serverServiceMock: IServerService = {
   logIn: async (user, password) => {
@@ -42,8 +42,7 @@ export const serverServiceMock: IServerService = {
   registerUser: async user => {
     await delay();
 
-    const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    if (!user.email.match(regexEmail)) throw new Error('Invalid Email.');
+    if (!validateEmail(user.email)) throw new Error('Invalid Email.');
 
     if (user.username.length < 4)
       throw new Error('Username must have at least 4 characters.');
@@ -59,5 +58,10 @@ export const serverServiceMock: IServerService = {
       email: user.email,
       password: user.password,
     };
+  },
+
+  sendResetPasswordEmail: async email => {
+    await delay();
+    if (!validateEmail(email)) throw new Error('Invalid Email.');
   },
 };

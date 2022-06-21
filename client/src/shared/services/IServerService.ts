@@ -8,4 +8,5 @@ export interface IServerService {
   ) => Promise<IRoomCardModel[]>;
   logIn: (user: string, password: string) => Promise<string>;
   registerUser: (user: IUserRegisterModel) => Promise<void>;
+  sendResetPasswordEmail: (email: string) => Promise<void>;
 }

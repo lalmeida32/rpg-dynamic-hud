@@ -32,3 +32,9 @@ export const checkUserPassword = (username: string, password: string) => {
   if (userDb[username].password === password) return true;
   return false;
 };
+
+export const validateEmail = (email: string) => {
+  const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  if (email.match(regexEmail)) return true;
+  return false;
+};
