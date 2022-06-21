@@ -23,4 +23,12 @@
   justify-content: center;
   padding: 30px;
   overflow-y: auto;
+  position: relative;
+}
+
+.close_button {
+  position: absolute;
+  width: 50px;
+  top: 20px;
+  right: 20px;
 }

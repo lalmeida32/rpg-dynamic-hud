@@ -30,16 +30,16 @@ export const UserLoginProvider: React.FC<IUserLoginProviderProps> = ({
     setToken(null);
   }, []);
 
-  // useEffect(() => {
-  //   if (
-  //     token === null &&
-  //     (location.pathname.startsWith('/room') ||
-  //       location.pathname.startsWith('/rooms'))
-  //   )
-  //     navigate('/auth');
-  //   else if (token !== null && location.pathname.startsWith('/auth'))
-  //     navigate('/rooms');
-  // }, [token, location, navigate]);
+  useEffect(() => {
+    if (
+      token === null &&
+      (location.pathname.startsWith('/room') ||
+        location.pathname.startsWith('/rooms'))
+    )
+      navigate('/auth');
+    else if (token !== null && location.pathname.startsWith('/auth'))
+      navigate('/rooms');
+  }, [token, location, navigate]);
 
   return (
     <UserLoginContext.Provider

@@ -2,11 +2,13 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
+import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
 import { serverService } from 'shared/services/serverService';
 
 export const LogInForm = () => {
   const userLogin = useContext(UserLoginContext);
+  const currentAlert = useContext(CurrentAlertContext);
 
   return (
     <form
@@ -15,7 +17,15 @@ export const LogInForm = () => {
         const target = e.target as HTMLFormElement;
         const user = target['user'].value;
         const password = target['password'].value;
-        userLogin.login(await serverService.logIn(user, password));
+
+        try {
+          const token = await serverService.logIn(user, password);
+          userLogin.login(token);
+        } catch (e) {
+          if (e instanceof Error) {
+            currentAlert.setAlert(<p>{e.message}</p>);
+          }
+        }
       }}
     >
       <p>
