@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import classes from './TextLikeInput.module.css';
 
 interface ITextLikeInputProps {
@@ -11,7 +12,10 @@ interface ITextLikeInputProps {
 }
 
 export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
-  const className = `${classes.text_like_input} ${props.className}`;
+  const className = useMemo(
+    () => `${classes.text_like_input} ${props.className}`,
+    [props.className]
+  );
 
   if (props.paragraph) return <p className={className}>{props.text}</p>;
 

@@ -30,7 +30,8 @@ export const AppRouter = () => {
         <Route path="register" element={<RegisterForm />} />
         <Route path="reset" element={<ResetForm />} />
       </Route>
-      <Route path="rooms" element={<Rooms />} />
+      <Route path="rooms/page/:page" element={<Rooms />} />
+      <Route path="rooms" element={<Navigate to="/rooms/page/1" />} />
       <Route path="room" element={<GameRoom />} />
       <Route path="*" element={<Navigate to="/home/not-found" />} />
     </Routes>
