@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
+import { ErrorAlertContent } from 'shared/components/ErrorAlertContent';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { serverService } from 'shared/services/serverService';
@@ -17,10 +18,12 @@ export const ResetForm = () => {
 
         try {
           await serverService.sendResetPasswordEmail(email);
-          currentAlert.setAlert(<p>E-mail sent successfully.</p>);
+          currentAlert.setAlert(
+            <ErrorAlertContent text="E-mail sent successfully." />
+          );
         } catch (e) {
           if (e instanceof Error) {
-            currentAlert.setAlert(<p>{e.message}</p>);
+            currentAlert.setAlert(<ErrorAlertContent text={e.message} />);
           }
         }
       }}

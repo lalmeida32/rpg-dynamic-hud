@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'shared/components/Button';
+import { ErrorAlertContent } from 'shared/components/ErrorAlertContent';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { serverService } from 'shared/services/serverService';
@@ -19,7 +20,7 @@ export const RegisterForm = () => {
         const confirmPassword = target['confirmPassword'].value;
         if (password !== confirmPassword)
           return currentAlert.setAlert(
-            <p>Passowrd field does not match with confirm password field.</p>
+            <ErrorAlertContent text="Passowrd field does not match with confirm password field." />
           );
 
         try {
@@ -28,10 +29,12 @@ export const RegisterForm = () => {
             password,
             username,
           });
-          currentAlert.setAlert(<p>User created successfully.</p>);
+          currentAlert.setAlert(
+            <ErrorAlertContent text="User created successfully." />
+          );
         } catch (e) {
           if (e instanceof Error) {
-            currentAlert.setAlert(<p>{e.message}</p>);
+            currentAlert.setAlert(<ErrorAlertContent text={e.message} />);
           }
         }
       }}
