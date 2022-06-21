@@ -1,4 +1,4 @@
-.alert_container {
+.alert_background {
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -11,7 +11,7 @@
   z-index: 100;
 }
 
-.alert {
+.alert_container {
   background: var(--secondary-background);
   border-radius: 20px;
   width: 80%;
@@ -20,11 +20,18 @@
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 100px 30px;
-  overflow-y: auto;
+  padding: 80px 50px 50px;
   position: relative;
+}
+
+.alert {
+  width: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .close_button {

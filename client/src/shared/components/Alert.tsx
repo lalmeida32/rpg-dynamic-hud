@@ -10,14 +10,16 @@ interface IAlertProps {
 export const Alert: React.FC<IAlertProps> = props => {
   const currentAlert = useContext(CurrentAlertContext);
   return (
-    <div className={classes.alert_container}>
-      <div className={classes.alert}>
-        {props.children}
-        <img
-          className={classes.close_button}
-          src={close}
-          onClick={() => currentAlert.closeAlert()}
-        />
+    <div className={classes.alert_background}>
+      <div className={classes.alert_container}>
+        <div className={classes.alert}>
+          {props.children}
+          <img
+            className={classes.close_button}
+            src={close}
+            onClick={() => currentAlert.closeAlert()}
+          />
+        </div>
       </div>
     </div>
   );

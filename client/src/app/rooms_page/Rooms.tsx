@@ -7,11 +7,14 @@ import classes from './Rooms.module.css';
 import { RoomSelection } from './RoomSelection';
 import { serverService } from 'shared/services/serverService';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
+import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
+import { UserConfigAlertContent } from './UserConfigAlertContent';
 
 export const Rooms = () => {
   const params = useParams();
   const [pageCount, setPageCount] = useState<[number, number] | null>(null);
   const userLogin = useContext(UserLoginContext);
+  const currentAlert = useContext(CurrentAlertContext);
 
   useEffect(() => {
     if (userLogin.username !== null)
@@ -30,8 +33,12 @@ export const Rooms = () => {
   return (
     <div className={classes.rooms_container}>
       <div className={classes.rooms}>
-        <img src={gear} />
-        <p>Hello, Username</p>
+        <img
+          className={classes.config_button}
+          src={gear}
+          onClick={() => currentAlert.setAlert(<UserConfigAlertContent />)}
+        />
+        <p>Hello, {userLogin.username}</p>
         <div className={classes.header_buttons}>
           <form
             className={classes.search_form}
