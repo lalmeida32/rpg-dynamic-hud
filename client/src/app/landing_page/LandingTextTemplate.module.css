@@ -1,0 +1,27 @@
+.landing_text_template {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.landing_text_template img {
+  width: 800px;
+}
+
+.landing_text_container {
+  width: 800px;
+  margin: 20px;
+}
+
+.landing_text_container p {
+  font-size: 1.3em;
+  text-align: justify;
+}
+
+.landing_text_container h1 {
+  font-size: 2em;
+}

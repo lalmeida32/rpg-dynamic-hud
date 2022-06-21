@@ -1,0 +1,16 @@
+.error {
+  color: var(--error);
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+.success {
+  color: var(--success);
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+.paragraph {
+  text-align: center;
+  font-size: 1.4em;
+}

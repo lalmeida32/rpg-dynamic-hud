@@ -1,0 +1,22 @@
+:root {
+  --alternative: hsl(30deg, 70%, 50%);
+  --background: hsl(230deg, 15%, 15%);
+  --secondary-background: hsl(230deg, 15%, 30%);
+  --alternative-background: black;
+  --background-contrast: white;
+  --alternative-background-contrast: #ddd;
+  --red-background: hsl(0deg, 55%, 30%);
+  --yellow-background: hsl(60deg, 55%, 30%);
+  --blue-background: hsl(240deg, 55%, 30%);
+  --purple-background: hsl(300deg, 55%, 30%);
+  --orange-background: hsl(30deg, 55%, 30%);
+  --cyan-background: hsl(200deg, 55%, 30%);
+  --green-background: hsl(140deg, 55%, 30%);
+  --light-green-background: hsl(140deg, 55%, 45%);
+  --success: hsl(120deg, 70%, 50%);
+  --error: hsl(0deg, 70%, 50%);
+}
+
+.bg__background {
+  background: var(--background);
+}

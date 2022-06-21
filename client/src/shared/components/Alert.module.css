@@ -1,0 +1,42 @@
+.alert_background {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+}
+
+.alert_container {
+  background: var(--secondary-background);
+  border-radius: 20px;
+  width: 80%;
+  min-height: 300px;
+  max-height: 90%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 50px;
+  position: relative;
+}
+
+.alert {
+  width: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.close_button {
+  position: absolute;
+  width: 50px;
+  top: 20px;
+  right: 20px;
+}

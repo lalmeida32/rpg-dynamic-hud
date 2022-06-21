@@ -1,0 +1,10 @@
+.room_selection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  margin: 10px 0;
+  overflow-y: scroll;
+}

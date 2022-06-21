@@ -1,0 +1,17 @@
+.text_like_input {
+  border: none;
+  border-radius: 100vmax;
+  width: 100%;
+  padding: 0;
+  text-align: center;
+  background: var(--background);
+  color: var(--background-contrast);
+}
+
+.text_like_input::placeholder {
+  color: var(--alternative-background-contrast);
+}
+
+.text_like_input:focus::placeholder {
+  color: transparent;
+}
