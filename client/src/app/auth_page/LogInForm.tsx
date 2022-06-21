@@ -5,7 +5,7 @@ import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
-import { serverService } from 'shared/services/serverService';
+import { services } from 'shared/services/services';
 
 export const LogInForm = () => {
   const userLogin = useContext(UserLoginContext);
@@ -20,7 +20,7 @@ export const LogInForm = () => {
         const password = target['password'].value;
 
         try {
-          const [username, token] = await serverService.logIn(user, password);
+          const [username, token] = await services.auth.logIn(user, password);
           userLogin.login(username, token);
         } catch (e) {
           if (e instanceof Error) {

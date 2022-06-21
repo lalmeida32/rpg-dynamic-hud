@@ -4,7 +4,7 @@ import { Button } from 'shared/components/Button';
 import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
-import { serverService } from 'shared/services/serverService';
+import { services } from 'shared/services/services';
 
 export const RegisterForm = () => {
   const currentAlert = useContext(CurrentAlertContext);
@@ -27,7 +27,7 @@ export const RegisterForm = () => {
           );
 
         try {
-          await serverService.registerUser({
+          await services.user.registerUser({
             email,
             password,
             username,

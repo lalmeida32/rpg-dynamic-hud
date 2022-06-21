@@ -5,7 +5,7 @@ import { TextLikeInput } from 'shared/components/TextLikeInput';
 import gear from 'shared/images/gear.svg';
 import classes from './Rooms.module.css';
 import { RoomSelection } from './RoomSelection';
-import { serverService } from 'shared/services/serverService';
+import { services } from 'shared/services/services';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { UserConfigAlertContent } from './UserConfigAlertContent';
@@ -18,16 +18,18 @@ export const Rooms = () => {
 
   useEffect(() => {
     if (userLogin.username !== null)
-      serverService.roomPageCount(userLogin.username).then(pageCount => {
-        let pageNumber = Number(params.page);
-        if (
-          isNaN(pageNumber) ||
-          !Number.isInteger(pageNumber) ||
-          pageNumber <= 0
-        )
-          pageNumber = 1;
-        setPageCount([pageNumber, pageCount]);
-      });
+      services.roomPagination
+        .roomPageCount(userLogin.token || '', userLogin.username)
+        .then(pageCount => {
+          let pageNumber = Number(params.page);
+          if (
+            isNaN(pageNumber) ||
+            !Number.isInteger(pageNumber) ||
+            pageNumber <= 0
+          )
+            pageNumber = 1;
+          setPageCount([pageNumber, pageCount]);
+        });
   }, [userLogin, params]);
 
   return (

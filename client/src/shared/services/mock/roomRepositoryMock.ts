@@ -1,4 +1,4 @@
-interface IRoom {
+export interface IRoomMock {
   owner: string;
   private: boolean;
   opened: boolean;
@@ -6,10 +6,10 @@ interface IRoom {
 }
 
 interface IRoomDb {
-  [key: string]: IRoom;
+  [key: string]: IRoomMock;
 }
 
-export const roomDb: IRoomDb = {
+const roomDb: IRoomDb = {
   '1341': {
     name: 'Dungeons',
     owner: 'johnsmith',
@@ -105,5 +105,20 @@ export const roomDb: IRoomDb = {
     owner: 'jackfreeman',
     private: false,
     opened: true,
+  },
+};
+
+interface IRoomRepository {
+  findAllUniqueCodes: () => string[];
+  findByUniqueCode: (uniqueCode: string) => IRoomMock | null;
+}
+
+export const roomRepositoryMock: IRoomRepository = {
+  findAllUniqueCodes: () => {
+    return Object.keys(roomDb);
+  },
+  findByUniqueCode: uniqueCode => {
+    if (uniqueCode in roomDb) return Object.assign({}, roomDb[uniqueCode]);
+    return null;
   },
 };

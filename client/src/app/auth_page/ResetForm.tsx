@@ -4,7 +4,7 @@ import { Button } from 'shared/components/Button';
 import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
-import { serverService } from 'shared/services/serverService';
+import { services } from 'shared/services/services';
 
 export const ResetForm = () => {
   const currentAlert = useContext(CurrentAlertContext);
@@ -17,7 +17,7 @@ export const ResetForm = () => {
         const email = target['email'].value;
 
         try {
-          await serverService.sendResetPasswordEmail(email);
+          await services.email.sendResetPasswordEmail(email);
           currentAlert.setAlert(
             <DefaultAlertContent success text="E-mail sent successfully." />
           );

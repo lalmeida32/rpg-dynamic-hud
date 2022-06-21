@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
 import { IRoomCardModel } from 'shared/models/IRoomCardModel';
-import { serverService } from 'shared/services/serverService';
+import { services } from 'shared/services/services';
 import { RoomCard } from './RoomCard';
 import classes from './RoomSelection.module.css';
 
@@ -15,8 +15,12 @@ export const RoomSelection: React.FC<IRoomSelectionProps> = props => {
 
   useEffect(() => {
     if (userLogin.username !== null)
-      serverService
-        .roomCardPagination(userLogin.username, props.page)
+      services.roomPagination
+        .roomCardPagination(
+          userLogin.token || '',
+          userLogin.username,
+          props.page
+        )
         .then(rooms => {
           setRooms(rooms);
         });
