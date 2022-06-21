@@ -1,7 +1,5 @@
-type TDelay = <T>(result: T) => Promise<T>;
-
-export const delay: TDelay = result => {
+export const delay = () => {
   return new Promise(resolve => {
-    setTimeout(() => resolve(result), 500);
+    setTimeout(() => resolve(''), 500);
   });
 };
