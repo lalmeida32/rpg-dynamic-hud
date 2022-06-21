@@ -13,6 +13,8 @@
   --cyan-background: hsl(200deg, 55%, 30%);
   --green-background: hsl(140deg, 55%, 30%);
   --light-green-background: hsl(140deg, 55%, 45%);
+  --success: hsl(120deg, 70%, 50%);
+  --error: hsl(0deg, 70%, 50%);
 }
 
 .bg__background {
