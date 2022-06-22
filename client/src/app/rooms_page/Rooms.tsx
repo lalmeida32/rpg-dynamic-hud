@@ -11,11 +11,15 @@ import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { UserConfigAlertContent } from './UserConfigAlertContent';
 
 export const Rooms = () => {
+  /* STATE */
   const params = useParams();
   const [pageCount, setPageCount] = useState<[number, number] | null>(null);
   const userLogin = useContext(UserLoginContext);
   const currentAlert = useContext(CurrentAlertContext);
 
+  /* LOGIC */
+
+  // Search for room page information
   useEffect(() => {
     if (userLogin.username !== null)
       services.roomPagination
@@ -32,6 +36,7 @@ export const Rooms = () => {
         });
   }, [userLogin, params]);
 
+  /* VIEW */
   return (
     <div className={classes.rooms_container}>
       <div className={classes.rooms}>

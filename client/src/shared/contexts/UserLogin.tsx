@@ -19,11 +19,13 @@ export const UserLoginContext = createContext<IUserLoginContextData>(
 export const UserLoginProvider: React.FC<IUserLoginProviderProps> = ({
   children,
 }) => {
+  /* STATE */
   const [username, setUsername] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
+  /* LOGIC */
   const handleLogin = useCallback((username: string, token: string) => {
     setToken(token);
     setUsername(username);
@@ -45,6 +47,7 @@ export const UserLoginProvider: React.FC<IUserLoginProviderProps> = ({
       navigate('/rooms');
   }, [token, location, navigate]);
 
+  /* PROVIDER */
   return (
     <UserLoginContext.Provider
       value={{

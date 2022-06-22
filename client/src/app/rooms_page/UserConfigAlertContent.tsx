@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Button } from 'shared/components/Button';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
@@ -8,10 +8,34 @@ import { services } from 'shared/services/services';
 // import classes from './UserConfigAlertContent.module.css';
 
 export const UserConfigAlertContent = () => {
+  /* STATE */
   const userLogin = useContext(UserLoginContext);
   const currentAlert = useContext(CurrentAlertContext);
   const [getUserModel, setGetUserModel] = useState<IUserGetModel | null>(null);
 
+  /* LOGIC */
+
+  const handleUpdateUserForm = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const target = e.target as HTMLFormElement;
+      const username = target['username'].value;
+      const email = target['email'].value;
+
+      await services.user.updateUser(
+        userLogin.token || '',
+        userLogin.username || '',
+        {
+          username,
+          email,
+        }
+      );
+      userLogin.logout();
+    },
+    [userLogin]
+  );
+
+  // Get user information
   useEffect(() => {
     if (userLogin.username !== null)
       services.user
@@ -21,6 +45,7 @@ export const UserConfigAlertContent = () => {
         });
   }, [userLogin]);
 
+  /* VIEW */
   return (
     <React.Fragment>
       <Button
@@ -31,24 +56,7 @@ export const UserConfigAlertContent = () => {
         }}
       />
       <h3>User update</h3>
-      <form
-        onSubmit={async e => {
-          e.preventDefault();
-          const target = e.target as HTMLFormElement;
-          const username = target['username'].value;
-          const email = target['email'].value;
-
-          await services.user.updateUser(
-            userLogin.token || '',
-            userLogin.username || '',
-            {
-              username,
-              email,
-            }
-          );
-          userLogin.logout();
-        }}
-      >
+      <form onSubmit={handleUpdateUserForm}>
         <TextLikeInput
           placeholder="Username"
           name="username"

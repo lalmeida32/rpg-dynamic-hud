@@ -18,16 +18,19 @@ export const CurrentAlertContext = createContext<ICurrentAlertContextData>(
 export const CurrentAlertProvider: React.FC<ICurrentAlertProviderProps> = ({
   children,
 }) => {
+  /* STATE */
   const [alertChildren, setAlertChildren] = useState<React.ReactNode | null>(
     null
   );
 
+  /* LOGIC */
   const setAlert = useCallback((alertChildren: React.ReactNode) => {
     setAlertChildren(alertChildren);
   }, []);
 
   const closeAlert = useCallback(() => setAlertChildren(null), []);
 
+  /* PROVIDER */
   return (
     <CurrentAlertContext.Provider
       value={{

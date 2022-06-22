@@ -10,9 +10,13 @@ interface IRoomSelectionProps {
 }
 
 export const RoomSelection: React.FC<IRoomSelectionProps> = props => {
+  /* STATE */
   const [rooms, setRooms] = useState<IRoomCardModel[] | null>(null);
   const userLogin = useContext(UserLoginContext);
 
+  /* LOGIC */
+
+  // Get room pagination data
   useEffect(() => {
     if (userLogin.username !== null)
       services.roomPagination
@@ -26,6 +30,7 @@ export const RoomSelection: React.FC<IRoomSelectionProps> = props => {
         });
   }, [props.page, userLogin]);
 
+  /* VIEW */
   return (
     <div className={classes.room_selection}>
       {rooms?.map((room, index) => (
