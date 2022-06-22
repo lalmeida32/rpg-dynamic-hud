@@ -87,6 +87,7 @@ export class UserServiceMock implements IUserService {
   async updatePassword(
     token: string,
     username: string,
+    oldPassword: string,
     newPassword: string
   ): Promise<void> {
     await delay();
@@ -96,6 +97,9 @@ export class UserServiceMock implements IUserService {
     if (userFound === null)
       throw new Error('Username not found. Critical error occurred.');
 
+    if (userFound.password !== oldPassword)
+      throw new Error('Invalid password!');
+
     if (!validatePassword(newPassword))
       throw new Error('Password must have at least 8 characters.');
 
@@ -103,5 +107,23 @@ export class UserServiceMock implements IUserService {
       email: userFound.email,
       password: newPassword,
     });
+  }
+
+  async deleteAccount(
+    token: string,
+    username: string,
+    password: string
+  ): Promise<void> {
+    await delay();
+
+    const userFound = userRepositoryMock.findByUsername(username);
+
+    if (userFound === null)
+      throw new Error('Username not found. Critical error occurred.');
+
+    if (userFound.password !== password) throw new Error('Invalid password!');
+
+    userRepositoryMock.deleteUser(username);
+    roomRepositoryMock.ownerUsernameDeleted(username);
   }
 }

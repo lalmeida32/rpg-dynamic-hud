@@ -32,6 +32,7 @@ interface IUserRepository {
     newUsername: string,
     user: IUserMock
   ) => void;
+  deleteUser: (username: string) => void;
 }
 
 export const userRepositoryMock: IUserRepository = {
@@ -62,5 +63,10 @@ export const userRepositoryMock: IUserRepository = {
     }
     userDb[newUsername].email = user.email;
     userDb[newUsername].password = user.password;
+  },
+
+  deleteUser: (username: string) => {
+    if (!(username in userDb)) return;
+    delete userDb[username];
   },
 };

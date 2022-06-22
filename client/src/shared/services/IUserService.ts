@@ -13,6 +13,12 @@ export interface IUserService {
   updatePassword: (
     token: string,
     username: string,
+    oldPassword: string,
     newPassword: string
+  ) => Promise<void>;
+  deleteAccount: (
+    token: string,
+    username: string,
+    password: string
   ) => Promise<void>;
 }

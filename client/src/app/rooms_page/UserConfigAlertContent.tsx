@@ -95,7 +95,11 @@ export const UserConfigAlertContent = () => {
       </form>
       <h3 className={classes.title}>Delete Account</h3>
       <form className={classes.form + ' ' + classes.delete_account_form}>
-        <TextLikeInput placeholder="Username" name="username" />
+        <TextLikeInput
+          placeholder="Your password"
+          type="password"
+          name="password"
+        />
         <Button text="Delete" type="submit" />
       </form>
     </React.Fragment>

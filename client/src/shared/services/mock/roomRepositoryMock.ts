@@ -112,6 +112,7 @@ interface IRoomRepository {
   findAllUniqueCodes: () => string[];
   findByUniqueCode: (uniqueCode: string) => IRoomMock | null;
   ownerUsernameChanged: (oldOwner: string, newOwner: string) => void;
+  ownerUsernameDeleted: (owner: string) => void;
 }
 
 export const roomRepositoryMock: IRoomRepository = {
@@ -127,5 +128,10 @@ export const roomRepositoryMock: IRoomRepository = {
     for (const uniqueCode in roomDb)
       if (roomDb[uniqueCode].owner === oldOwner)
         roomDb[uniqueCode].owner = newOwner;
+  },
+
+  ownerUsernameDeleted: owner => {
+    for (const uniqueCode in roomDb)
+      if (roomDb[uniqueCode].owner === owner) delete roomDb[uniqueCode];
   },
 };
