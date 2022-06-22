@@ -10,4 +10,9 @@ export interface IUserService {
     username: string,
     user: IUserUpdateModel
   ) => Promise<void>;
+  updatePassword: (
+    token: string,
+    username: string,
+    newPassword: string
+  ) => Promise<void>;
 }

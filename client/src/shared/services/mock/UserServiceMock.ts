@@ -83,4 +83,25 @@ export class UserServiceMock implements IUserService {
 
     roomRepositoryMock.ownerUsernameChanged(username, user.username);
   }
+
+  async updatePassword(
+    token: string,
+    username: string,
+    newPassword: string
+  ): Promise<void> {
+    await delay();
+
+    const userFound = userRepositoryMock.findByUsername(username);
+
+    if (userFound === null)
+      throw new Error('Username not found. Critical error occurred.');
+
+    if (!validatePassword(newPassword))
+      throw new Error('Password must have at least 8 characters.');
+
+    userRepositoryMock.changeUser(username, username, {
+      email: userFound.email,
+      password: newPassword,
+    });
+  }
 }
