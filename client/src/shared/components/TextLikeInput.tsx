@@ -29,6 +29,7 @@ export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
       maxLength={props.maxLength}
       placeholder={props.placeholder}
       name={props.name}
+      defaultValue={props.text}
     />
   );
 };
