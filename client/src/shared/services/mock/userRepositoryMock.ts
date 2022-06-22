@@ -27,6 +27,11 @@ interface IUserRepository {
   findByUsername: (username: string) => IUserMock | null;
   findUsernameByEmail: (email: string) => string | null;
   addUser: (username: string, user: IUserMock) => void;
+  changeUser: (
+    oldUsername: string,
+    newUsername: string,
+    user: IUserMock
+  ) => void;
 }
 
 export const userRepositoryMock: IUserRepository = {
@@ -48,9 +53,14 @@ export const userRepositoryMock: IUserRepository = {
   addUser: (username: string, user: IUserMock) => {
     userDb[username] = Object.assign({}, user);
   },
-};
 
-// const checkUserPassword = (username: string, password: string) => {
-//   if (userDb[username].password === password) return true;
-//   return false;
-// };
+  changeUser: (oldUsername: string, newUsername: string, user: IUserMock) => {
+    if (!(oldUsername in userDb)) return;
+    if (newUsername !== oldUsername) {
+      userDb[newUsername] = Object.assign({}, userDb[oldUsername]);
+      delete userDb[oldUsername];
+    }
+    userDb[newUsername].email = user.email;
+    userDb[newUsername].password = user.password;
+  },
+};
