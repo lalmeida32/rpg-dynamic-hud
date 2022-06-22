@@ -5,7 +5,7 @@ import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
 import { IUserGetModel } from 'shared/models/IUserGetModel';
 import { services } from 'shared/services/services';
-// import classes from './UserConfigAlertContent.module.css';
+import classes from './UserConfigAlertContent.module.css';
 
 export const UserConfigAlertContent = () => {
   /* STATE */
@@ -49,14 +49,18 @@ export const UserConfigAlertContent = () => {
   return (
     <React.Fragment>
       <Button
+        className={classes.logout_button}
         text="Logout"
         onClick={() => {
           userLogin.logout();
           currentAlert.closeAlert();
         }}
       />
-      <h3>User update</h3>
-      <form onSubmit={handleUpdateUserForm}>
+      <h3 className={classes.title}>User update</h3>
+      <form
+        className={classes.form + ' ' + classes.user_update_form}
+        onSubmit={handleUpdateUserForm}
+      >
         <TextLikeInput
           placeholder="Username"
           name="username"
@@ -70,8 +74,8 @@ export const UserConfigAlertContent = () => {
         />
         <Button text="Update" type="submit" />
       </form>
-      <h3>Change password</h3>
-      <form>
+      <h3 className={classes.title}>Change password</h3>
+      <form className={classes.form + ' ' + classes.change_password_form}>
         <TextLikeInput
           placeholder="Old password"
           type="password"
@@ -89,10 +93,10 @@ export const UserConfigAlertContent = () => {
         />
         <Button text="Update" type="submit" />
       </form>
-      <h3>Delete Account</h3>
-      <form>
+      <h3 className={classes.title}>Delete Account</h3>
+      <form className={classes.form + ' ' + classes.delete_account_form}>
         <TextLikeInput placeholder="Username" name="username" />
-        <Button text="Delete Account" type="submit" />
+        <Button text="Delete" type="submit" />
       </form>
     </React.Fragment>
   );
