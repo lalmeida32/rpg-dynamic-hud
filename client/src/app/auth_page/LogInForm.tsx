@@ -17,11 +17,11 @@ export const LogInForm = () => {
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const target = e.target as HTMLFormElement;
-      const user = target['user'].value;
+      const userId = target['userId'].value;
       const password = target['password'].value;
 
       try {
-        const [username, token] = await services.auth.logIn(user, password);
+        const [username, token] = await services.auth.logIn(userId, password);
         userLogin.login(username, token);
       } catch (e) {
         if (e instanceof Error) {
@@ -38,7 +38,7 @@ export const LogInForm = () => {
       <p>
         It{"'"}s time to play! Log in or create an account to enter the game.
       </p>
-      <TextLikeInput placeholder="Username/E-mail" name="user" />
+      <TextLikeInput placeholder="Username/E-mail" name="userId" />
       <TextLikeInput placeholder="Password" type="password" name="password" />
       <Button text="Log in" type="submit" />
 
