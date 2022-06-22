@@ -22,9 +22,9 @@ export const Rooms = () => {
 
   // Search for room page information
   useEffect(() => {
-    if (userLogin.username !== null)
+    if (userLogin.username !== null && userLogin.token !== null)
       services.roomPagination
-        .roomPageCount(userLogin.token || '', userLogin.username)
+        .roomPageCount(userLogin.token, userLogin.username)
         .then(pageCount => {
           let pageNumber = Number(params.page);
           if (

@@ -21,13 +21,9 @@ export const RoomSelection: React.FC<IRoomSelectionProps> = props => {
 
   // Get room pagination data
   useEffect(() => {
-    if (userLogin.username !== null)
+    if (userLogin.username !== null && userLogin.token !== null)
       services.roomPagination
-        .roomCardPagination(
-          userLogin.token || '',
-          userLogin.username,
-          props.page
-        )
+        .roomCardPagination(userLogin.token, userLogin.username, props.page)
         .then(rooms => {
           setRooms(rooms);
         })

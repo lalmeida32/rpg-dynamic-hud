@@ -23,15 +23,13 @@ export const UserConfigAlertContent = () => {
       const username = target['username'].value;
       const email = target['email'].value;
 
+      if (userLogin.token === null || userLogin.username === null) return;
+
       try {
-        await services.user.updateUser(
-          userLogin.token || '',
-          userLogin.username || '',
-          {
-            username,
-            email,
-          }
-        );
+        await services.user.updateUser(userLogin.token, userLogin.username, {
+          username,
+          email,
+        });
         currentAlert.setAlert(
           <DefaultAlertContent success text="User updated successfully." />
         );
@@ -46,9 +44,9 @@ export const UserConfigAlertContent = () => {
 
   // Get user information
   useEffect(() => {
-    if (userLogin.username !== null)
+    if (userLogin.username !== null && userLogin.token !== null)
       services.user
-        .getUser(userLogin.token || '', userLogin.username)
+        .getUser(userLogin.token, userLogin.username)
         .then(user => {
           setGetUserModel(user);
         })
