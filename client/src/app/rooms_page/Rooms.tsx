@@ -9,6 +9,7 @@ import { services } from 'shared/services/services';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { UserConfigAlertContent } from './UserConfigAlertContent';
+import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
 
 export const Rooms = () => {
   /* STATE */
@@ -33,8 +34,15 @@ export const Rooms = () => {
           )
             pageNumber = 1;
           setPageCount([pageNumber, pageCount]);
+        })
+        .catch(e => {
+          if (e instanceof Error) {
+            currentAlert.setAlert(
+              <DefaultAlertContent text={e.message} error />
+            );
+          }
         });
-  }, [userLogin, params]);
+  }, [userLogin, params, currentAlert]);
 
   /* VIEW */
   return (

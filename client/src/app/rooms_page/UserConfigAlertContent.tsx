@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Button } from 'shared/components/Button';
+import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
@@ -22,17 +23,25 @@ export const UserConfigAlertContent = () => {
       const username = target['username'].value;
       const email = target['email'].value;
 
-      await services.user.updateUser(
-        userLogin.token || '',
-        userLogin.username || '',
-        {
-          username,
-          email,
-        }
-      );
-      userLogin.logout();
+      try {
+        await services.user.updateUser(
+          userLogin.token || '',
+          userLogin.username || '',
+          {
+            username,
+            email,
+          }
+        );
+        currentAlert.setAlert(
+          <DefaultAlertContent success text="User updated successfully." />
+        );
+        if (userLogin.username !== username) userLogin.logout();
+      } catch (e) {
+        if (e instanceof Error)
+          currentAlert.setAlert(<DefaultAlertContent text={e.message} error />);
+      }
     },
-    [userLogin]
+    [userLogin, currentAlert]
   );
 
   // Get user information
@@ -42,8 +51,15 @@ export const UserConfigAlertContent = () => {
         .getUser(userLogin.token || '', userLogin.username)
         .then(user => {
           setGetUserModel(user);
+        })
+        .catch(e => {
+          if (e instanceof Error) {
+            currentAlert.setAlert(
+              <DefaultAlertContent text={e.message} error />
+            );
+          }
         });
-  }, [userLogin]);
+  }, [userLogin, currentAlert]);
 
   /* VIEW */
   return (

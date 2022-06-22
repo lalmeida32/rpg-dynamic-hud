@@ -1,4 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
+import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
+import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
 import { IRoomCardModel } from 'shared/models/IRoomCardModel';
 import { services } from 'shared/services/services';
@@ -13,6 +15,7 @@ export const RoomSelection: React.FC<IRoomSelectionProps> = props => {
   /* STATE */
   const [rooms, setRooms] = useState<IRoomCardModel[] | null>(null);
   const userLogin = useContext(UserLoginContext);
+  const currentAlert = useContext(CurrentAlertContext);
 
   /* LOGIC */
 
@@ -27,8 +30,15 @@ export const RoomSelection: React.FC<IRoomSelectionProps> = props => {
         )
         .then(rooms => {
           setRooms(rooms);
+        })
+        .catch(e => {
+          if (e instanceof Error) {
+            currentAlert.setAlert(
+              <DefaultAlertContent text={e.message} error />
+            );
+          }
         });
-  }, [props.page, userLogin]);
+  }, [props.page, userLogin, currentAlert]);
 
   /* VIEW */
   return (
