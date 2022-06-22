@@ -17,7 +17,7 @@ export const RoomCard: React.FC<IRoomCardProps> = props => {
       </div>
       <p>{props.info.name}</p>
       <p>#{props.info.uniqueCode}</p>
-      <p>Owned by {props.info.owner}</p>
+      <p>Owned by @{props.info.owner}</p>
       <Button text="Enter" disabled={!props.info.opened} />
     </div>
   );

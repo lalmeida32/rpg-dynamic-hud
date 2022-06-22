@@ -3,6 +3,7 @@ import { IUserGetModel } from 'shared/models/IUserGetModel';
 import { IUserRegisterModel } from 'shared/models/IUserRegisterModel';
 import { IUserUpdateModel } from 'shared/models/IUserUpdateModel';
 import { IUserService } from '../IUserService';
+import { roomRepositoryMock } from './roomRepositoryMock';
 import { userRepositoryMock } from './userRepositoryMock';
 import {
   validateEmail,
@@ -79,5 +80,7 @@ export class UserServiceMock implements IUserService {
       email: user.email,
       password: userFound.password,
     });
+
+    roomRepositoryMock.ownerUsernameChanged(username, user.username);
   }
 }

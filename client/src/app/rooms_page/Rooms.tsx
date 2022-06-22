@@ -40,7 +40,7 @@ export const Rooms = () => {
           src={gear}
           onClick={() => currentAlert.setAlert(<UserConfigAlertContent />)}
         />
-        <p>Hello, {userLogin.username}</p>
+        <p>Hello, @{userLogin.username}</p>
         <div className={classes.header_buttons}>
           <form
             className={classes.search_form}
