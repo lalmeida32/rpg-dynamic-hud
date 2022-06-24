@@ -10,8 +10,8 @@ export const RoomSelection: React.FC<IRoomSelectionProps> = props => {
   /* VIEW */
   return (
     <div className={classes.room_selection}>
-      {props.cards.map((room, index) => (
-        <RoomCard key={index} info={room} />
+      {props.cards.map(room => (
+        <RoomCard key={room.uniqueCode} info={room} />
       ))}
     </div>
   );
