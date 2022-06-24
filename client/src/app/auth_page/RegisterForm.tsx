@@ -23,7 +23,7 @@ export const RegisterForm = () => {
         return currentAlert.setAlert(
           <DefaultAlertContent
             error
-            text="Passowrd field does not match with confirm password field."
+            text="Password field does not match with confirm password field."
           />
         );
 

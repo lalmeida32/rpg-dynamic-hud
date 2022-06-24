@@ -42,6 +42,49 @@ export const UserConfigAlertContent = () => {
     [userLogin, currentAlert]
   );
 
+  const handleChangePasswordForm = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const target = e.target as HTMLFormElement;
+      const oldPassword = target['oldPassword'].value;
+      const newPassword = target['newPassword'].value;
+      const confirmNewPassword = target['confirmNewPassword'].value;
+
+      if (userLogin.token === null || userLogin.username === null) return;
+
+      if (newPassword !== confirmNewPassword)
+        return currentAlert.setAlert(
+          <DefaultAlertContent
+            error
+            text="Password field does not match with confirm password field."
+          />
+        );
+
+      try {
+        await services.user.updatePassword(
+          userLogin.token,
+          userLogin.username,
+          oldPassword,
+          newPassword
+        );
+        currentAlert.setAlert(
+          <DefaultAlertContent success text="Password updated successfully." />
+        );
+      } catch (e) {
+        if (e instanceof Error)
+          currentAlert.setAlert(<DefaultAlertContent text={e.message} error />);
+      }
+    },
+    [currentAlert, userLogin]
+  );
+
+  const handleDeleteAccountForm = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+    },
+    []
+  );
+
   // Get user information
   useEffect(() => {
     if (userLogin.username !== null && userLogin.token !== null)
@@ -89,7 +132,10 @@ export const UserConfigAlertContent = () => {
         <Button text="Update" type="submit" />
       </form>
       <h3 className={classes.title}>Change password</h3>
-      <form className={classes.form + ' ' + classes.change_password_form}>
+      <form
+        className={classes.form + ' ' + classes.change_password_form}
+        onSubmit={handleChangePasswordForm}
+      >
         <TextLikeInput
           placeholder="Old password"
           type="password"
@@ -108,7 +154,10 @@ export const UserConfigAlertContent = () => {
         <Button text="Update" type="submit" />
       </form>
       <h3 className={classes.title}>Delete Account</h3>
-      <form className={classes.form + ' ' + classes.delete_account_form}>
+      <form
+        className={classes.form + ' ' + classes.delete_account_form}
+        onSubmit={handleDeleteAccountForm}
+      >
         <TextLikeInput
           placeholder="Your password"
           type="password"
