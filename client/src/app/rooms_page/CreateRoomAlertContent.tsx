@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { Button } from 'shared/components/Button';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
+import classes from './CreateRoomAlertContent.module.css';
 
 export const CreateRoomAlertContent = () => {
   /* STATE */
@@ -24,7 +25,7 @@ export const CreateRoomAlertContent = () => {
         <h4>Attributes</h4>
         <Button text="Add a new attribute" />
         <h4>Dices</h4>
-        <TextLikeInput text="6" />
+        <TextLikeInput className={classes.dice_input} maxLength={3} />
         <Button text="Add a new die" />
         <Button type="submit" text="Create" />
       </form>
