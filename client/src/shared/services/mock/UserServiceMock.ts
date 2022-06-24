@@ -3,6 +3,7 @@ import { IUserGetModel } from 'shared/models/IUserGetModel';
 import { IUserRegisterModel } from 'shared/models/IUserRegisterModel';
 import { IUserUpdateModel } from 'shared/models/IUserUpdateModel';
 import { IUserService } from '../IUserService';
+import { characterRepositoryMock } from './characterRepository';
 import { roomRepositoryMock } from './roomRepositoryMock';
 import { userRepositoryMock } from './userRepositoryMock';
 import {
@@ -82,6 +83,7 @@ export class UserServiceMock implements IUserService {
     });
 
     roomRepositoryMock.ownerUsernameChanged(username, user.username);
+    characterRepositoryMock.usernameChanged(username, user.username);
   }
 
   async updatePassword(
@@ -125,5 +127,6 @@ export class UserServiceMock implements IUserService {
 
     userRepositoryMock.deleteUser(username);
     roomRepositoryMock.ownerUsernameDeleted(username);
+    characterRepositoryMock.usernameDeleted(username);
   }
 }
