@@ -81,8 +81,27 @@ export const UserConfigAlertContent = () => {
   const handleDeleteAccountForm = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      const target = e.target as HTMLFormElement;
+      const password = target['password'].value;
+
+      if (userLogin.token === null || userLogin.username === null) return;
+
+      try {
+        await services.user.deleteAccount(
+          userLogin.token,
+          userLogin.username,
+          password
+        );
+        currentAlert.setAlert(
+          <DefaultAlertContent success text="Account deleted successfully." />
+        );
+        userLogin.logout();
+      } catch (e) {
+        if (e instanceof Error)
+          currentAlert.setAlert(<DefaultAlertContent text={e.message} error />);
+      }
     },
-    []
+    [userLogin, currentAlert]
   );
 
   // Get user information

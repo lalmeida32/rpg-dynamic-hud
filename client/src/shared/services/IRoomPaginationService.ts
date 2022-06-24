@@ -5,6 +5,10 @@ export interface IRoomPaginationService {
     token: string,
     username: string,
     page: number
-  ) => Promise<IRoomCardModel[]>;
-  roomPageCount: (token: string, username: string) => Promise<number>;
+  ) => Promise<[number, IRoomCardModel[]]>;
+  roomCardPaginationWithSearch: (
+    token: string,
+    query: string,
+    page: number
+  ) => Promise<[number, IRoomCardModel[]]>;
 }
