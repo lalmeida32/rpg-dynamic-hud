@@ -11,6 +11,7 @@ import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { UserConfigAlertContent } from './UserConfigAlertContent';
 import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
 import { IRoomCardModel } from 'shared/models/IRoomCardModel';
+import { CreateRoomAlertContent } from './CreateRoomAlertContent';
 
 export const Rooms = () => {
   /* STATE */
@@ -84,7 +85,11 @@ export const Rooms = () => {
             <TextLikeInput type="text" name="query" />
             <Button text="Search" type="submit" />
           </form>
-          <Button className={classes.create_room_button} text="Create room" />
+          <Button
+            className={classes.create_room_button}
+            text="Create room"
+            onClick={() => currentAlert.setAlert(<CreateRoomAlertContent />)}
+          />
         </div>
         {currentPage !== null && pages !== null ? (
           <div className={classes.room_pagination}>

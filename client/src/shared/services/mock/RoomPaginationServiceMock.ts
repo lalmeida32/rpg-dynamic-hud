@@ -72,7 +72,7 @@ export class RoomPaginationServiceMock implements IRoomPaginationService {
     // Find by unique code
     if (query.startsWith('#')) {
       const uniqueCode = query.slice(1);
-      if (roomRepositoryMock.checkIfExistsByRoom(uniqueCode))
+      if (roomRepositoryMock.checkIfExistsByUniqueCode(uniqueCode))
         roomCodes.push(uniqueCode);
     }
 
