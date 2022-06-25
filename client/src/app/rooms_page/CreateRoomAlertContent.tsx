@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Button } from 'shared/components/Button';
-import { Select } from 'shared/components/Select';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
+import { ColorSelect } from './ColorSelect';
 import classes from './CreateRoomAlertContent.module.css';
 
 export const CreateRoomAlertContent = () => {
@@ -52,20 +52,12 @@ export const CreateRoomAlertContent = () => {
       <form className={classes.form} onSubmit={handleCreateRoomForm}>
         {/* STAT BARS  */}
         <h4>Stat bars</h4>
-        <TextLikeInput text="Health" name="inputId0" />
+        <TextLikeInput text="Health" name="statBarNameId0" />
+        <ColorSelect name={`statBarColorId0`} />
         {statBarIds.map(statBarId => (
           <React.Fragment key={statBarId}>
-            <TextLikeInput name={`inputId${statBarId}`} />
-            <Select
-              className={classes.color_select}
-              dataChosen="red"
-              name={`selectId${statBarId}`}
-            >
-              <option value="red">Red</option>
-              <option value="blue">Blue</option>
-              <option value="yellow">Yellow</option>
-              <option value="purple">Purple</option>
-            </Select>
+            <TextLikeInput name={`statBarNameId${statBarId}`} />
+            <ColorSelect name={`statBarColorId${statBarId}`} />
             <Button
               text="delete"
               onClick={e =>
@@ -77,14 +69,14 @@ export const CreateRoomAlertContent = () => {
         <Button
           text="Add a new bar"
           onClick={e => handleAddButton(statBarIds, setStatBarIds, e)}
-          disabled={statBarIds.length === 8}
+          disabled={statBarIds.length === 4}
         />
 
         {/* ATTRIBUTES */}
         <h4>Attributes</h4>
         {attributeIds.map(attributeId => (
           <React.Fragment key={attributeId}>
-            <TextLikeInput name={`inputId${attributeId}`} />
+            <TextLikeInput name={`attributeId${attributeId}`} />
             <Button
               text="delete"
               onClick={e =>
@@ -109,7 +101,7 @@ export const CreateRoomAlertContent = () => {
         {dieIds.map(dieId => (
           <React.Fragment key={dieId}>
             <TextLikeInput
-              name={`inputId${dieId}`}
+              name={`dieId${dieId}`}
               className={classes.dice_input}
               maxLength={3}
             />
@@ -122,7 +114,7 @@ export const CreateRoomAlertContent = () => {
         <Button
           text="Add a new die"
           onClick={e => handleAddButton(dieIds, setDieIds, e)}
-          disabled={dieIds.length === 4}
+          disabled={dieIds.length === 8}
         />
         <Button type="submit" text="Create" />
       </form>

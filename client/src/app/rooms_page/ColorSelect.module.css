@@ -1,0 +1,16 @@
+.color_select[data-chosen='red'] {
+  background: var(--red-background);
+}
+.color_select[data-chosen='blue'] {
+  background: var(--blue-background);
+}
+.color_select[data-chosen='yellow'] {
+  background: var(--yellow-background);
+}
+.color_select[data-chosen='purple'] {
+  background: var(--purple-background);
+}
+
+.color_select > option {
+  background: var(--background);
+}
