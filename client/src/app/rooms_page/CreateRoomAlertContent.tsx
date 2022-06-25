@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { Button } from 'shared/components/Button';
+import { Select } from 'shared/components/Select';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
 import classes from './CreateRoomAlertContent.module.css';
 
@@ -47,14 +48,24 @@ export const CreateRoomAlertContent = () => {
   /* VIEW */
   return (
     <React.Fragment>
-      <h3>Room settings</h3>
-      <form onSubmit={handleCreateRoomForm}>
+      <h3 className={classes.title}>Room settings</h3>
+      <form className={classes.form} onSubmit={handleCreateRoomForm}>
         {/* STAT BARS  */}
         <h4>Stat bars</h4>
         <TextLikeInput text="Health" name="inputId0" />
         {statBarIds.map(statBarId => (
           <React.Fragment key={statBarId}>
             <TextLikeInput name={`inputId${statBarId}`} />
+            <Select
+              className={classes.color_select}
+              dataChosen="red"
+              name={`selectId${statBarId}`}
+            >
+              <option value="red">Red</option>
+              <option value="blue">Blue</option>
+              <option value="yellow">Yellow</option>
+              <option value="purple">Purple</option>
+            </Select>
             <Button
               text="delete"
               onClick={e =>
@@ -66,7 +77,7 @@ export const CreateRoomAlertContent = () => {
         <Button
           text="Add a new bar"
           onClick={e => handleAddButton(statBarIds, setStatBarIds, e)}
-          disabled={statBarIds.length === 4}
+          disabled={statBarIds.length === 8}
         />
 
         {/* ATTRIBUTES */}
@@ -90,7 +101,7 @@ export const CreateRoomAlertContent = () => {
         <Button
           text="Add a new attribute"
           onClick={e => handleAddButton(attributeIds, setAttributeIds, e)}
-          disabled={attributeIds.length === 4}
+          disabled={attributeIds.length === 8}
         />
 
         {/* DICE */}

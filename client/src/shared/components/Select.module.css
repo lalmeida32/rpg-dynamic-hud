@@ -1,0 +1,8 @@
+.select {
+  border: none;
+  border-radius: 100vmax;
+  width: 100%;
+  padding: 0;
+  background: var(--background);
+  color: var(--background-contrast);
+}
