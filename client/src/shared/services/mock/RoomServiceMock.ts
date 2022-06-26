@@ -1,5 +1,7 @@
 import { delay } from 'shared/lib/delay';
+import { IGameRoomModel } from 'shared/models/IGameRoomModel';
 import { IRoomCreateModel } from 'shared/models/IRoomCreateModel';
+import { TStatBarColor } from 'shared/types/TStatBarColor';
 import { IRoomService } from '../IRoomService';
 import { roomRepositoryMock } from './roomRepositoryMock';
 import { userRepositoryMock } from './userRepositoryMock';
@@ -44,5 +46,22 @@ export class RoomServiceMock implements IRoomService {
       attributes: room.attributes,
       dice: room.dices,
     });
+  }
+  async getRoom(
+    token: string,
+    username: string,
+    uniqueCode: string
+  ): Promise<IGameRoomModel> {
+    await delay();
+    const room = roomRepositoryMock.findByUniqueCode(uniqueCode);
+    if (room === null) throw new Error('Room not found. May be deleted.');
+
+    return {
+      uniqueCode: uniqueCode,
+      name: room.name,
+      statBars: room.statBars.map(v => [v.name, v.color as TStatBarColor]),
+      attributes: room.attributes,
+      dices: room.dice,
+    };
   }
 }
