@@ -25,6 +25,9 @@ const generatePage = (roomCodes: string[], page: number): IRoomCardModel[] => {
     }));
 };
 
+const countRoomPages = (roomsCount: number): number =>
+  roomsCount !== 0 ? Math.ceil(roomsCount / 6) : 1;
+
 export class RoomPaginationServiceMock implements IRoomPaginationService {
   private static instance: RoomPaginationServiceMock | null = null;
 
@@ -51,10 +54,7 @@ export class RoomPaginationServiceMock implements IRoomPaginationService {
       .findAllUniqueCodes()
       .filter(v => roomRepositoryMock.findByUniqueCode(v)?.owner === username);
 
-    return [
-      Math.floor(roomCodes.length / 6) + 1,
-      generatePage(roomCodes, page),
-    ];
+    return [countRoomPages(roomCodes.length), generatePage(roomCodes, page)];
   }
 
   async roomCardPaginationWithSearch(
@@ -94,9 +94,6 @@ export class RoomPaginationServiceMock implements IRoomPaginationService {
         );
     }
 
-    return [
-      Math.floor(roomCodes.length / 6) + 1,
-      generatePage(roomCodes, page),
-    ];
+    return [countRoomPages(roomCodes.length), generatePage(roomCodes, page)];
   }
 }
