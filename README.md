@@ -111,17 +111,17 @@ Despite that, for many cases localtunnel should be worth to use. Here is a
 
 ### Requirements
 
-- The system's home screen must show currently user status if logged in
-- The system's home screen must show a text
-- The system must allow any person, over 13 years old, to create an account
-- The system must allow a user to change it's settings
-- The system must allow a user to create a room
-- The system must allow a user to join a room given it's Room Code
-- The system must allow the game master to kick/ban another user from it's room
-- The system must allow the game master to change the room settings
-- The system must allow the game master to lock/unlock a room
-- The system must allow the game master to delete the room
-- Each room must have dice options (i.e. D6, D12, D20...) 
+- The system's home screen must show information about the program
+- The system must allow any person to create an account, given the username, e-mail and password
+- The system must allow authenticated users to update their information
+- The system must allow authenticated users to delete their account
+- The system must allow authenticated users to create a room
+- The system must allow authenticated users to search a room by name, code or owner
+- The system must allow game masters to invite users to their rooms
+- The system must allow game masters to update their rooms settings
+- The system must allow game masters to open/close their rooms
+- The system must allow game masters to delete their rooms
+- Each room must have dice options (i.e. D6, D12, D20...)
 - Each room must have a room's members list
 - The game master's view must show all players status and dices, in real-time
 - The player's view must show all players status, dices and their character sheets, in real-time
@@ -138,11 +138,9 @@ The mockups can be found here: <a href="https://github.com/lalmeida32/rpg-dynami
 
 The user will see a landing page that can navigate over static pages like "About" or "Contact us". Then, the user can logging in or sign up to enter the application.
 The application is made of rooms, each user can create their own rooms, which make them GMs for that particular rooms. When creating a room, an user can choose the character information that can be manipulated by the players, like stat bars and attributes. He can also choose which dices players can toss.
-The players can enter the room via an auto-generated code. The GM can lock or unlock a room, and can kick/ban players.
+The players can search and enter a room if they have been invited. The GM can lock or unlock a room, and can invite players.
 Players can enter rooms using a code, create and update their own character.
 The information of all characters will change in real-time, using WebSockets technology.
-
-We will save on the server database: the users register information, the rooms information and the user characters for each room information.
 
 
 ### Mockups
@@ -159,10 +157,11 @@ Note: All mockups are not responsive. The recommended resolution to display them
 - Rooms
     - Unique code
     - Owner
+    - Name
+    - Opened
     - Status bars
     - Character attributes
     - Dices
-    - Players
 - Users
     - Username
     - E-mail
@@ -212,8 +211,36 @@ On database:
 
 ### Development Suggestions
 ### Test Plans
+
+On the client-side:
+
+- All tests are manual, because the core of the application is not there.
+- An user enter the auth page and try to log in with a not registered user, but fail.
+- An user enter the auth page and register, log in and logout, successfully .
+- An user enter the auth page and try to register with password and confirm password fields that does not match, but fails.
+- An user enter the auth page, log in, and see his rooms with pagination.
+- An user enter the auth page, log in, and search rooms by name, successfully.
+- The same user search rooms by name, successfully.
+- The same user search rooms by username, successfully.
+- The same user search rooms by code, successfully.
+- The same user try to create a room, successfully.
+- The same user try to enter a room that is opened.
+
 ### Test Results
+
+On the client-side:
+
+- All tests passed.
+
 ### Build Procedures
+
+On the client-side:
+
+- run `node --version` to check if node is installed. Upgrade it to version 18.x.x if necessary.
+- run `yarn --version` to check if yarn is enabled.
+    - if not, run `corepack enable` with administration privileges to enable it.
+- enter the client directory and run `yarn install` or `yarn` to install the dependencies.
+- run `yarn run dev` to run it in the development mode.
 
 ---
 
@@ -225,7 +252,12 @@ On database:
 ---
 
 ### Problems
+
+No problems.
+
 ### Comments
+
+No comments.
 
 ---
 
