@@ -1,0 +1,99 @@
+.title {
+  font-size: 1.3em;
+  min-height: 30px;
+}
+
+.section {
+  font-size: 1.1em;
+  margin: 5px 0 2px;
+  min-height: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  font-size: 1.1em;
+  overflow-y: auto;
+}
+
+.room_name_input {
+  font-size: 1.1em;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  min-height: 30px;
+}
+
+.stat_bar,
+.attribute {
+  display: flex;
+  width: 100%;
+  margin: 2px 0;
+  position: relative;
+  min-height: 30px;
+}
+
+.stat_bar > *,
+.attribute > * {
+  padding: 5px 5px;
+}
+
+.stat_bar > input,
+.attribute > input {
+  width: 0;
+  flex-grow: 1;
+}
+
+.stat_bar > select {
+  width: 70px;
+  margin-right: 10px;
+}
+
+.stat_bar > button,
+.attribute > button {
+  position: absolute;
+  width: 32px;
+  font-weight: 200;
+  right: 0;
+}
+
+.dice {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 60px;
+}
+
+.die {
+  position: relative;
+  margin: 2px;
+  min-height: 30px;
+}
+
+.die > input {
+  width: 50px;
+  height: 50px;
+}
+
+.die > button {
+  position: absolute;
+  width: 20px;
+  font-weight: 200;
+  right: 0;
+}
+
+.add_button {
+  width: 300px;
+  padding: 5px 10px;
+  background: var(--cyan-background);
+  margin: 5px 0 10px;
+  min-height: 30px;
+}
+
+.create_button {
+  background: var(--green-background);
+  padding: 10px 5px;
+  font-size: 1.3em;
+  min-height: 50px;
+}

@@ -1,9 +1,10 @@
 import { TextLikeInput } from 'shared/components/TextLikeInput';
+import { TStatBarColor } from 'shared/types/TStatBarColor';
 import classes from './StatBar.module.css';
 
 interface IStatBarProps {
   name: string;
-  color: 'red' | 'yellow' | 'blue' | 'purple';
+  color: TStatBarColor;
 }
 
 const maxLength = 5;

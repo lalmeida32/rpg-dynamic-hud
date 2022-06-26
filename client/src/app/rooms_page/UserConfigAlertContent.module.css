@@ -1,0 +1,46 @@
+.logout_button {
+  font-size: 1.2em;
+  padding: 5px 10px;
+  width: 150px;
+  background: var(--red-background);
+  margin-bottom: 15px;
+  min-height: 40px;
+}
+
+.title {
+  font-size: 1.3em;
+  margin-bottom: 5px;
+  min-height: 30px;
+}
+
+.form {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form:last-of-type {
+  margin-bottom: 0;
+}
+
+.form input {
+  width: 300px;
+  margin-bottom: 5px;
+  font-size: 1.1em;
+}
+
+.form button {
+  width: 150px;
+  font-size: 1.2em;
+}
+
+.user_update_form {
+  min-height: 75px;
+}
+.change_password_form {
+  min-height: 100px;
+}
+.delete_account_form {
+  min-height: 50px;
+}

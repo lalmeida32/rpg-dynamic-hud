@@ -7,6 +7,7 @@ interface IButtonProps {
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
+  tabIndex?: number;
 }
 
 export const Button: React.FC<IButtonProps> = props => {
@@ -21,6 +22,7 @@ export const Button: React.FC<IButtonProps> = props => {
       className={className}
       onClick={props.onClick}
       disabled={props.disabled}
+      tabIndex={props.tabIndex}
     >
       {props.text}
     </button>
