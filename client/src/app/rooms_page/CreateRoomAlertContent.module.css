@@ -18,6 +18,12 @@
   overflow-y: auto;
 }
 
+.room_name_input {
+  font-size: 1.1em;
+  padding: 5px 10px;
+  min-height: 30px;
+}
+
 .stat_bar,
 .attribute {
   display: flex;

@@ -21,6 +21,7 @@ export const CreateRoomAlertContent = () => {
       const target = e.target as HTMLFormElement;
 
       const model: IRoomCreateModel = {
+        name: target['roomName'].value,
         statBars: [
           [target['statBarNameId0'].value, target['statBarColorId0'].value],
           ...statBarIds.map<[string, TStatBarColor]>(id => {
@@ -67,6 +68,8 @@ export const CreateRoomAlertContent = () => {
     <React.Fragment>
       <h3 className={classes.title}>Room settings</h3>
       <form className={classes.form} onSubmit={handleCreateRoomForm}>
+        <h4 className={classes.section}>Room name</h4>
+        <TextLikeInput className={classes.room_name_input} name="roomName" />
         {/* STAT BARS  */}
         <h4 className={classes.section}>Stat bars</h4>
         <div className={classes.stat_bar}>

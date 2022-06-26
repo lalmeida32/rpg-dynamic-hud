@@ -14,15 +14,13 @@ const generatePage = (roomCodes: string[], page: number): IRoomCardModel[] => {
         ]
     )
     .filter(v => v[1] !== null)
-    .map(v => ({
+    .map<IRoomCardModel>(v => ({
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       name: v[1]!.name,
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       opened: v[1]!.opened,
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       owner: v[1]!.owner,
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      private: v[1]!.private,
       uniqueCode: v[0],
     }));
 };
