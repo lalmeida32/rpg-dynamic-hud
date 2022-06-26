@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Button } from 'shared/components/Button';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
+import { IRoomCreateModel } from 'shared/models/IRoomCreateModel';
+import { TStatBarColor } from 'shared/types/TStatBarColor';
 import { ColorSelect } from './ColorSelect';
 import classes from './CreateRoomAlertContent.module.css';
 
@@ -16,8 +18,23 @@ export const CreateRoomAlertContent = () => {
   const handleCreateRoomForm = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      const target = e.target as HTMLFormElement;
+
+      const model: IRoomCreateModel = {
+        statBars: [
+          [target['statBarNameId0'].value, target['statBarColorId0'].value],
+          ...statBarIds.map<[string, TStatBarColor]>(id => {
+            const statBarName = target[`statBarNameId${id}`].value;
+            const statBarColor = target[`statBarColorId${id}`].value;
+            return [statBarName, statBarColor];
+          }),
+        ],
+        attributes: attributeIds.map(id => target[`attributeId${id}`].value),
+        dices: dieIds.map(id => target[`dieId${id}`].value),
+      };
+      console.log(model);
     },
-    []
+    [statBarIds, attributeIds, dieIds]
   );
 
   const handleRemoveButton = useCallback(
@@ -51,34 +68,40 @@ export const CreateRoomAlertContent = () => {
       <h3 className={classes.title}>Room settings</h3>
       <form className={classes.form} onSubmit={handleCreateRoomForm}>
         {/* STAT BARS  */}
-        <h4>Stat bars</h4>
-        <TextLikeInput text="Health" name="statBarNameId0" />
-        <ColorSelect name={`statBarColorId0`} />
+        <h4 className={classes.section}>Stat bars</h4>
+        <div className={classes.stat_bar}>
+          <ColorSelect name={`statBarColorId0`} />
+          <TextLikeInput text="Health" name="statBarNameId0" />
+        </div>
         {statBarIds.map(statBarId => (
-          <React.Fragment key={statBarId}>
-            <TextLikeInput name={`statBarNameId${statBarId}`} />
+          <div className={classes.stat_bar} key={statBarId}>
             <ColorSelect name={`statBarColorId${statBarId}`} />
+            <TextLikeInput name={`statBarNameId${statBarId}`} />
             <Button
-              text="delete"
+              text="X"
               onClick={e =>
                 handleRemoveButton(statBarId, statBarIds, setStatBarIds, e)
               }
+              tabIndex={-1}
             />
-          </React.Fragment>
+          </div>
         ))}
         <Button
+          type="button"
           text="Add a new bar"
+          className={classes.add_button}
           onClick={e => handleAddButton(statBarIds, setStatBarIds, e)}
-          disabled={statBarIds.length === 4}
+          disabled={statBarIds.length === 3}
+          tabIndex={-1}
         />
 
         {/* ATTRIBUTES */}
-        <h4>Attributes</h4>
+        <h4 className={classes.section}>Attributes</h4>
         {attributeIds.map(attributeId => (
-          <React.Fragment key={attributeId}>
+          <div className={classes.attribute} key={attributeId}>
             <TextLikeInput name={`attributeId${attributeId}`} />
             <Button
-              text="delete"
+              text="X"
               onClick={e =>
                 handleRemoveButton(
                   attributeId,
@@ -87,36 +110,46 @@ export const CreateRoomAlertContent = () => {
                   e
                 )
               }
+              tabIndex={-1}
             />
-          </React.Fragment>
+          </div>
         ))}
         <Button
+          type="button"
           text="Add a new attribute"
+          className={classes.add_button}
           onClick={e => handleAddButton(attributeIds, setAttributeIds, e)}
           disabled={attributeIds.length === 8}
+          tabIndex={-1}
         />
 
         {/* DICE */}
-        <h4>Dice</h4>
-        {dieIds.map(dieId => (
-          <React.Fragment key={dieId}>
-            <TextLikeInput
-              name={`dieId${dieId}`}
-              className={classes.dice_input}
-              maxLength={3}
-            />
-            <Button
-              text="delete"
-              onClick={e => handleRemoveButton(dieId, dieIds, setDieIds, e)}
-            />
-          </React.Fragment>
-        ))}
+        <h4 className={classes.section}>Dice</h4>
+        <div className={classes.dice}>
+          {dieIds.map(dieId => (
+            <div className={classes.die} key={dieId}>
+              <TextLikeInput
+                name={`dieId${dieId}`}
+                className={classes.dice_input}
+                maxLength={3}
+              />
+              <Button
+                text="X"
+                onClick={e => handleRemoveButton(dieId, dieIds, setDieIds, e)}
+                tabIndex={-1}
+              />
+            </div>
+          ))}
+        </div>
         <Button
+          type="button"
           text="Add a new die"
+          className={classes.add_button}
           onClick={e => handleAddButton(dieIds, setDieIds, e)}
           disabled={dieIds.length === 8}
+          tabIndex={-1}
         />
-        <Button type="submit" text="Create" />
+        <Button className={classes.create_button} type="submit" text="Create" />
       </form>
     </React.Fragment>
   );
