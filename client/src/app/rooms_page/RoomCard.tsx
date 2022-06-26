@@ -6,6 +6,7 @@ import { Button } from 'shared/components/Button';
 import { IRoomCardModel } from 'shared/models/IRoomCardModel';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface IRoomCardProps {
   info: IRoomCardModel;
@@ -13,6 +14,7 @@ interface IRoomCardProps {
 
 export const RoomCard: React.FC<IRoomCardProps> = props => {
   const userLogin = useContext(UserLoginContext);
+  const navigate = useNavigate();
 
   return (
     <div className={classes.room_card}>
@@ -29,7 +31,11 @@ export const RoomCard: React.FC<IRoomCardProps> = props => {
       <p>{props.info.name}</p>
       <p>#{props.info.uniqueCode}</p>
       <p>Owned by @{props.info.owner}</p>
-      <Button text="Enter" disabled={!props.info.opened} />
+      <Button
+        text="Enter"
+        disabled={!props.info.opened}
+        onClick={() => navigate('/room/')}
+      />
     </div>
   );
 };
