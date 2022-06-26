@@ -1,7 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { Button } from 'shared/components/Button';
+import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
 import { TextLikeInput } from 'shared/components/TextLikeInput';
+import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
+import { UserLoginContext } from 'shared/contexts/UserLogin';
 import { IRoomCreateModel } from 'shared/models/IRoomCreateModel';
+import { services } from 'shared/services/services';
 import { TStatBarColor } from 'shared/types/TStatBarColor';
 import { ColorSelect } from './ColorSelect';
 import classes from './CreateRoomAlertContent.module.css';
@@ -13,6 +17,9 @@ export const CreateRoomAlertContent = () => {
   const [dieIds, setDieIds] = useState<number[]>([]);
 
   const [nextId, setNextId] = useState<number>(1);
+
+  const userLogin = useContext(UserLoginContext);
+  const currentAlert = useContext(CurrentAlertContext);
 
   /* LOGIC */
   const handleCreateRoomForm = useCallback(
@@ -31,11 +38,26 @@ export const CreateRoomAlertContent = () => {
           }),
         ],
         attributes: attributeIds.map(id => target[`attributeId${id}`].value),
-        dices: dieIds.map(id => target[`dieId${id}`].value),
+        dices: dieIds.map(id => Number(target[`dieId${id}`].value)),
       };
-      console.log(model);
+
+      if (userLogin.token === null || userLogin.username === null) return;
+
+      try {
+        await services.room.createRoom(
+          userLogin.token,
+          userLogin.username,
+          model
+        );
+        currentAlert.setAlert(
+          <DefaultAlertContent success text="Room created successfully." />
+        );
+      } catch (e) {
+        if (e instanceof Error)
+          currentAlert.setAlert(<DefaultAlertContent text={e.message} error />);
+      }
     },
-    [statBarIds, attributeIds, dieIds]
+    [statBarIds, attributeIds, dieIds, currentAlert, userLogin]
   );
 
   const handleRemoveButton = useCallback(

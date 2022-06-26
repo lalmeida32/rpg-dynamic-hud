@@ -21,6 +21,7 @@
 .room_name_input {
   font-size: 1.1em;
   padding: 5px 10px;
+  margin-bottom: 5px;
   min-height: 30px;
 }
 
