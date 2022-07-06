@@ -1,4 +1,4 @@
-import { serverSettings } from 'util/server_settings_config';
+/*import { serverSettings } from 'util/server_settings_config';
 
 import path from 'path';
 
@@ -37,4 +37,4 @@ const server = app.listen(port, () =>
 
 // EVENTS
 
-gracefulShutdown(server);
+gracefulShutdown(server);*/
