@@ -1,6 +1,8 @@
 import express from 'express';
 import date from 'date-and-time';
 
+import mongoose from 'mongoose';
+
 import userRouter from './controllers/user.js';
 
 const app = express();
@@ -24,6 +26,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
 app.use('/user', userRouter);
 
 
-app.listen(port, () => {
-    console.log('listening')
+app.listen(port, async () => {
+    await mongoose.connect('mongodb://localhost:27017/rpg');
+    console.log('listening');
 });

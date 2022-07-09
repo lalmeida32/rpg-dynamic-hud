@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
+export
 const characterSchema = new Schema({
     ownerUsername: {
         type: 'String'

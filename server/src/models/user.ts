@@ -15,8 +15,10 @@ const userSchema = new Schema({
         type: 'String'
     },
     roomsCodes: {
-        type: '[String]'
+        type: [String]
     }
 });
 
 const User = mongoose.model('User', userSchema);
+
+export default User;
