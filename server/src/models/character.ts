@@ -7,15 +7,20 @@ const characterSchema = new Schema({
     ownerUsername: {
         type: 'String'
     },
-    roomCode: {
+    name: {
         type: 'String'
+    },
+    roomCode: {
+        type: Number
     },
     state: {
-        type: 'String'
+        type: [Map]
     },
     image: {
-        type: 'Buffer'
+        type: 'String' // base64 img
     }
 });
 
 const Character = mongoose.model('Character', characterSchema);
+
+export default Character;

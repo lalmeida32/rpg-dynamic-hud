@@ -9,6 +9,14 @@ function encryptPassword(passwd: String): String {
     const encPass = sha256(SALT+passwd);
     return encPass.toString();
 }
+export
+const userFind = async (username: String) => {
+    const user = await User.findOne({username: username});
+    if (!user)
+        throw new Error("User does not exists!");
+    return user;
+}
+
 
 export
 const userCreate = (username: String, email: String, password: String) => {
@@ -24,10 +32,33 @@ const userCreate = (username: String, email: String, password: String) => {
 }
 
 export
-const userFind = async (username: String) => {
-    const user = await User.findOne({username: username});
-    return user;
+const userInRoom = async (username: String, roomCode: number): Promise<boolean> => {
+    const user = await userFind(username);
+
+    for (let room of user.roomsCodes)
+        if (room === roomCode)
+            return true;
+
+    return false;
 }
+
+export
+const userJoinRoom = async (username: string, roomCode: number) => {
+    const user = await userFind(username);
+    if (roomCode in user.roomsCodes)
+        throw new Error('User already in this room!');
+    user.roomsCodes.push(roomCode);
+    await user.save();
+}
+
+export
+const userLeaveRoom = async (username: string, roomCode: number) => {
+    const user = await userFind(username);
+    if (roomCode in user.roomsCodes)
+        throw new Error('User already in this room!');
+    user.roomsCodes = user.roomsCodes.filter(room => room != roomCode);
+    await user.save();
+};
 
 export
 const userLogin = async (username: String, password: String) => {

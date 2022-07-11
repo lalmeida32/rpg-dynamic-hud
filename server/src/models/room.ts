@@ -5,28 +5,41 @@ const { Schema } = mongoose;
 
 const roomSchema = new Schema({
     code: {
-        type: 'String',
-        unique: true
+        type: Number,
+        unique: true,
+        required: true
     },
     name: {
-        type: 'String'
+        type: 'String',
+        required: true
     },
     owner: {
-        type: 'String'
+        type: 'String',
+        required: true
     },
     opened: {
-        type: 'Boolean'
+        type: 'Boolean',
+        default: true
     },
     statusBars: {
-        type: '[Map]'
+        type: [Map],
+        default: []
+    },
+    attributes: {
+        type: [Map],
+        default: []
     },
     characters: {
-        type: [characterSchema]
+        type: [String],
+        default: []
     },
     dices: {
-        type: '[Map]'
+        type: [Number],
+        required: true
     }
 
 });
 
 const Room = mongoose.model('Room', roomSchema);
+
+export default Room;

@@ -4,6 +4,9 @@ import date from 'date-and-time';
 import mongoose from 'mongoose';
 
 import userRouter from './controllers/user.js';
+import roomRouter from './controllers/room.js';
+import characterRouter from './controllers/character.js';
+
 
 const app = express();
 const port = 4000;
@@ -24,7 +27,8 @@ app.get('/', (req: express.Request, res: express.Response) => {
 });
 
 app.use('/user', userRouter);
-
+app.use('/room', roomRouter);
+app.use('/character', characterRouter);
 
 app.listen(port, async () => {
     await mongoose.connect('mongodb://localhost:27017/rpg');

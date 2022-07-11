@@ -15,7 +15,7 @@ const userSchema = new Schema({
         type: 'String'
     },
     roomsCodes: {
-        type: [String]
+        type: [Number]
     }
 });
 
