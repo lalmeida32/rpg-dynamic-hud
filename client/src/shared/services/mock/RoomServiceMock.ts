@@ -6,6 +6,37 @@ import { IRoomService } from '../IRoomService';
 import { roomRepositoryMock } from './roomRepositoryMock';
 import { userRepositoryMock } from './userRepositoryMock';
 
+const changeRoomHandled = (
+  username: string,
+  uniqueCode: string,
+  data: {
+    attributes?: string[];
+    statBars?: { name: string; color: string }[];
+    dice?: number[];
+    name?: string;
+    opened?: boolean;
+    owner?: string;
+  }
+) => {
+  const room = roomRepositoryMock.findByUniqueCode(uniqueCode);
+  if (room === null) throw new Error('Room not found. May be deleted.');
+
+  if (room.owner !== username)
+    throw new Error(
+      "The user cannot perform this operation. The room's owner is another one."
+    );
+
+  roomRepositoryMock.changeRoom(uniqueCode, uniqueCode, {
+    attributes:
+      data.attributes === undefined ? room.attributes : data.attributes,
+    dice: data.dice === undefined ? room.dice : data.dice,
+    name: data.name === undefined ? room.name : data.name,
+    opened: data.opened === undefined ? room.opened : data.opened,
+    owner: data.owner === undefined ? room.owner : data.owner,
+    statBars: data.statBars === undefined ? room.statBars : data.statBars,
+  });
+};
+
 export class RoomServiceMock implements IRoomService {
   private static instance: RoomServiceMock | null = null;
 
@@ -63,5 +94,23 @@ export class RoomServiceMock implements IRoomService {
       attributes: room.attributes,
       dices: room.dice,
     };
+  }
+
+  async openRoom(
+    token: string,
+    username: string,
+    uniqueCode: string
+  ): Promise<void> {
+    await delay();
+    changeRoomHandled(username, uniqueCode, { opened: true });
+  }
+
+  async closeRoom(
+    token: string,
+    username: string,
+    uniqueCode: string
+  ): Promise<void> {
+    await delay();
+    changeRoomHandled(username, uniqueCode, { opened: false });
   }
 }

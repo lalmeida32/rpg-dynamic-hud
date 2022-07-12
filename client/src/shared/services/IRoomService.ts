@@ -12,4 +12,14 @@ export interface IRoomService {
     username: string,
     uniqueCode: string
   ) => Promise<IGameRoomModel>;
+  closeRoom: (
+    token: string,
+    username: string,
+    uniqueCode: string
+  ) => Promise<void>;
+  openRoom: (
+    token: string,
+    username: string,
+    uniqueCode: string
+  ) => Promise<void>;
 }
