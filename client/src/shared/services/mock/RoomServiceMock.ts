@@ -1,6 +1,7 @@
 import { delay } from 'shared/lib/delay';
 import { IGameRoomModel } from 'shared/models/IGameRoomModel';
 import { IRoomCreateModel } from 'shared/models/IRoomCreateModel';
+import { IRoomUpdateModel } from 'shared/models/IRoomUpdateModel';
 import { TStatBarColor } from 'shared/types/TStatBarColor';
 import { IRoomService } from '../IRoomService';
 import { roomRepositoryMock } from './roomRepositoryMock';
@@ -112,5 +113,23 @@ export class RoomServiceMock implements IRoomService {
   ): Promise<void> {
     await delay();
     changeRoomHandled(username, uniqueCode, { opened: false });
+  }
+
+  async updateRoom(
+    token: string,
+    username: string,
+    uniqueCode: string,
+    room: IRoomUpdateModel
+  ): Promise<void> {
+    await delay();
+    changeRoomHandled(username, uniqueCode, {
+      attributes: room.attributes,
+      dice: room.dices,
+      name: room.name,
+      statBars: room.statBars.map(statBar => ({
+        name: statBar[0],
+        color: statBar[1],
+      })),
+    });
   }
 }
