@@ -15,6 +15,7 @@ export const Select: React.FC<ISelectProps> = props => {
     <select
       className={className}
       name={props.name}
+      defaultValue={props.dataChosen}
       data-chosen={props.dataChosen}
       onChange={e => (e.target.dataset.chosen = e.target.value)}
     >
