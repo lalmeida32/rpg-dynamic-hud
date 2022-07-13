@@ -1,6 +1,6 @@
 import { TStatBarColor } from 'shared/types/TStatBarColor';
 
-export interface IGameRoomModel {
+export interface IRoomGetModel {
   uniqueCode: string;
   name: string;
   statBars: [string, TStatBarColor][];

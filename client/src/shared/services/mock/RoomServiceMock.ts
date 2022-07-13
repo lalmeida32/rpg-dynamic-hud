@@ -1,5 +1,5 @@
 import { delay } from 'shared/lib/delay';
-import { IGameRoomModel } from 'shared/models/IGameRoomModel';
+import { IRoomGetModel } from 'shared/models/IRoomGetModel';
 import { IRoomCreateModel } from 'shared/models/IRoomCreateModel';
 import { IRoomUpdateModel } from 'shared/models/IRoomUpdateModel';
 import { TStatBarColor } from 'shared/types/TStatBarColor';
@@ -83,7 +83,7 @@ export class RoomServiceMock implements IRoomService {
     token: string,
     username: string,
     uniqueCode: string
-  ): Promise<IGameRoomModel> {
+  ): Promise<IRoomGetModel> {
     await delay();
     const room = roomRepositoryMock.findByUniqueCode(uniqueCode);
     if (room === null) throw new Error('Room not found. May be deleted.');
