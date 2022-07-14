@@ -10,9 +10,9 @@ import gracefulShutdown from 'http-graceful-shutdown';
 
 import mongoose from 'mongoose';
 
-import userRouter from './routes/user';
-import roomRouter from './routes/room';
-import characterRouter from './routes/character';
+// import userRouter from './routes/user';
+// import roomRouter from './routes/room';
+// import characterRouter from './routes/character';
 
 const app = express();
 
@@ -34,9 +34,9 @@ app.get('/api', (req, res) => {
   res.send('Express + TypeScript Server');
 });
 
-app.use('/api/user', userRouter);
-app.use('/api/room', roomRouter);
-app.use('/api/character', characterRouter);
+// app.use('/api/user', userRouter);
+// app.use('/api/room', roomRouter);
+// app.use('/api/character', characterRouter);
 
 // LISTEN
 

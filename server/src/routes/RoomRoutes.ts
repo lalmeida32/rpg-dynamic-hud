@@ -1,7 +1,7 @@
 import express from 'express';
 
-import { roomCreate, roomFind } from '../service/room';
-import { userJoinRoom, userLeaveRoom } from '../service/user';
+import { roomCreate, roomFind } from 'services/room';
+import { userJoinRoom, userLeaveRoom } from 'services/user';
 
 const router = express.Router();
 

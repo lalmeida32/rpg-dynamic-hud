@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { userCreate, userFind, userLogin } from '../service/user';
+import { userCreate, userFind, userLogin } from 'services/user';
 
 const router = express.Router();
 

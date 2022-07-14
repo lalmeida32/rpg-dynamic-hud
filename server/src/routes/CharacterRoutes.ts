@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { characterUpdate, characterCreate } from '../service/character';
+import { characterUpdate, characterCreate } from 'services/character';
 
 const router = express.Router();
 
