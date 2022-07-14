@@ -5,28 +5,65 @@ import closed_book from 'shared/images/closed_book.svg';
 import { Button } from 'shared/components/Button';
 import { IRoomCardModel } from 'shared/models/IRoomCardModel';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
-import { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { services } from 'shared/services/services';
+import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
+import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
+import { RoomConfigAlertContent } from './RoomConfigAlertContent';
 
 interface IRoomCardProps {
   info: IRoomCardModel;
 }
 
 export const RoomCard: React.FC<IRoomCardProps> = props => {
+  /* STATE */
   const userLogin = useContext(UserLoginContext);
+  const currentAlert = useContext(CurrentAlertContext);
   const navigate = useNavigate();
 
+  /* LOGIC */
+  const handleLockRoom = useCallback(
+    async (action: 'close' | 'open') => {
+      if (userLogin.token === null || userLogin.username === null) return;
+      const serviceFunction =
+        action === 'close' ? services.room.closeRoom : services.room.openRoom;
+
+      try {
+        await serviceFunction(
+          userLogin.token,
+          userLogin.username,
+          props.info.uniqueCode
+        );
+      } catch (e) {
+        if (e instanceof Error)
+          currentAlert.setAlert(<DefaultAlertContent text={e.message} error />);
+      }
+    },
+    [userLogin, props.info.uniqueCode, currentAlert]
+  );
+
+  /* VIEW */
   return (
     <div className={classes.room_card}>
       <div className={classes.card_buttons}>
         {props.info.owner === userLogin.username ? (
-          props.info.opened ? (
-            <img src={unlocked} />
-          ) : (
-            <img src={locked} />
-          )
+          <React.Fragment>
+            {props.info.opened ? (
+              <img src={unlocked} onClick={() => handleLockRoom('close')} />
+            ) : (
+              <img src={locked} onClick={() => handleLockRoom('open')} />
+            )}
+            <img
+              src={closed_book}
+              onClick={() =>
+                currentAlert.setAlert(
+                  <RoomConfigAlertContent uniqueCode={props.info.uniqueCode} />
+                )
+              }
+            />
+          </React.Fragment>
         ) : null}
-        <img src={closed_book} />
       </div>
       <p>{props.info.name}</p>
       <p>#{props.info.uniqueCode}</p>
@@ -34,7 +71,7 @@ export const RoomCard: React.FC<IRoomCardProps> = props => {
       <Button
         text="Enter"
         disabled={!props.info.opened}
-        onClick={() => navigate('/room/')}
+        onClick={() => navigate(`/room/${props.info.uniqueCode}`)}
       />
     </div>
   );

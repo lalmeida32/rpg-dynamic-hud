@@ -2,15 +2,49 @@ import { CharacterSheet } from './character_sheet/CharacterSheet';
 import classes from './GameRoom.module.css';
 import { GameHud } from './game_hud/GameHud';
 import { DiceChooser } from './DiceChooser';
+import door from 'shared/images/door.svg';
+import gear from 'shared/images/gear.svg';
+import { useNavigate, useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
+import { RoomConfigAlertContent } from 'app/rooms_page/RoomConfigAlertContent';
 
 export const GameRoom = () => {
+  const navigate = useNavigate();
+  const currentAlert = useContext(CurrentAlertContext);
+  const params = useParams();
+  const [roomCode, setRoomCode] = useState<string | null>(null);
+
+  useEffect(() => {
+    setRoomCode(params.code ? params.code : null);
+  }, [params]);
+
   return (
     <div className={classes.game_room}>
-      <CharacterSheet />
-      <div className={classes.game_hud_and_dice_chooser}>
-        <GameHud />
-        <DiceChooser />
-      </div>
+      {roomCode !== null ? (
+        <React.Fragment>
+          {' '}
+          <img
+            src={door}
+            className={classes.leave_button}
+            onClick={() => navigate('/rooms/')}
+          />
+          <img
+            src={gear}
+            className={classes.config_button}
+            onClick={() =>
+              currentAlert.setAlert(
+                <RoomConfigAlertContent uniqueCode={roomCode} />
+              )
+            }
+          />
+          <CharacterSheet />
+          <div className={classes.game_hud_and_dice_chooser}>
+            <GameHud />
+            <DiceChooser />
+          </div>
+        </React.Fragment>
+      ) : null}
     </div>
   );
 };

@@ -202,6 +202,11 @@ interface IRoomRepository {
   addRoom: (room: IRoomMock) => void;
   ownerUsernameChanged: (oldOwner: string, newOwner: string) => void;
   ownerUsernameDeleted: (owner: string) => void;
+  changeRoom: (
+    oldUniqueCode: string,
+    newUniqueCode: string,
+    room: IRoomMock
+  ) => void;
 }
 
 const copyRoom = (room: IRoomMock): IRoomMock => {
@@ -246,5 +251,23 @@ export const roomRepositoryMock: IRoomRepository = {
   ownerUsernameDeleted: owner => {
     for (const uniqueCode in roomDb)
       if (roomDb[uniqueCode].owner === owner) delete roomDb[uniqueCode];
+  },
+
+  changeRoom: (
+    oldUniqueCode: string,
+    newUniqueCode: string,
+    room: IRoomMock
+  ) => {
+    if (!(oldUniqueCode in roomDb)) return;
+    if (newUniqueCode !== oldUniqueCode) {
+      roomDb[newUniqueCode] = Object.assign({}, roomDb[oldUniqueCode]);
+      delete roomDb[oldUniqueCode];
+    }
+    roomDb[newUniqueCode].attributes = room.attributes;
+    roomDb[newUniqueCode].dice = room.dice;
+    roomDb[newUniqueCode].name = room.name;
+    roomDb[newUniqueCode].opened = room.opened;
+    roomDb[newUniqueCode].owner = room.owner;
+    roomDb[newUniqueCode].statBars = room.statBars;
   },
 };

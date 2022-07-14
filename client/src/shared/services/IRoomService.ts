@@ -1,5 +1,6 @@
-import { IGameRoomModel } from 'shared/models/IGameRoomModel';
+import { IRoomGetModel } from 'shared/models/IRoomGetModel';
 import { IRoomCreateModel } from 'shared/models/IRoomCreateModel';
+import { IRoomUpdateModel } from 'shared/models/IRoomUpdateModel';
 
 export interface IRoomService {
   createRoom: (
@@ -11,5 +12,21 @@ export interface IRoomService {
     token: string,
     username: string,
     uniqueCode: string
-  ) => Promise<IGameRoomModel>;
+  ) => Promise<IRoomGetModel>;
+  closeRoom: (
+    token: string,
+    username: string,
+    uniqueCode: string
+  ) => Promise<void>;
+  openRoom: (
+    token: string,
+    username: string,
+    uniqueCode: string
+  ) => Promise<void>;
+  updateRoom: (
+    token: string,
+    username: string,
+    uniqueCode: string,
+    room: IRoomUpdateModel
+  ) => Promise<void>;
 }
