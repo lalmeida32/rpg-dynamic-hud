@@ -1,58 +1,79 @@
 export interface ICharacter {
+  owner: string;
+  room: string;
   name: string;
 }
 
+import mongoose from 'mongoose';
+
+const { Schema } = mongoose;
+
+export const characterSchema = new Schema({
+  owner: {
+    type: String,
+    required: true,
+  },
+  room: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+});
+
+characterSchema.index({ owner: 1, room: 1 }, { unique: true });
+
+const CharacterDb = mongoose.model('Character', characterSchema);
+
 interface ICharacterRepository {
   checkIfExistsByCompositeKey: (
-    uniqueCode: string,
-    username: string
-  ) => boolean;
-  findAllCompositeKeys: () => string[];
+    room: string,
+    owner: string
+  ) => Promise<boolean>;
+  findAllCompositeKeys: () => Promise<[string, string][]>;
   findByCompositeKey: (
-    uniqueCode: string,
-    username: string
-  ) => ICharacter | null;
-  usernameChanged: (oldUsername: string, newUsername: string) => void;
-  usernameDeleted: (username: string) => void;
-  // roomStateChanged: => void;
-  roomDeleted: (uniqueCode: string) => void;
+    room: string,
+    owner: string
+  ) => Promise<ICharacter | null>;
+  usernameChanged: (oldUsername: string, newUsername: string) => Promise<void>;
+  usernameDeleted: (username: string) => Promise<void>;
+  roomDeleted: (room: string) => Promise<void>;
 }
 
 export const CharacterRepository: ICharacterRepository = {
-  checkIfExistsByCompositeKey: (uniqueCode, username) => {
-    return `${uniqueCode}@${username}` in characterDb;
+  checkIfExistsByCompositeKey: async (room, owner) => {
+    return (
+      (await CharacterDb.findOne({ $and: [{ room }, { owner }] }).exec()) !==
+      null
+    );
   },
 
-  findAllCompositeKeys: () => {
-    return Object.keys(characterDb);
+  findAllCompositeKeys: async () => {
+    return (await CharacterDb.find({}, 'owner room').exec()).map(v => [
+      v.owner,
+      v.room,
+    ]);
   },
 
-  findByCompositeKey: (uniqueCode, username) => {
-    const key = `${uniqueCode}@${username}`;
-    if (key in characterDb) return Object.assign({}, characterDb[key]);
-    return null;
+  findByCompositeKey: async (room, owner) => {
+    return await CharacterDb.findOne({ $and: [{ room }, { owner }] }).exec();
   },
 
-  usernameChanged: (oldUsername, newUsername) => {
+  usernameChanged: async (oldUsername, newUsername) => {
     if (oldUsername === newUsername) return;
-    for (const key in characterDb) {
-      const separatorIndex = key.indexOf('@');
-      if (key.slice(separatorIndex + 1) === oldUsername) {
-        const newKey = key.slice(0, separatorIndex + 1) + newUsername;
-        characterDb[newKey] = Object.assign({}, characterDb[key]);
-        delete characterDb[key];
-      }
-    }
+    await CharacterDb.updateMany(
+      { owner: oldUsername },
+      { owner: newUsername }
+    ).exec();
   },
 
-  usernameDeleted: username => {
-    for (const key in characterDb)
-      if (key.slice(key.indexOf('@') + 1) === username) delete characterDb[key];
+  usernameDeleted: async username => {
+    await CharacterDb.deleteMany({ owner: username }).exec();
   },
 
-  roomDeleted: uniqueCode => {
-    for (const key in characterDb)
-      if (key.slice(0, key.indexOf('@')) === uniqueCode)
-        delete characterDb[key];
+  roomDeleted: async room => {
+    await CharacterDb.deleteMany({ room }).exec();
   },
 };

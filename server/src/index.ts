@@ -9,6 +9,9 @@ import debug from 'debug';
 import gracefulShutdown from 'http-graceful-shutdown';
 
 import mongoose from 'mongoose';
+import { CharacterRepository } from 'repositories/CharacterRepository';
+import { UserRepository } from 'repositories/UserRepository';
+import { RoomRepository } from 'repositories/RoomRepository';
 
 // import userRouter from './routes/user';
 // import roomRouter from './routes/room';
