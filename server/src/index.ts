@@ -1,4 +1,4 @@
-/*import { serverSettings } from 'util/server_settings_config';
+import { serverSettings } from 'util/server_settings_config';
 
 import path from 'path';
 
@@ -7,6 +7,12 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import debug from 'debug';
 import gracefulShutdown from 'http-graceful-shutdown';
+
+import mongoose from 'mongoose';
+
+import userRouter from './routes/user';
+import roomRouter from './routes/room';
+import characterRouter from './routes/character';
 
 const app = express();
 
@@ -28,13 +34,18 @@ app.get('/api', (req, res) => {
   res.send('Express + TypeScript Server');
 });
 
+app.use('/api/user', userRouter);
+app.use('/api/room', roomRouter);
+app.use('/api/character', characterRouter);
+
 // LISTEN
 
 const port = serverSettings.port;
-const server = app.listen(port, () =>
-  debug('app:setup')(`Server is running at http://localhost:${port}`)
-);
+const server = app.listen(port, async () => {
+  await mongoose.connect('mongodb://127.0.0.1:27017/rpg');
+  debug('app:setup')(`Server is running at http://localhost:${port}`);
+});
 
 // EVENTS
 
-gracefulShutdown(server);*/
+gracefulShutdown(server);
