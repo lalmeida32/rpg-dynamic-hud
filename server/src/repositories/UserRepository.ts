@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { CharacterRepository } from './CharacterRepository';
 import { RoomRepository } from './RoomRepository';
 
 /* In memory Interface */
@@ -61,10 +62,12 @@ export const UserRepository: IUserRepository = {
   changeUser: async (oldUsername: string, user: IUser) => {
     await UserDb.updateOne({ username: oldUsername }, user).exec();
     await RoomRepository.ownerUsernameChanged(oldUsername, user.username);
+    await CharacterRepository.usernameChanged(oldUsername, user.username);
   },
 
   deleteUser: async (username: string) => {
     await UserDb.deleteOne({ username }).exec();
     await RoomRepository.ownerUsernameDeleted(username);
+    await CharacterRepository.usernameDeleted(username);
   },
 };

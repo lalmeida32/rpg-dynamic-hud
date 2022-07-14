@@ -1,23 +1,26 @@
-import { characterRepositoryMock } from 'repositories/CharacterRepository';
-import { roomRepositoryMock } from 'repositories/RoomRepository';
-import { userRepositoryMock } from 'repositories/UserRepository';
+import { IUserGetModel } from 'models/IUserGetModel';
+import { IUserRegisterModel } from 'models/IUserRegisterModel';
+import { IUserUpdateModel } from 'models/IUserUpdateModel';
+import { CharacterRepository } from 'repositories/CharacterRepository';
+import { RoomRepository } from 'repositories/RoomRepository';
+import { UserRepository } from 'repositories/UserRepository';
+import { passwordEncryptor } from 'util/password_encryptor';
 import {
   validateEmail,
   validatePassword,
   validateUsername,
 } from 'util/validation';
 
-export class UserServiceMock {
-  private static instance: UserServiceMock | null = null;
+export class UserService {
+  private static instance: UserService | null = null;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
-  public static getInstance(): UserServiceMock {
-    if (UserServiceMock.instance === null)
-      UserServiceMock.instance = new UserServiceMock();
+  public static getInstance(): UserService {
+    if (UserService.instance === null) UserService.instance = new UserService();
 
-    return UserServiceMock.instance;
+    return UserService.instance;
   }
 
   async registerUser(user: IUserRegisterModel): Promise<void> {
@@ -29,20 +32,21 @@ export class UserServiceMock {
     if (!validatePassword(user.password))
       throw new Error('Password must have at least 8 characters.');
 
-    if (userRepositoryMock.checkIfExistsByUsername(user.username))
+    if (await UserRepository.checkIfExistsByUsername(user.username))
       throw new Error('Username already exists!');
 
-    if (userRepositoryMock.findUsernameByEmail(user.email) !== null)
+    if ((await UserRepository.findUsernameByEmail(user.email)) !== null)
       throw new Error('Email already exists!');
 
-    userRepositoryMock.addUser(user.username, {
+    await UserRepository.addUser({
+      username: user.username,
       email: user.email,
-      password: user.password,
+      password: passwordEncryptor(user.password),
     });
   }
 
   async getUser(token: string, username: string): Promise<IUserGetModel> {
-    const user = userRepositoryMock.findByUsername(username);
+    const user = await UserRepository.findByUsername(username);
     if (user === null)
       throw new Error('Username not found. Critical error occurred.');
 
@@ -57,7 +61,7 @@ export class UserServiceMock {
     username: string,
     user: IUserUpdateModel
   ): Promise<void> {
-    const userFound = userRepositoryMock.findByUsername(username);
+    const userFound = await UserRepository.findByUsername(username);
 
     if (userFound === null)
       throw new Error('Username not found. Critical error occurred.');
@@ -67,13 +71,14 @@ export class UserServiceMock {
     if (!validateUsername(user.username))
       throw new Error('Username must have at least 4 characters.');
 
-    userRepositoryMock.changeUser(username, user.username, {
+    await UserRepository.changeUser(username, {
+      username: user.username,
       email: user.email,
       password: userFound.password,
     });
 
-    roomRepositoryMock.ownerUsernameChanged(username, user.username);
-    characterRepositoryMock.usernameChanged(username, user.username);
+    await RoomRepository.ownerUsernameChanged(username, user.username);
+    await CharacterRepository.usernameChanged(username, user.username);
   }
 
   async updatePassword(
@@ -82,7 +87,7 @@ export class UserServiceMock {
     oldPassword: string,
     newPassword: string
   ): Promise<void> {
-    const userFound = userRepositoryMock.findByUsername(username);
+    const userFound = await UserRepository.findByUsername(username);
 
     if (userFound === null)
       throw new Error('Username not found. Critical error occurred.');
@@ -93,7 +98,8 @@ export class UserServiceMock {
     if (!validatePassword(newPassword))
       throw new Error('Password must have at least 8 characters.');
 
-    userRepositoryMock.changeUser(username, username, {
+    await UserRepository.changeUser(username, {
+      username,
       email: userFound.email,
       password: newPassword,
     });
@@ -104,15 +110,15 @@ export class UserServiceMock {
     username: string,
     password: string
   ): Promise<void> {
-    const userFound = userRepositoryMock.findByUsername(username);
+    const userFound = await UserRepository.findByUsername(username);
 
     if (userFound === null)
       throw new Error('Username not found. Critical error occurred.');
 
     if (userFound.password !== password) throw new Error('Invalid password!');
 
-    userRepositoryMock.deleteUser(username);
-    roomRepositoryMock.ownerUsernameDeleted(username);
-    characterRepositoryMock.usernameDeleted(username);
+    await UserRepository.deleteUser(username);
+    await RoomRepository.ownerUsernameDeleted(username);
+    await CharacterRepository.usernameDeleted(username);
   }
 }

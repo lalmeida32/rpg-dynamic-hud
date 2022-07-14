@@ -1,7 +1,11 @@
-import { roomRepositoryMock } from 'repositories/RoomRepository';
-import { userRepositoryMock } from 'repositories/UserRepository';
+import { IRoomCreateModel } from 'models/IRoomCreateModel';
+import { IRoomGetModel } from 'models/IRoomGetModel';
+import { IRoomUpdateModel } from 'models/IRoomUpdateModel';
+import { RoomRepository } from 'repositories/RoomRepository';
+import { UserRepository } from 'repositories/UserRepository';
+import { TStatBarColor } from 'types/TStatBarColor';
 
-const changeRoomHandled = (
+const changeRoomHandled = async (
   username: string,
   uniqueCode: string,
   data: {
@@ -13,7 +17,7 @@ const changeRoomHandled = (
     owner?: string;
   }
 ) => {
-  const room = roomRepositoryMock.findByUniqueCode(uniqueCode);
+  const room = await RoomRepository.findByUniqueCode(uniqueCode);
   if (room === null) throw new Error('Room not found. May be deleted.');
 
   if (room.owner !== username)
@@ -21,7 +25,8 @@ const changeRoomHandled = (
       "The user cannot perform this operation. The room's owner is another one."
     );
 
-  roomRepositoryMock.changeRoom(uniqueCode, uniqueCode, {
+  await RoomRepository.changeRoom({
+    uniqueCode,
     attributes:
       data.attributes === undefined ? room.attributes : data.attributes,
     dice: data.dice === undefined ? room.dice : data.dice,
@@ -50,9 +55,7 @@ export class RoomServiceMock {
     username: string,
     room: IRoomCreateModel
   ): Promise<void> {
-    await delay();
-
-    if (!userRepositoryMock.checkIfExistsByUsername(username))
+    if (!(await UserRepository.checkIfExistsByUsername(username)))
       throw new Error('Username sent does not exist!');
 
     if (room.statBars.some(v => v[0].trim() === ''))
@@ -64,7 +67,8 @@ export class RoomServiceMock {
     if (room.dices.some(v => isNaN(v) || !Number.isInteger(v) || v <= 0))
       throw new Error('Dice must be positive integers!');
 
-    roomRepositoryMock.addRoom({
+    await RoomRepository.addRoom({
+      uniqueCode: '',
       name: room.name,
       owner: username,
       opened: false,
@@ -78,7 +82,7 @@ export class RoomServiceMock {
     username: string,
     uniqueCode: string
   ): Promise<IRoomGetModel> {
-    const room = roomRepositoryMock.findByUniqueCode(uniqueCode);
+    const room = await RoomRepository.findByUniqueCode(uniqueCode);
     if (room === null) throw new Error('Room not found. May be deleted.');
 
     return {
@@ -95,7 +99,7 @@ export class RoomServiceMock {
     username: string,
     uniqueCode: string
   ): Promise<void> {
-    changeRoomHandled(username, uniqueCode, { opened: true });
+    await changeRoomHandled(username, uniqueCode, { opened: true });
   }
 
   async closeRoom(
@@ -103,7 +107,7 @@ export class RoomServiceMock {
     username: string,
     uniqueCode: string
   ): Promise<void> {
-    changeRoomHandled(username, uniqueCode, { opened: false });
+    await changeRoomHandled(username, uniqueCode, { opened: false });
   }
 
   async updateRoom(
@@ -112,7 +116,7 @@ export class RoomServiceMock {
     uniqueCode: string,
     room: IRoomUpdateModel
   ): Promise<void> {
-    changeRoomHandled(username, uniqueCode, {
+    await changeRoomHandled(username, uniqueCode, {
       attributes: room.attributes,
       dice: room.dices,
       name: room.name,

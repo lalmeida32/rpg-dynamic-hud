@@ -1,22 +1,22 @@
-import { userRepositoryMock } from 'repositories/UserRepository';
+import { UserRepository } from 'repositories/UserRepository';
 import { validateEmail } from 'util/validation';
 
-export class EmailServiceMock {
-  private static instance: EmailServiceMock | null = null;
+export class EmailService {
+  private static instance: EmailService | null = null;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
-  public static getInstance(): EmailServiceMock {
-    if (EmailServiceMock.instance === null)
-      EmailServiceMock.instance = new EmailServiceMock();
+  public static getInstance(): EmailService {
+    if (EmailService.instance === null)
+      EmailService.instance = new EmailService();
 
-    return EmailServiceMock.instance;
+    return EmailService.instance;
   }
 
   async sendResetPasswordEmail(email: string): Promise<void> {
     if (!validateEmail(email)) throw new Error('Invalid Email.');
-    if (userRepositoryMock.findUsernameByEmail(email) === null)
+    if ((await UserRepository.findUsernameByEmail(email)) === null)
       throw new Error('Email not found!');
   }
 }

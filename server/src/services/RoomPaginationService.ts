@@ -1,13 +1,14 @@
-import { IRoomMock, roomRepositoryMock } from 'repositories/RoomRepository';
+import { IRoomCardModel } from 'models/IRoomCardModel';
+import { IRoom, RoomRepository } from 'repositories/RoomRepository';
 
 const generatePage = (roomCodes: string[], page: number): IRoomCardModel[] => {
   return roomCodes
     .slice((page - 1) * 6, page * 6)
     .map(
       id =>
-        [id, roomRepositoryMock.findByUniqueCode(id)] as [
+        [id, await RoomRepository.findByUniqueCode(id)] as [
           string,
-          IRoomMock | null
+          IRoom | null
         ]
     )
     .filter(v => v[1] !== null)
@@ -25,17 +26,17 @@ const generatePage = (roomCodes: string[], page: number): IRoomCardModel[] => {
 const countRoomPages = (roomsCount: number): number =>
   roomsCount !== 0 ? Math.ceil(roomsCount / 6) : 1;
 
-export class RoomPaginationServiceMock {
-  private static instance: RoomPaginationServiceMock | null = null;
+export class RoomPaginationService {
+  private static instance: RoomPaginationService | null = null;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
-  public static getInstance(): RoomPaginationServiceMock {
-    if (RoomPaginationServiceMock.instance === null)
-      RoomPaginationServiceMock.instance = new RoomPaginationServiceMock();
+  public static getInstance(): RoomPaginationService {
+    if (RoomPaginationService.instance === null)
+      RoomPaginationService.instance = new RoomPaginationService();
 
-    return RoomPaginationServiceMock.instance;
+    return RoomPaginationService.instance;
   }
 
   async roomCardPagination(
@@ -45,9 +46,9 @@ export class RoomPaginationServiceMock {
   ): Promise<[number, IRoomCardModel[]]> {
     if (isNaN(page) || !Number.isInteger(page) || page <= 0) page = 1;
 
-    const roomCodes = roomRepositoryMock
-      .findAllUniqueCodes()
-      .filter(v => roomRepositoryMock.findByUniqueCode(v)?.owner === username);
+    const roomCodes = RoomRepository.findAllUniqueCodes().filter(
+      v => RoomRepository.findByUniqueCode(v)?.owner === username
+    );
 
     return [countRoomPages(roomCodes.length), generatePage(roomCodes, page)];
   }
@@ -63,28 +64,23 @@ export class RoomPaginationServiceMock {
     // Find by unique code
     if (query.startsWith('#')) {
       const uniqueCode = query.slice(1);
-      if (roomRepositoryMock.checkIfExistsByUniqueCode(uniqueCode))
+      if (await RoomRepository.checkIfExistsByUniqueCode(uniqueCode))
         roomCodes.push(uniqueCode);
     }
 
     // Find by owner
     else if (query.startsWith('@')) {
       const owner = query.slice(1);
-      roomCodes = roomRepositoryMock
-        .findAllUniqueCodes()
-        .filter(v => roomRepositoryMock.findByUniqueCode(v)?.owner === owner);
+      roomCodes = RoomRepository.findAllUniqueCodes().filter(
+        v => RoomRepository.findByUniqueCode(v)?.owner === owner
+      );
     }
 
     // Find by name
     else {
-      roomCodes = roomRepositoryMock
-        .findAllUniqueCodes()
-        .filter(v =>
-          roomRepositoryMock
-            .findByUniqueCode(v)
-            ?.name.toLowerCase()
-            .includes(query)
-        );
+      roomCodes = RoomRepository.findAllUniqueCodes().filter(v =>
+        RoomRepository.findByUniqueCode(v)?.name.toLowerCase().includes(query)
+      );
     }
 
     return [countRoomPages(roomCodes.length), generatePage(roomCodes, page)];
