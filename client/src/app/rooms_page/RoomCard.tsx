@@ -71,7 +71,7 @@ export const RoomCard: React.FC<IRoomCardProps> = props => {
       <Button
         text="Enter"
         disabled={!props.info.opened}
-        onClick={() => navigate('/room/')}
+        onClick={() => navigate(`/room/${props.info.uniqueCode}`)}
       />
     </div>
   );
