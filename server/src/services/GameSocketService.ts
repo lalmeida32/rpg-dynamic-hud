@@ -1,3 +1,5 @@
+import { randomInteger } from 'util/random';
+
 export class GameSocketService {
   private static instance: GameSocketService | null = null;
 
@@ -11,7 +13,7 @@ export class GameSocketService {
     return GameSocketService.instance;
   }
 
-  async rollDice(value: number): Promise<number> {
-    return value;
+  rollDice(diceCap: number): number {
+    return randomInteger(1, diceCap);
   }
 }
