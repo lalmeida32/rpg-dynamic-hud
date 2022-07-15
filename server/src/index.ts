@@ -15,6 +15,7 @@ import UserRouter from './routes/UserRoutes';
 import AuthRouter from './routes/AuthRoutes';
 import RoomRouter from './routes/RoomRoutes';
 import EmailRouter from './routes/EmailRoutes';
+import RoomPaginationRouter from './routes/RoomPaginationRoutes';
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use('/api/users', UserRouter);
 app.use('/api/auth', AuthRouter);
 app.use('/api/rooms', RoomRouter);
 app.use('/api/emails', EmailRouter);
+app.use('/api/roompages', RoomPaginationRouter);
 
 // LISTEN
 
