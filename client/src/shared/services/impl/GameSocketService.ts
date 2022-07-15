@@ -3,7 +3,7 @@ import { IGameSocketService } from '../IGameSocketService';
 
 export class GameSocketService implements IGameSocketService {
   private static instance: GameSocketService | null = null;
-  private static socket: Socket | null = null;
+  private socket: Socket | null = null;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
@@ -16,15 +16,15 @@ export class GameSocketService implements IGameSocketService {
   }
 
   connect(): Socket {
-    if (GameSocketService.socket !== null) return GameSocketService.socket;
-    GameSocketService.socket = io('ws://localhost:4000/');
+    if (this.socket !== null) return this.socket;
+    this.socket = io('ws://localhost:4000/');
 
-    return GameSocketService.socket;
+    return this.socket;
   }
 
   disconnect(): void {
-    if (GameSocketService.socket === null) return;
-    GameSocketService.socket?.disconnect();
-    GameSocketService.socket = null;
+    if (this.socket === null) return;
+    this.socket?.disconnect();
+    this.socket = null;
   }
 }

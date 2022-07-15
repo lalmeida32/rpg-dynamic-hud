@@ -8,7 +8,10 @@ export const DiceChooser = () => {
 
   return (
     <div className={classes.dice_chooser}>
-      <Button text="d6" onClick={() => gameSocket.socket?.emit('dice', 6)} />
+      <Button
+        text="d6"
+        onClick={() => gameSocket.socket?.emit('rollDice', 6)}
+      />
       <Button text="d8" />
       <Button text="d12" />
       <Button text="d20" />

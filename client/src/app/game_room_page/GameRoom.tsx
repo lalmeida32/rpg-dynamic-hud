@@ -10,6 +10,7 @@ import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { RoomConfigAlertContent } from 'app/rooms_page/RoomConfigAlertContent';
 import { GameSocketContext } from 'shared/contexts/GameSocket';
 import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
+import { UserLoginContext } from 'shared/contexts/UserLogin';
 
 export const GameRoom = () => {
   const navigate = useNavigate();
@@ -17,13 +18,17 @@ export const GameRoom = () => {
   const params = useParams();
   const [roomCode, setRoomCode] = useState<string | null>(null);
   const gameSocket = useContext(GameSocketContext);
+  const userLogin = useContext(UserLoginContext);
 
   useEffect(() => {
     gameSocket.connect();
-    gameSocket.socket?.on('diceResult', result =>
+    gameSocket.socket?.emit('joinRoom', [userLogin.token, roomCode]);
+
+    gameSocket.socket?.on('rollDiceResult', result =>
       currentAlert.setAlert(<DefaultAlertContent text={result} />)
     );
-  }, [gameSocket, currentAlert]);
+    gameSocket.socket?.on('joinRoomResult', result => console.log(result));
+  }, [gameSocket, currentAlert, roomCode, userLogin]);
 
   useEffect(() => {
     setRoomCode(params.code ? params.code : null);
