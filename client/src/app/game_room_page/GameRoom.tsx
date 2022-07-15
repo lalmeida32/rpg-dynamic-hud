@@ -23,7 +23,6 @@ export const GameRoom = () => {
     <div className={classes.game_room}>
       {roomCode !== null ? (
         <React.Fragment>
-          {' '}
           <img
             src={door}
             className={classes.leave_button}

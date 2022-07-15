@@ -68,7 +68,7 @@ export const Rooms = () => {
             );
           }
         });
-  }, [userLogin, currentAlert, query, pages, currentPage]);
+  }, [currentAlert, currentPage, query, userLogin.token, userLogin.username]);
 
   /* VIEW */
   return (
