@@ -21,8 +21,8 @@ router.get('/:page', async (req: express.Request, res: express.Response) => {
 router.get(
   '/:page/filter',
   async (req: express.Request, res: express.Response) => {
-    const query = req.header('x-query');
     try {
+      const query = req.header('x-query');
       const response = await roomPaginationService.roomCardPaginationWithSearch(
         getToken(req),
         query ? query : '',

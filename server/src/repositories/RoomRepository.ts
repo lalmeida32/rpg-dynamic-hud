@@ -60,6 +60,7 @@ const RoomDb = mongoose.model('Room', roomSchema);
 /* Repository */
 interface IRoomRepository {
   checkIfExistsByUniqueCode: (uniqueCode: string) => Promise<boolean>;
+  findAll: () => Promise<IRoom[]>;
   findAllUniqueCodes: () => Promise<string[]>;
   findByUniqueCode: (uniqueCode: string) => Promise<IRoom | null>;
   addRoom: (room: IRoom) => Promise<void>;
@@ -83,6 +84,10 @@ const copyRoom = (room: IRoom): IRoom => {
 export const RoomRepository: IRoomRepository = {
   checkIfExistsByUniqueCode: async (uniqueCode: string) => {
     return (await RoomDb.findOne({ uniqueCode }).exec()) !== null;
+  },
+
+  findAll: async () => {
+    return await RoomDb.find({}).exec();
   },
 
   findAllUniqueCodes: async () => {

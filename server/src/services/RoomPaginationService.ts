@@ -6,16 +6,14 @@ const generatePage = async (
   roomCodes: string[],
   page: number
 ): Promise<IRoomCardModel[]> => {
-  const mappedCodes = await Promise.all(
-    roomCodes
-      .slice((page - 1) * 6, page * 6)
-      .map(
-        async id =>
-          [id, await RoomRepository.findByUniqueCode(id)] as [
-            string,
-            IRoom | null
-          ]
-      )
+  const slicedCodes = roomCodes.slice((page - 1) * 6, page * 6);
+
+  const rooms = [];
+  for (const code of slicedCodes)
+    rooms.push(await RoomRepository.findByUniqueCode(code));
+
+  const mappedCodes = rooms.map(
+    r => [r?.uniqueCode, r] as [string, IRoom | null]
   );
 
   return mappedCodes
@@ -54,14 +52,9 @@ export class RoomPaginationService {
     const username = validateToken(token);
     if (isNaN(page) || !Number.isInteger(page) || page <= 0) page = 1;
 
-    const roomCodes = await Promise.all(
-      (
-        await RoomRepository.findAllUniqueCodes()
-      ).filter(
-        async v =>
-          (await RoomRepository.findByUniqueCode(v))?.owner === username
-      )
-    );
+    const roomCodes = (await RoomRepository.findAll())
+      .filter(v => v.owner === username)
+      .map(v => v.uniqueCode);
 
     return [
       countRoomPages(roomCodes.length),
@@ -88,26 +81,16 @@ export class RoomPaginationService {
     // Find by owner
     else if (query.startsWith('@')) {
       const owner = query.slice(1);
-      roomCodes = await Promise.all(
-        (
-          await RoomRepository.findAllUniqueCodes()
-        ).filter(
-          async v => (await RoomRepository.findByUniqueCode(v))?.owner === owner
-        )
-      );
+      roomCodes = (await RoomRepository.findAll())
+        .filter(v => v.owner === owner)
+        .map(v => v.uniqueCode);
     }
 
     // Find by name
     else {
-      roomCodes = await Promise.all(
-        (
-          await RoomRepository.findAllUniqueCodes()
-        ).filter(async v =>
-          (await RoomRepository.findByUniqueCode(v))?.name
-            .toLowerCase()
-            .includes(query)
-        )
-      );
+      roomCodes = (await RoomRepository.findAll())
+        .filter(v => v.name.toLowerCase().includes(query))
+        .map(v => v.uniqueCode);
     }
 
     return [
