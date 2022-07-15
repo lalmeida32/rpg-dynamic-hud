@@ -8,12 +8,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import React, { useContext, useEffect, useState } from 'react';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { RoomConfigAlertContent } from 'app/rooms_page/RoomConfigAlertContent';
+import { services } from 'shared/services/services';
 
 export const GameRoom = () => {
   const navigate = useNavigate();
   const currentAlert = useContext(CurrentAlertContext);
   const params = useParams();
   const [roomCode, setRoomCode] = useState<string | null>(null);
+
+  useEffect(() => {
+    services.gameSocket.connect();
+  }, []);
 
   useEffect(() => {
     setRoomCode(params.code ? params.code : null);
@@ -26,7 +31,10 @@ export const GameRoom = () => {
           <img
             src={door}
             className={classes.leave_button}
-            onClick={() => navigate('/rooms/')}
+            onClick={() => {
+              services.gameSocket.disconnect();
+              navigate('/rooms/');
+            }}
           />
           <img
             src={gear}

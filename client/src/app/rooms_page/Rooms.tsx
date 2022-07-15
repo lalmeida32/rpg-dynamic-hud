@@ -23,7 +23,6 @@ export const Rooms = () => {
   const currentAlert = useContext(CurrentAlertContext);
 
   /* LOGIC */
-
   const handleSearchForm = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();

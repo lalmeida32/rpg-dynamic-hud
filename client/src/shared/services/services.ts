@@ -8,6 +8,8 @@ import { AuthService } from './impl/AuthService';
 import { RoomPaginationService } from './impl/RoomPaginationService';
 import { RoomService } from './impl/RoomService';
 import { UserService } from './impl/UserService';
+import { GameSocketService } from './impl/GameSocketService';
+import { IGameSocketService } from './IGameSocketService';
 
 interface IServices {
   auth: IAuthService;
@@ -15,6 +17,7 @@ interface IServices {
   user: IUserService;
   email: IEmailService;
   room: IRoomService;
+  gameSocket: IGameSocketService;
 }
 
 export const services: IServices = {
@@ -23,4 +26,5 @@ export const services: IServices = {
   user: UserService.getInstance(),
   email: EmailService.getInstance(),
   room: RoomService.getInstance(),
+  gameSocket: GameSocketService.getInstance(),
 };
