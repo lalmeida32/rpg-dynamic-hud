@@ -1,13 +1,13 @@
 import { IAuthService } from './IAuthService';
 import { IEmailService } from './IEmailService';
+import { EmailService } from './impl/EmailService';
 import { IRoomPaginationService } from './IRoomPaginationService';
 import { IRoomService } from './IRoomService';
 import { IUserService } from './IUserService';
 import { AuthServiceMock } from './mock/AuthServiceMock';
-import { EmailServiceMock } from './mock/EmailServiceMock';
 import { RoomPaginationServiceMock } from './mock/RoomPaginationServiceMock';
 import { RoomServiceMock } from './mock/RoomServiceMock';
-import { UserServiceMock } from './mock/UserServiceMock';
+import { UserService } from './impl/UserService';
 
 interface IServices {
   auth: IAuthService;
@@ -20,7 +20,7 @@ interface IServices {
 export const services: IServices = {
   auth: AuthServiceMock.getInstance(),
   roomPagination: RoomPaginationServiceMock.getInstance(),
-  user: UserServiceMock.getInstance(),
-  email: EmailServiceMock.getInstance(),
+  user: UserService.getInstance(),
+  email: EmailService.getInstance(),
   room: RoomServiceMock.getInstance(),
 };
