@@ -6,6 +6,7 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import debug from 'debug';
+import cors from 'cors';
 import gracefulShutdown from 'http-graceful-shutdown';
 
 import mongoose from 'mongoose';
@@ -22,6 +23,7 @@ debug('app:setup')(`Starting ${serverSettings.node_env} environment debug`);
 // MIDDLEWARES
 
 app.use(helmet());
+app.use(cors());
 if (serverSettings.morgan !== 'none') {
   debug('app:setup')(`Morgan enabled with ${serverSettings.morgan}`);
   app.use(morgan(serverSettings.morgan));

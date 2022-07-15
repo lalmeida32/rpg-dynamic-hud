@@ -19,12 +19,13 @@ router.get('/:page', async (req: express.Request, res: express.Response) => {
 });
 
 router.get(
-  '/:page/:query',
+  '/:page/filter',
   async (req: express.Request, res: express.Response) => {
+    const query = req.header('x-query');
     try {
       const response = await roomPaginationService.roomCardPaginationWithSearch(
         getToken(req),
-        req.params.query,
+        query ? query : '',
         Number(req.params.page)
       );
       res.send(response);

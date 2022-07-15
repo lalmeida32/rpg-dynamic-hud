@@ -100,7 +100,7 @@ export class UserService {
     await UserRepository.changeUser(username, {
       username,
       email: userFound.email,
-      password: newPassword,
+      password: passwordEncryptor(newPassword),
     });
   }
 
