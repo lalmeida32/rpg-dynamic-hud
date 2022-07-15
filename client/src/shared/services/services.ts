@@ -1,13 +1,15 @@
 import { IAuthService } from './IAuthService';
 import { IEmailService } from './IEmailService';
+import { EmailService } from './impl/EmailService';
 import { IRoomPaginationService } from './IRoomPaginationService';
 import { IRoomService } from './IRoomService';
 import { IUserService } from './IUserService';
-import { AuthServiceMock } from './mock/AuthServiceMock';
-import { EmailServiceMock } from './mock/EmailServiceMock';
-import { RoomPaginationServiceMock } from './mock/RoomPaginationServiceMock';
-import { RoomServiceMock } from './mock/RoomServiceMock';
-import { UserServiceMock } from './mock/UserServiceMock';
+import { AuthService } from './impl/AuthService';
+import { RoomPaginationService } from './impl/RoomPaginationService';
+import { RoomService } from './impl/RoomService';
+import { UserService } from './impl/UserService';
+import { GameSocketService } from './impl/GameSocketService';
+import { IGameSocketService } from './IGameSocketService';
 
 interface IServices {
   auth: IAuthService;
@@ -15,12 +17,14 @@ interface IServices {
   user: IUserService;
   email: IEmailService;
   room: IRoomService;
+  gameSocket: IGameSocketService;
 }
 
 export const services: IServices = {
-  auth: AuthServiceMock.getInstance(),
-  roomPagination: RoomPaginationServiceMock.getInstance(),
-  user: UserServiceMock.getInstance(),
-  email: EmailServiceMock.getInstance(),
-  room: RoomServiceMock.getInstance(),
+  auth: AuthService.getInstance(),
+  roomPagination: RoomPaginationService.getInstance(),
+  user: UserService.getInstance(),
+  email: EmailService.getInstance(),
+  room: RoomService.getInstance(),
+  gameSocket: GameSocketService.getInstance(),
 };

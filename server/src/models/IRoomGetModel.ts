@@ -1,4 +1,4 @@
-import { TStatBarColor } from 'shared/types/TStatBarColor';
+import { TStatBarColor } from 'types/TStatBarColor';
 
 export interface IRoomGetModel {
   uniqueCode: string;

@@ -23,7 +23,6 @@ export const Rooms = () => {
   const currentAlert = useContext(CurrentAlertContext);
 
   /* LOGIC */
-
   const handleSearchForm = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -68,7 +67,7 @@ export const Rooms = () => {
             );
           }
         });
-  }, [userLogin, currentAlert, query, pages, currentPage]);
+  }, [currentAlert, currentPage, query, userLogin.token, userLogin.username]);
 
   /* VIEW */
   return (

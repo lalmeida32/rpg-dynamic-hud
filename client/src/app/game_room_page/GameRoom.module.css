@@ -10,27 +10,3 @@
   display: flex;
   flex-direction: column;
 }
-
-.leave_button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 60px;
-}
-
-.leave_button:hover {
-  opacity: 0.7;
-  cursor: pointer;
-}
-
-.config_button {
-  position: absolute;
-  top: 10px;
-  right: 70px;
-  width: 60px;
-}
-
-.config_button:hover {
-  opacity: 0.7;
-  cursor: pointer;
-}
