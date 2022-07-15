@@ -1,4 +1,6 @@
+import { Socket } from 'socket.io-client';
+
 export interface IGameSocketService {
-  connect: () => void;
+  connect: () => Socket;
   disconnect: () => void;
 }

@@ -15,13 +15,16 @@ export class GameSocketService implements IGameSocketService {
     return GameSocketService.instance;
   }
 
-  connect(): void {
-    if (GameSocketService.socket !== null) return;
+  connect(): Socket {
+    if (GameSocketService.socket !== null) return GameSocketService.socket;
     GameSocketService.socket = io('ws://localhost:4000/');
+
+    return GameSocketService.socket;
   }
 
   disconnect(): void {
     if (GameSocketService.socket === null) return;
     GameSocketService.socket?.disconnect();
+    GameSocketService.socket = null;
   }
 }
