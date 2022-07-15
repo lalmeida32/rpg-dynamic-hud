@@ -23,12 +23,15 @@ export const GameRoom = () => {
   useEffect(() => {
     gameSocket.connect();
     gameSocket.socket?.emit('joinRoom', [userLogin.token, roomCode]);
+    gameSocket.socket?.on('joinRoomResult', result => console.log(result));
+    gameSocket.socket?.on('disconnectResult', result => console.log(result));
+  }, [gameSocket, userLogin, roomCode]);
 
+  useEffect(() => {
     gameSocket.socket?.on('rollDiceResult', result =>
       currentAlert.setAlert(<DefaultAlertContent text={result} />)
     );
-    gameSocket.socket?.on('joinRoomResult', result => console.log(result));
-  }, [gameSocket, currentAlert, roomCode, userLogin]);
+  }, [gameSocket, currentAlert]);
 
   useEffect(() => {
     setRoomCode(params.code ? params.code : null);
