@@ -1,66 +1,72 @@
 import express from 'express';
-
-import { roomCreate, roomFind } from 'services/room';
-import { userJoinRoom, userLeaveRoom } from 'services/user';
+import { RoomService } from 'services/RoomService';
+import { getToken } from 'util/auth';
 
 const router = express.Router();
 
+const roomService = RoomService.getInstance();
+
 router.get('/:code', async (req: express.Request, res: express.Response) => {
-  const room = await roomFind(parseInt(req.params.code));
-
-  if (!room) {
-    res.status(404).send({ status: 'Room not found' });
-    return;
+  try {
+    const response = await roomService.getRoom(getToken(req), req.params.code);
+    res.send(response);
+  } catch (e) {
+    if (e instanceof Error) res.status(404).send({ message: e.message });
   }
-
-  res.send({
-    code: room.code,
-    owner: room.owner,
-    opened: room.opened,
-    statusBars: room.statusBars,
-    dices: room.dices,
-    characters: room.characters,
-    attributes: room.attributes,
-  });
 });
 
-router.put(
-  '/:code/join',
-  async (req: express.Request, res: express.Response) => {
-    try {
-      await userJoinRoom(req.body.username, parseInt(req.params.code));
-      res.send('Joined!');
-    } catch (e) {
-      res.status(400).send('Could not join this room.');
-    }
-  }
-);
-
-router.put(
-  '/:code/leave',
-  async (req: express.Request, res: express.Response) => {
-    try {
-      await userLeaveRoom(req.body.username, parseInt(req.params.code));
-      res.send('Left!');
-    } catch (e) {
-      res.status(400).send('Could not left this room.');
-    }
-  }
-);
-
-router.post('/create', async (req: express.Request, res: express.Response) => {
-  console.log('req', req.body);
+router.put('/:code', async (req: express.Request, res: express.Response) => {
   try {
-    const roomId = await roomCreate(
-      req.body.username,
-      req.body.name,
-      req.body.bars,
-      req.body.attrs,
-      req.body.dices
+    const response = await roomService.updateRoom(
+      getToken(req),
+      req.params.code,
+      req.body.roomInfo
     );
-    res.send({ status: 'Room Created', roomId: roomId });
+    res.send(response);
   } catch (e) {
-    res.status(400).send({ status: 'Invalid Paramters!' });
+    if (e instanceof Error) res.status(404).send({ message: e.message });
+  }
+});
+
+router.patch(
+  '/:code/open',
+  async (req: express.Request, res: express.Response) => {
+    try {
+      const response = await roomService.openRoom(
+        getToken(req),
+        req.params.code
+      );
+      res.send(response);
+    } catch (e) {
+      if (e instanceof Error) res.status(404).send({ message: e.message });
+    }
+  }
+);
+
+router.patch(
+  '/:code/close',
+  async (req: express.Request, res: express.Response) => {
+    try {
+      const response = await roomService.closeRoom(
+        getToken(req),
+        req.params.code
+      );
+      res.send(response);
+    } catch (e) {
+      if (e instanceof Error) res.status(404).send({ message: e.message });
+    }
+  }
+);
+
+router.post('/', async (req: express.Request, res: express.Response) => {
+  try {
+    const response = await roomService.createRoom(
+      getToken(req),
+      req.body.roomInfo
+    );
+    res.send(response);
+  } catch (e) {
+    if (e instanceof Error) res.status(404).send({ message: e.message });
   }
 });
 

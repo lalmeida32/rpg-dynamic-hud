@@ -4,6 +4,7 @@ import { IUserUpdateModel } from 'models/IUserUpdateModel';
 import { CharacterRepository } from 'repositories/CharacterRepository';
 import { RoomRepository } from 'repositories/RoomRepository';
 import { UserRepository } from 'repositories/UserRepository';
+import { validateToken } from 'util/auth';
 import { passwordEncryptor } from 'util/password_encryptor';
 import {
   validateEmail,
@@ -45,7 +46,8 @@ export class UserService {
     });
   }
 
-  async getUser(token: string, username: string): Promise<IUserGetModel> {
+  async getUser(token: string): Promise<IUserGetModel> {
+    const username = validateToken(token);
     const user = await UserRepository.findByUsername(username);
     if (user === null)
       throw new Error('Username not found. Critical error occurred.');
@@ -56,11 +58,8 @@ export class UserService {
     };
   }
 
-  async updateUser(
-    token: string,
-    username: string,
-    user: IUserUpdateModel
-  ): Promise<void> {
+  async updateUser(token: string, user: IUserUpdateModel): Promise<void> {
+    const username = validateToken(token);
     const userFound = await UserRepository.findByUsername(username);
 
     if (userFound === null)
@@ -83,10 +82,10 @@ export class UserService {
 
   async updatePassword(
     token: string,
-    username: string,
     oldPassword: string,
     newPassword: string
   ): Promise<void> {
+    const username = validateToken(token);
     const userFound = await UserRepository.findByUsername(username);
 
     if (userFound === null)
@@ -105,11 +104,8 @@ export class UserService {
     });
   }
 
-  async deleteAccount(
-    token: string,
-    username: string,
-    password: string
-  ): Promise<void> {
+  async deleteAccount(token: string, password: string): Promise<void> {
+    const username = validateToken(token);
     const userFound = await UserRepository.findByUsername(username);
 
     if (userFound === null)

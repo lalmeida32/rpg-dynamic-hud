@@ -1,4 +1,6 @@
 import { UserRepository } from 'repositories/UserRepository';
+import { passwordEncryptor } from 'util/password_encryptor';
+import { generateToken } from 'util/auth';
 
 export class AuthService {
   private static instance: AuthService | null = null;
@@ -24,8 +26,9 @@ export class AuthService {
     if (username !== null) user = await UserRepository.findByUsername(username);
     if (username === null || user === null) throw new Error('Invalid user!');
 
-    if (user.password !== password) throw new Error('Invalid password!');
+    if (user.password !== passwordEncryptor(password))
+      throw new Error('Invalid password!');
 
-    return [username, 'tokenstring'];
+    return [username, generateToken(username)];
   }
 }

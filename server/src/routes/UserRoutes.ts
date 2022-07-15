@@ -1,36 +1,76 @@
 import express from 'express';
-
-import { userCreate, userFind, userLogin } from 'services/user';
+import { UserService } from 'services/UserService';
+import { getToken } from 'util/auth';
 
 const router = express.Router();
+
+const userService = UserService.getInstance();
 
 router.get(
   '/:username',
   async (req: express.Request, res: express.Response) => {
-    const user = await userFind(req.params.username);
-    if (!user) {
-      res.status(404).send({ status: 'User not found' });
-      return;
+    try {
+      const response = await userService.getUser(getToken(req));
+      res.send(response);
+    } catch (e) {
+      if (e instanceof Error) res.status(404).send({ message: e.message });
     }
-    res.send({
-      username: user.username,
-      email: user.email,
-      rooms: user.roomsCodes,
-    });
   }
 );
 
-router.post('/create', async (req: express.Request, res: express.Response) => {
-  console.log('req', req.body);
-  await userCreate(req.body.username, req.body.email, req.body.password);
+router.patch(
+  '/:username/info',
+  async (req: express.Request, res: express.Response) => {
+    try {
+      const response = await userService.updateUser(
+        getToken(req),
+        req.body.userInfo
+      );
+      res.send(response);
+    } catch (e) {
+      if (e instanceof Error) res.status(404).send({ message: e.message });
+    }
+  }
+);
 
-  res.send({ status: 'User Created' });
+router.patch(
+  '/:username/password',
+  async (req: express.Request, res: express.Response) => {
+    try {
+      const response = await userService.updatePassword(
+        getToken(req),
+        req.body.oldPassword,
+        req.body.newPassword
+      );
+      res.send(response);
+    } catch (e) {
+      if (e instanceof Error) res.status(404).send({ message: e.message });
+    }
+  }
+);
+
+router.post('/', async (req: express.Request, res: express.Response) => {
+  try {
+    const response = await userService.registerUser(req.body.userInfo);
+    res.send(response);
+  } catch (e) {
+    if (e instanceof Error) res.status(404).send({ message: e.message });
+  }
 });
 
-router.post('/login', async (req: express.Request, res: express.Response) => {
-  const result = await userLogin(req.body.username, req.body.password);
-  if (result) res.status(200).send({ status: 'Authorized' });
-  else res.status(401).send({ status: 'Login Failed' });
-});
+router.delete(
+  '/:username',
+  async (req: express.Request, res: express.Response) => {
+    try {
+      const response = await userService.deleteAccount(
+        getToken(req),
+        req.body.password
+      );
+      res.send(response);
+    } catch (e) {
+      if (e instanceof Error) res.status(404).send({ message: e.message });
+    }
+  }
+);
 
 export default router;

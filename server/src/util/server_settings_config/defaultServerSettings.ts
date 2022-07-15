@@ -10,4 +10,5 @@ export const defaultServerSettings: Readonly<IServerSettings> = {
   database_port: 3306,
   database_username: 'root',
   database_password: '',
+  jwt_privatekey: 'password',
 };

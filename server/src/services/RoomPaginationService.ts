@@ -1,16 +1,24 @@
 import { IRoomCardModel } from 'models/IRoomCardModel';
 import { IRoom, RoomRepository } from 'repositories/RoomRepository';
+import { validateToken } from 'util/auth';
 
-const generatePage = (roomCodes: string[], page: number): IRoomCardModel[] => {
-  return roomCodes
-    .slice((page - 1) * 6, page * 6)
-    .map(
-      id =>
-        [id, await RoomRepository.findByUniqueCode(id)] as [
-          string,
-          IRoom | null
-        ]
-    )
+const generatePage = async (
+  roomCodes: string[],
+  page: number
+): Promise<IRoomCardModel[]> => {
+  const mappedCodes = await Promise.all(
+    roomCodes
+      .slice((page - 1) * 6, page * 6)
+      .map(
+        async id =>
+          [id, await RoomRepository.findByUniqueCode(id)] as [
+            string,
+            IRoom | null
+          ]
+      )
+  );
+
+  return mappedCodes
     .filter(v => v[1] !== null)
     .map<IRoomCardModel>(v => ({
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -41,16 +49,24 @@ export class RoomPaginationService {
 
   async roomCardPagination(
     token: string,
-    username: string,
     page: number
   ): Promise<[number, IRoomCardModel[]]> {
+    const username = validateToken(token);
     if (isNaN(page) || !Number.isInteger(page) || page <= 0) page = 1;
 
-    const roomCodes = RoomRepository.findAllUniqueCodes().filter(
-      v => RoomRepository.findByUniqueCode(v)?.owner === username
+    const roomCodes = await Promise.all(
+      (
+        await RoomRepository.findAllUniqueCodes()
+      ).filter(
+        async v =>
+          (await RoomRepository.findByUniqueCode(v))?.owner === username
+      )
     );
 
-    return [countRoomPages(roomCodes.length), generatePage(roomCodes, page)];
+    return [
+      countRoomPages(roomCodes.length),
+      await generatePage(roomCodes, page),
+    ];
   }
 
   async roomCardPaginationWithSearch(
@@ -58,6 +74,7 @@ export class RoomPaginationService {
     query: string,
     page: number
   ): Promise<[number, IRoomCardModel[]]> {
+    validateToken(token);
     let roomCodes = [];
     query = query.trim().toLowerCase();
 
@@ -71,18 +88,31 @@ export class RoomPaginationService {
     // Find by owner
     else if (query.startsWith('@')) {
       const owner = query.slice(1);
-      roomCodes = RoomRepository.findAllUniqueCodes().filter(
-        v => RoomRepository.findByUniqueCode(v)?.owner === owner
+      roomCodes = await Promise.all(
+        (
+          await RoomRepository.findAllUniqueCodes()
+        ).filter(
+          async v => (await RoomRepository.findByUniqueCode(v))?.owner === owner
+        )
       );
     }
 
     // Find by name
     else {
-      roomCodes = RoomRepository.findAllUniqueCodes().filter(v =>
-        RoomRepository.findByUniqueCode(v)?.name.toLowerCase().includes(query)
+      roomCodes = await Promise.all(
+        (
+          await RoomRepository.findAllUniqueCodes()
+        ).filter(async v =>
+          (await RoomRepository.findByUniqueCode(v))?.name
+            .toLowerCase()
+            .includes(query)
+        )
       );
     }
 
-    return [countRoomPages(roomCodes.length), generatePage(roomCodes, page)];
+    return [
+      countRoomPages(roomCodes.length),
+      await generatePage(roomCodes, page),
+    ];
   }
 }

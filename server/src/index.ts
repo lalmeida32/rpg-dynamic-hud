@@ -9,13 +9,11 @@ import debug from 'debug';
 import gracefulShutdown from 'http-graceful-shutdown';
 
 import mongoose from 'mongoose';
-import { CharacterRepository } from 'repositories/CharacterRepository';
-import { UserRepository } from 'repositories/UserRepository';
-import { RoomRepository } from 'repositories/RoomRepository';
 
-// import userRouter from './routes/user';
-// import roomRouter from './routes/room';
-// import characterRouter from './routes/character';
+import UserRouter from './routes/UserRoutes';
+import AuthRouter from './routes/AuthRoutes';
+import RoomRouter from './routes/RoomRoutes';
+import EmailRouter from './routes/EmailRoutes';
 
 const app = express();
 
@@ -37,9 +35,10 @@ app.get('/api', (req, res) => {
   res.send('Express + TypeScript Server');
 });
 
-// app.use('/api/user', userRouter);
-// app.use('/api/room', roomRouter);
-// app.use('/api/character', characterRouter);
+app.use('/api/users', UserRouter);
+app.use('/api/auth', AuthRouter);
+app.use('/api/rooms', RoomRouter);
+app.use('/api/emails', EmailRouter);
 
 // LISTEN
 
