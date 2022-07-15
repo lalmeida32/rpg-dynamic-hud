@@ -91,7 +91,7 @@ export class UserService {
     if (userFound === null)
       throw new Error('Username not found. Critical error occurred.');
 
-    if (userFound.password !== oldPassword)
+    if (userFound.password !== passwordEncryptor(oldPassword))
       throw new Error('Invalid password!');
 
     if (!validatePassword(newPassword))
@@ -111,7 +111,8 @@ export class UserService {
     if (userFound === null)
       throw new Error('Username not found. Critical error occurred.');
 
-    if (userFound.password !== password) throw new Error('Invalid password!');
+    if (userFound.password !== passwordEncryptor(password))
+      throw new Error('Invalid password!');
 
     await UserRepository.deleteUser(username);
     await RoomRepository.ownerUsernameDeleted(username);
