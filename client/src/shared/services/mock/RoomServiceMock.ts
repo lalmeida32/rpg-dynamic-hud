@@ -90,6 +90,7 @@ export class RoomServiceMock implements IRoomService {
 
     return {
       uniqueCode: uniqueCode,
+      owner: room.owner,
       name: room.name,
       statBars: room.statBars.map(v => [v.name, v.color as TStatBarColor]),
       attributes: room.attributes,
