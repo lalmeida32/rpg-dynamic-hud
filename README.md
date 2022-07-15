@@ -245,6 +245,8 @@ On the server-side:
 - enter the client directory and run `yarn install` or `yarn` to install the dependencies.
 - run `yarn run dev` to run it in the development mode.
 
+- You must have a mongodb instance running on port 27017, and a database called "rpg" in that instance.
+
 ---
 
 <br/>
