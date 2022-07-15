@@ -9,6 +9,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
 import { RoomConfigAlertContent } from 'app/rooms_page/RoomConfigAlertContent';
 import { GameSocketContext } from 'shared/contexts/GameSocket';
+import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
 
 export const GameRoom = () => {
   const navigate = useNavigate();
@@ -19,7 +20,10 @@ export const GameRoom = () => {
 
   useEffect(() => {
     gameSocket.connect();
-  }, [gameSocket]);
+    gameSocket.socket?.on('diceResult', result =>
+      currentAlert.setAlert(<DefaultAlertContent text={result} />)
+    );
+  }, [gameSocket, currentAlert]);
 
   useEffect(() => {
     setRoomCode(params.code ? params.code : null);
