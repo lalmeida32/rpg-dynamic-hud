@@ -1,6 +1,7 @@
 import { serverSettings } from 'util/server_settings_config';
 
 import path from 'path';
+import http from 'http';
 
 import express from 'express';
 import helmet from 'helmet';
@@ -16,8 +17,10 @@ import AuthRouter from './routes/AuthRoutes';
 import RoomRouter from './routes/RoomRoutes';
 import EmailRouter from './routes/EmailRoutes';
 import RoomPaginationRouter from './routes/RoomPaginationRoutes';
+import { setGameSocketEvents } from 'routes/GameSocketRoutes';
 
 const app = express();
+const server = http.createServer(app);
 
 debug('app:setup')(`Starting ${serverSettings.node_env} environment debug`);
 
@@ -44,14 +47,15 @@ app.use('/api/rooms', RoomRouter);
 app.use('/api/emails', EmailRouter);
 app.use('/api/roompages', RoomPaginationRouter);
 
+// EVENTS
+
+setGameSocketEvents(server);
+gracefulShutdown(server);
+
 // LISTEN
 
 const port = serverSettings.port;
-const server = app.listen(port, async () => {
+server.listen(port, async () => {
   await mongoose.connect('mongodb://127.0.0.1:27017/rpg');
   debug('app:setup')(`Server is running at http://localhost:${port}`);
 });
-
-// EVENTS
-
-gracefulShutdown(server);

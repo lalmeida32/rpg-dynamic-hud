@@ -2,6 +2,12 @@ export interface ICharacter {
   owner: string;
   room: string;
   name: string;
+  deadImage: Uint8Array;
+  lowImage: Uint8Array;
+  mediumImage: Uint8Array;
+  highImage: Uint8Array;
+  statusBars: { min: number; max: number }[];
+  attributes: number[];
 }
 
 import mongoose from 'mongoose';
@@ -19,6 +25,35 @@ export const characterSchema = new Schema({
   },
   name: {
     type: String,
+    required: true,
+  },
+  deadImage: {
+    type: Buffer,
+    required: true,
+  },
+  lowImage: {
+    type: Buffer,
+    required: true,
+  },
+  mediumImage: {
+    type: Buffer,
+    required: true,
+  },
+  highImage: {
+    type: Buffer,
+    required: true,
+  },
+  statusBars: {
+    type: [
+      new Schema({
+        min: { type: Number, required: true },
+        max: { type: Number, required: true },
+      }),
+    ],
+    required: true,
+  },
+  attributes: {
+    type: [Number],
     required: true,
   },
 });
