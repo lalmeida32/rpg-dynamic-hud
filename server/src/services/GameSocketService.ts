@@ -87,12 +87,10 @@ export class GameSocketService {
       });
     }
 
-    console.log(this.states);
-
     return this.states[roomCode];
   }
 
-  async leaveRoom(socketId: string): Promise<void> {
+  async leaveRoom(socketId: string): Promise<IGameSocketState> {
     for (const roomCode of Object.keys(this.states))
       for (const playerName of Object.keys(this.states[roomCode]))
         if (this.states[roomCode][playerName].socketId === socketId) {
@@ -111,7 +109,8 @@ export class GameSocketService {
             attributes: [...this.states[roomCode][playerName].attributes],
           });
           delete this.states[roomCode][playerName];
-          return;
+          return this.states[roomCode];
         }
+    throw new Error('Room not found.');
   }
 }
