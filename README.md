@@ -117,12 +117,10 @@ Despite that, for many cases localtunnel should be worth to use. Here is a
 - The system must allow authenticated users to delete their account
 - The system must allow authenticated users to create a room
 - The system must allow authenticated users to search a room by name, code or owner
-- The system must allow game masters to invite users to their rooms
 - The system must allow game masters to update their rooms settings
 - The system must allow game masters to open/close their rooms
 - The system must allow game masters to delete their rooms
 - Each room must have dice options (i.e. D6, D12, D20...)
-- Each room must have a room's members list
 - The game master's view must show all players status and dices, in real-time
 - The player's view must show all players status, dices and their character sheets, in real-time
 - Each player's character sheet must show character's name, character's photo, status bars and attributes 
@@ -138,7 +136,7 @@ The mockups can be found here: <a href="https://github.com/lalmeida32/rpg-dynami
 
 The user will see a landing page that can navigate over static pages like "About" or "Contact us". Then, the user can logging in or sign up to enter the application.
 The application is made of rooms, each user can create their own rooms, which make them GMs for that particular rooms. When creating a room, an user can choose the character information that can be manipulated by the players, like stat bars and attributes. He can also choose which dices players can toss.
-The players can search and enter a room if they have been invited. The GM can lock or unlock a room, and can invite players.
+The players can search and enter a room. The GM can lock or unlock a room.
 Players can enter rooms using a code, create and update their own character.
 The information of all characters will change in real-time, using WebSockets technology.
 
@@ -212,9 +210,7 @@ On database:
 ### Development Suggestions
 ### Test Plans
 
-On the client-side:
-
-- All tests are manual, because the core of the application is not there.
+- All tests are manual.
 - An user enter the auth page and try to log in with a not registered user, but fail.
 - An user enter the auth page and register, log in and logout, successfully .
 - An user enter the auth page and try to register with password and confirm password fields that does not match, but fails.
@@ -228,8 +224,6 @@ On the client-side:
 
 ### Test Results
 
-On the client-side:
-
 - All tests passed.
 
 ### Build Procedures
@@ -241,6 +235,17 @@ On the client-side:
     - if not, run `corepack enable` with administration privileges to enable it.
 - enter the client directory and run `yarn install` or `yarn` to install the dependencies.
 - run `yarn run dev` to run it in the development mode.
+
+
+On the server-side:
+
+- run `node --version` to check if node is installed. Upgrade it to version 18.x.x if necessary.
+- run `yarn --version` to check if yarn is enabled.
+    - if not, run `corepack enable` with administration privileges to enable it.
+- enter the client directory and run `yarn install` or `yarn` to install the dependencies.
+- run `yarn run dev` to run it in the development mode.
+
+- You must have a mongodb instance running on port 27017, and a database called "rpg" in that instance.
 
 ---
 

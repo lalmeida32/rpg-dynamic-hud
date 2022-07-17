@@ -10,4 +10,6 @@ export interface IServerSettings {
   database_port: number;
   database_username: string;
   database_password: string;
+  // auth
+  jwt_privatekey: string;
 }

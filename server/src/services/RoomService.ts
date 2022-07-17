@@ -1,13 +1,12 @@
-import { delay } from 'shared/lib/delay';
-import { IRoomGetModel } from 'shared/models/IRoomGetModel';
-import { IRoomCreateModel } from 'shared/models/IRoomCreateModel';
-import { IRoomUpdateModel } from 'shared/models/IRoomUpdateModel';
-import { TStatBarColor } from 'shared/types/TStatBarColor';
-import { IRoomService } from '../IRoomService';
-import { roomRepositoryMock } from './roomRepositoryMock';
-import { userRepositoryMock } from './userRepositoryMock';
+import { IRoomCreateModel } from 'models/IRoomCreateModel';
+import { IRoomGetModel } from 'models/IRoomGetModel';
+import { IRoomUpdateModel } from 'models/IRoomUpdateModel';
+import { RoomRepository } from 'repositories/RoomRepository';
+import { UserRepository } from 'repositories/UserRepository';
+import { TStatBarColor } from 'types/TStatBarColor';
+import { validateToken } from 'util/auth';
 
-const changeRoomHandled = (
+const changeRoomHandled = async (
   username: string,
   uniqueCode: string,
   data: {
@@ -19,7 +18,7 @@ const changeRoomHandled = (
     owner?: string;
   }
 ) => {
-  const room = roomRepositoryMock.findByUniqueCode(uniqueCode);
+  const room = await RoomRepository.findByUniqueCode(uniqueCode);
   if (room === null) throw new Error('Room not found. May be deleted.');
 
   if (room.owner !== username)
@@ -27,7 +26,8 @@ const changeRoomHandled = (
       "The user cannot perform this operation. The room's owner is another one."
     );
 
-  roomRepositoryMock.changeRoom(uniqueCode, uniqueCode, {
+  await RoomRepository.changeRoom({
+    uniqueCode,
     attributes:
       data.attributes === undefined ? room.attributes : data.attributes,
     dice: data.dice === undefined ? room.dice : data.dice,
@@ -38,27 +38,22 @@ const changeRoomHandled = (
   });
 };
 
-export class RoomServiceMock implements IRoomService {
-  private static instance: RoomServiceMock | null = null;
+export class RoomService {
+  private static instance: RoomService | null = null;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
-  public static getInstance(): RoomServiceMock {
-    if (RoomServiceMock.instance === null)
-      RoomServiceMock.instance = new RoomServiceMock();
+  public static getInstance(): RoomService {
+    if (RoomService.instance === null) RoomService.instance = new RoomService();
 
-    return RoomServiceMock.instance;
+    return RoomService.instance;
   }
 
-  async createRoom(
-    token: string,
-    username: string,
-    room: IRoomCreateModel
-  ): Promise<void> {
-    await delay();
+  async createRoom(token: string, room: IRoomCreateModel): Promise<void> {
+    const username = validateToken(token);
 
-    if (!userRepositoryMock.checkIfExistsByUsername(username))
+    if (!(await UserRepository.checkIfExistsByUsername(username)))
       throw new Error('Username sent does not exist!');
 
     if (room.statBars.some(v => v[0].trim() === ''))
@@ -70,7 +65,8 @@ export class RoomServiceMock implements IRoomService {
     if (room.dices.some(v => isNaN(v) || !Number.isInteger(v) || v <= 0))
       throw new Error('Dice must be positive integers!');
 
-    roomRepositoryMock.addRoom({
+    await RoomRepository.addRoom({
+      uniqueCode: '',
       name: room.name,
       owner: username,
       opened: false,
@@ -79,13 +75,9 @@ export class RoomServiceMock implements IRoomService {
       dice: room.dices,
     });
   }
-  async getRoom(
-    token: string,
-    username: string,
-    uniqueCode: string
-  ): Promise<IRoomGetModel> {
-    await delay();
-    const room = roomRepositoryMock.findByUniqueCode(uniqueCode);
+  async getRoom(token: string, uniqueCode: string): Promise<IRoomGetModel> {
+    validateToken(token);
+    const room = await RoomRepository.findByUniqueCode(uniqueCode);
     if (room === null) throw new Error('Room not found. May be deleted.');
 
     return {
@@ -98,32 +90,23 @@ export class RoomServiceMock implements IRoomService {
     };
   }
 
-  async openRoom(
-    token: string,
-    username: string,
-    uniqueCode: string
-  ): Promise<void> {
-    await delay();
-    changeRoomHandled(username, uniqueCode, { opened: true });
+  async openRoom(token: string, uniqueCode: string): Promise<void> {
+    const username = validateToken(token);
+    await changeRoomHandled(username, uniqueCode, { opened: true });
   }
 
-  async closeRoom(
-    token: string,
-    username: string,
-    uniqueCode: string
-  ): Promise<void> {
-    await delay();
-    changeRoomHandled(username, uniqueCode, { opened: false });
+  async closeRoom(token: string, uniqueCode: string): Promise<void> {
+    const username = validateToken(token);
+    await changeRoomHandled(username, uniqueCode, { opened: false });
   }
 
   async updateRoom(
     token: string,
-    username: string,
     uniqueCode: string,
     room: IRoomUpdateModel
   ): Promise<void> {
-    await delay();
-    changeRoomHandled(username, uniqueCode, {
+    const username = validateToken(token);
+    await changeRoomHandled(username, uniqueCode, {
       attributes: room.attributes,
       dice: room.dices,
       name: room.name,

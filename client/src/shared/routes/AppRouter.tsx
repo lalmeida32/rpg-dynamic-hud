@@ -11,6 +11,7 @@ import { LogInForm } from 'app/auth_page/LogInForm';
 import { RegisterForm } from 'app/auth_page/RegisterForm';
 import { ResetForm } from 'app/auth_page/ResetForm';
 import { Rooms } from 'app/rooms_page/Rooms';
+import { GameSocketProvider } from 'shared/contexts/GameSocket';
 
 export const AppRouter = () => {
   return (
@@ -32,7 +33,14 @@ export const AppRouter = () => {
       </Route>
       <Route path="rooms/page/:page" element={<Rooms />} />
       <Route path="rooms" element={<Navigate to="/rooms/page/1" />} />
-      <Route path="room/:code" element={<GameRoom />} />
+      <Route
+        path="room/:code"
+        element={
+          <GameSocketProvider>
+            <GameRoom />
+          </GameSocketProvider>
+        }
+      />
       <Route path="*" element={<Navigate to="/home/not-found" />} />
     </Routes>
   );

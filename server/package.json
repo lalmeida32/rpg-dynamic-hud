@@ -11,16 +11,25 @@
     "formatter:check": "prettier --check ."
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "date-and-time": "^2.4.0",
     "debug": "^4.3.4",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "helmet": "^5.0.2",
     "http-graceful-shutdown": "^3.1.7",
-    "morgan": "^1.10.0"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.4.4",
+    "morgan": "^1.10.0",
+    "socket.io": "^4.5.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/crypto-js": "^4.1.1",
     "@types/debug": "^4.1.7",
     "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.23",
     "@typescript-eslint/eslint-plugin": "^5.16.0",

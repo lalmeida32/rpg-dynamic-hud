@@ -79,6 +79,8 @@ const validateDatabaseUsername =
 const validateDatabasePassword =
   createGenericValidateString('database_password');
 
+const validatePrivatekey = createGenericValidateString('jwt_privatekey');
+
 /* Exporting validations */
 
 export const settingsValidation: TSettingsValidation = serverSettingsModel => {
@@ -96,5 +98,6 @@ export const settingsValidation: TSettingsValidation = serverSettingsModel => {
     database_password: validateDatabasePassword(
       serverSettingsModel.database_password
     ),
+    jwt_privatekey: validatePrivatekey(serverSettingsModel.jwt_privatekey),
   };
 };
