@@ -5,7 +5,7 @@ import closed_book from 'shared/images/closed_book.svg';
 import { Button } from 'shared/components/Button';
 import { IRoomCardModel } from 'shared/models/IRoomCardModel';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { services } from 'shared/services/services';
 import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
@@ -20,6 +20,7 @@ export const RoomCard: React.FC<IRoomCardProps> = props => {
   /* STATE */
   const userLogin = useContext(UserLoginContext);
   const currentAlert = useContext(CurrentAlertContext);
+  const [opened, setOpened] = useState<boolean | null>(null);
   const navigate = useNavigate();
 
   /* LOGIC */
@@ -35,6 +36,10 @@ export const RoomCard: React.FC<IRoomCardProps> = props => {
           userLogin.username,
           props.info.uniqueCode
         );
+        if (action === 'close')
+          setOpened(false)
+        else
+          setOpened(true)
       } catch (e) {
         if (e instanceof Error)
           currentAlert.setAlert(<DefaultAlertContent text={e.message} error />);
@@ -49,7 +54,7 @@ export const RoomCard: React.FC<IRoomCardProps> = props => {
       <div className={classes.card_buttons}>
         {props.info.owner === userLogin.username ? (
           <React.Fragment>
-            {props.info.opened ? (
+            { (opened !== null ? opened : props.info.opened) ? (
               <img src={unlocked} onClick={() => handleLockRoom('close')} />
             ) : (
               <img src={locked} onClick={() => handleLockRoom('open')} />

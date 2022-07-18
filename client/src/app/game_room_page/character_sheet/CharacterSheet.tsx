@@ -31,12 +31,36 @@ export const CharacterSheet: React.FC<ICharacterSheetProps> = props => {
   const currentAlert = useContext(CurrentAlertContext);
   const [isOwner, setIsOwner] = useState<boolean>(false);
   const [roomData, setRoomData] = useState<IRoomGetModel | null>(null);
-  const [formData, setFormData] = useState<ICharacterSheetFormData>({
-    name: '',
-    statusBars: [],
-    attributes: [],
-  });
+  const [formData, setFormData] = useState<ICharacterSheetFormData | null>(
+    null
+  );
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (roomData !== null)
+      gameSocket.socket?.emit('characterChanged', [
+        userLogin.token,
+        roomData.uniqueCode,
+        formData,
+      ]);
+  }, [formData, roomData, userLogin.token, gameSocket.socket]);
+
+  useEffect(() => {
+    if (
+      gameSocket.state !== null &&
+      userLogin.username !== null &&
+      userLogin.username in gameSocket.state
+    ) {
+      setFormData({
+        attributes: gameSocket.state[userLogin.username].attributes.map(v => v),
+        name: gameSocket.state[userLogin.username].name,
+        statusBars: gameSocket.state[userLogin.username].statusBars.map(v => ({
+          min: v.min,
+          max: v.max,
+        })),
+      });
+    }
+  }, [gameSocket.state, userLogin.username]);
 
   useEffect(() => {
     if (userLogin.token === null || userLogin.username === null) return;
@@ -46,16 +70,6 @@ export const CharacterSheet: React.FC<ICharacterSheetProps> = props => {
         if (userLogin.username === null) return;
         setRoomData(room);
         setIsOwner(room.owner === userLogin.username);
-        setFormData({
-          name: gameSocket.state?.[userLogin.username].name,
-          statusBars: gameSocket.state?.[userLogin.username].statusBars.map(
-            v => ({
-              min: v.min,
-              max: v.max,
-            })
-          ),
-          attributes: gameSocket.state?.[userLogin.username].attributes,
-        });
       })
       .catch(e => {
         if (e instanceof Error)
@@ -85,26 +99,92 @@ export const CharacterSheet: React.FC<ICharacterSheetProps> = props => {
           }
         />
       ) : null}
-      {isOwner ? null : (
+      {isOwner || formData === null ? null : (
         <div className={classes.character_sheet_container}>
-          <form
-            className={classes.character_sheet}
-            onChange={e => console.log(e.target)}
-          >
+          <form className={classes.character_sheet}>
             <TextLikeInput
               className={classes.character_name}
               maxLength={32}
               placeholder="Character Name"
-              text={formData.name}
+              id="charactername"
+              onChange={e => {
+                if (
+                  userLogin.username !== null &&
+                  gameSocket.state?.[userLogin.username] !== undefined
+                )
+                  setFormData({
+                    name: e.target.value,
+                    statusBars: formData.statusBars,
+                    attributes: formData.attributes,
+                  });
+              }}
             />
             <CharacterImage />
-            {roomData?.statBars.map((v, index) => (
-              <StatBar name={v[0]} color={v[1]} key={index} />
-            ))}
+            {roomData?.statBars.map((v, index) =>
+              userLogin.username !== null &&
+              gameSocket.state?.[userLogin.username] !== undefined ? (
+                <StatBar
+                  name={v[0]}
+                  color={v[1]}
+                  key={index}
+                  idMin={`statusbarmin${index}`}
+                  idMax={`statusbarmax${index}`}
+                  onChange={(data, limit) => {
+                    if (
+                      userLogin.username !== null &&
+                      gameSocket.state?.[userLogin.username] !== undefined
+                    ) {
+                      const statusBars = formData.statusBars?.map(v => ({
+                        min: v.min,
+                        max: v.max,
+                      }));
+
+                      if (limit === 'min' && statusBars !== null)
+                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                        statusBars![index].min = Number(data);
+                      else if (statusBars !== null)
+                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                        statusBars![index].max = Number(data);
+
+                      setFormData({
+                        name: formData.name,
+                        statusBars,
+                        attributes: formData.attributes,
+                      });
+                    }
+                  }}
+                />
+              ) : null
+            )}
             <div className={classes.stat_bars_and_attributes_gap} />
-            {roomData?.attributes.map((v, index) => (
-              <Attribute name={v} key={index} />
-            ))}
+            {roomData?.attributes.map((v, index) =>
+              userLogin.username !== null &&
+              gameSocket.state?.[userLogin.username] !== undefined ? (
+                <Attribute
+                  name={v}
+                  key={index}
+                  id={`attribute${index}`}
+                  onChange={data => {
+                    if (
+                      userLogin.username !== null &&
+                      gameSocket.state?.[userLogin.username] !== undefined
+                    ) {
+                      const attributes = formData.attributes?.map(v => v);
+
+                      if (attributes !== null)
+                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                        attributes![index] = Number(data);
+
+                      setFormData({
+                        name: formData.name,
+                        statusBars: formData.statusBars,
+                        attributes,
+                      });
+                    }
+                  }}
+                />
+              ) : null
+            )}
           </form>
         </div>
       )}

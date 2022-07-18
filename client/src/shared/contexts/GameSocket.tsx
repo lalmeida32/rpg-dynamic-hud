@@ -1,8 +1,8 @@
-import { createContext, useCallback, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 import { services } from 'shared/services/services';
 import { Socket } from 'socket.io-client';
 
-interface IGameSocketState {
+export interface IGameSocketState {
   [key: string]: {
     socketId: string;
     name?: string;
@@ -51,6 +51,8 @@ export const GameSocketProvider: React.FC<IGameSocketProviderProps> = ({
   const handleSetState = useCallback((s: IGameSocketState | null) => {
     setState(s);
   }, []);
+
+  useEffect(() => console.log(state), [state]);
 
   /* PROVIDER */
   return (

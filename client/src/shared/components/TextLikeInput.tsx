@@ -9,6 +9,8 @@ interface ITextLikeInputProps {
   className?: string;
   placeholder?: string;
   name?: string;
+  id?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
@@ -29,7 +31,9 @@ export const TextLikeInput: React.FC<ITextLikeInputProps> = props => {
       maxLength={props.maxLength}
       placeholder={props.placeholder}
       name={props.name}
+      id={props.id}
       defaultValue={props.text}
+      onChange={props.onChange}
     />
   );
 };

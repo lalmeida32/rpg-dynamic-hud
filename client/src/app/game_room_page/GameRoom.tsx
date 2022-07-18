@@ -6,7 +6,10 @@ import { DiceChooser } from './DiceChooser';
 import { useParams } from 'react-router-dom';
 import React, { useContext, useEffect, useState } from 'react';
 import { CurrentAlertContext } from 'shared/contexts/CurrentAlert';
-import { GameSocketContext } from 'shared/contexts/GameSocket';
+import {
+  GameSocketContext,
+  IGameSocketState,
+} from 'shared/contexts/GameSocket';
 import { DefaultAlertContent } from 'shared/components/DefaultAlertContent';
 import { UserLoginContext } from 'shared/contexts/UserLogin';
 
@@ -20,12 +23,10 @@ export const GameRoom = () => {
   useEffect(() => {
     gameSocket.connect();
     gameSocket.socket?.emit('joinRoom', [userLogin.token, roomCode]);
-    gameSocket.socket?.on('joinRoomResult', result =>
-      gameSocket.setState(result)
-    );
-    gameSocket.socket?.on('disconnectResult', result =>
-      gameSocket.setState(result)
-    );
+    gameSocket.socket?.on('joinRoomResult', (result: IGameSocketState) => {
+      gameSocket.setState(result);
+    });
+    gameSocket.socket?.on('disconnectResult', _ => gameSocket.setState(null));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameSocket.socket, userLogin, roomCode]);
 
