@@ -22,6 +22,17 @@ export const setGameSocketEvents = (server: http.Server) => {
       } catch (_) {}
     });
 
+    socket.on('characterChanged', async ([token, roomCode, characterData]) => {
+
+      console.log('Character changed event', socket.id)
+      try {
+        const result = await gameSocketService.characterChanged(token, roomCode, characterData);
+        socket.emit('characterChangedResult', result);
+        socket.broadcast.emit('characterChangedResult', result);
+        // eslint-disable-next-line no-empty
+      } catch (_) {}
+    })
+
     socket.on('rollDice', diceCap => {
       try {
         const result = gameSocketService.rollDice(diceCap);

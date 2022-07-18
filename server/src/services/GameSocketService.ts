@@ -1,4 +1,4 @@
-import { CharacterRepository } from 'repositories/CharacterRepository';
+import { CharacterRepository, ICharacter } from 'repositories/CharacterRepository';
 import { RoomRepository } from 'repositories/RoomRepository';
 import { validateToken } from 'util/auth';
 import { randomInteger } from 'util/random';
@@ -113,4 +113,22 @@ export class GameSocketService {
         }
     throw new Error('Room not found.');
   }
+
+  async characterChanged(
+    token: string,
+    roomCode: string,
+    characterData: ICharacter
+  ): Promise<IGameSocketState> {
+    const username = validateToken(token);
+    this.states[roomCode][username].name = characterData.name
+    this.states[roomCode][username].deadImage = characterData.deadImage
+    this.states[roomCode][username].lowImage = characterData.lowImage
+    this.states[roomCode][username].mediumImage = characterData.mediumImage
+    this.states[roomCode][username].highImage = characterData.highImage
+    this.states[roomCode][username].statusBars = characterData.statusBars
+    this.states[roomCode][username].attributes = characterData.attributes
+
+    return this.states[roomCode]
+  }
+
 }
