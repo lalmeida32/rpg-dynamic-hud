@@ -33,9 +33,9 @@ export const setGameSocketEvents = (server: http.Server) => {
       } catch (_) {}
     })
 
-    socket.on('rollDice', diceCap => {
+    socket.on('rollDice', ([token, roomCode, diceCap]) => {
       try {
-        const result = gameSocketService.rollDice(diceCap);
+        const result = gameSocketService.rollDice(token, roomCode, diceCap);
         socket.emit('rollDiceResult', result);
         socket.broadcast.emit('rollDiceResult', result);
         // eslint-disable-next-line no-empty

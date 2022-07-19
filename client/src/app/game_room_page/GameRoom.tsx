@@ -31,10 +31,12 @@ export const GameRoom = () => {
   }, [gameSocket.socket, userLogin, roomCode]);
 
   useEffect(() => {
-    gameSocket.socket?.on('rollDiceResult', result =>
-      currentAlert.setAlert(<DefaultAlertContent text={result} />)
+    gameSocket.socket?.on('rollDiceResult', result => {
+        if (result[1] === roomCode)
+          currentAlert.setAlert(<DefaultAlertContent text={result[0]} />)
+      }
     );
-  }, [gameSocket, currentAlert]);
+  }, [gameSocket, currentAlert, roomCode]);
 
   useEffect(() => {
     setRoomCode(params.code ? params.code : null);
@@ -47,7 +49,7 @@ export const GameRoom = () => {
           <CharacterSheet roomCode={roomCode} />
           <div className={classes.game_hud_and_dice_chooser}>
             <GameHud />
-            <DiceChooser />
+            <DiceChooser uniqueCode={roomCode} />
           </div>
         </React.Fragment>
       ) : null}

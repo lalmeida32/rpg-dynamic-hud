@@ -75,7 +75,7 @@ export const RoomCard: React.FC<IRoomCardProps> = props => {
       <p>Owned by @{props.info.owner}</p>
       <Button
         text="Enter"
-        disabled={!props.info.opened}
+        disabled={opened !== null ? !opened : !props.info.opened}
         onClick={() => navigate(`/room/${props.info.uniqueCode}`)}
       />
     </div>

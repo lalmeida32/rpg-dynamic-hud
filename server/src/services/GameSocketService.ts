@@ -34,8 +34,9 @@ export class GameSocketService {
     return GameSocketService.instance;
   }
 
-  rollDice(diceCap: number): number {
-    return randomInteger(1, diceCap);
+  rollDice(token: string, roomCode: string, diceCap: number): [string, string] {
+    const username = validateToken(token);
+    return [`${username} rolled a d${diceCap} and got ${randomInteger(1, diceCap)}`, roomCode];
   }
 
   async joinRoom(
